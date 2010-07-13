@@ -1,0 +1,18 @@
+InputFile: ./repo/level_0/20100501030201/scg.crs.gz
+AdditionalDataFile: ./repo/level_0_archive/scg.crs.20100501000000
+AdditionalDataFile: ./repo/level_0_archive/scg.crs.p0
+AdditionalDataFile: ./repo/level_0_archive/scg.crs.p1.gz
+ConfigFile: ../vc/Debug/bde_copy.cfg
+ConfigFile: test1.cfg
+OutputFile: output\scg4.out
+TableName: crs_sys_code_group
+InputFields: desc|user_create_flag|user_modify_flag|user_delete_flag|user_view_flag|data_type|group_type|code|audit_id
+OutputFields: desc|user_create_flag|user_modify_flag|user_delete_flag|user_view_flag|data_type|group_type|code|audit_id
+BdeStartTime: 2010-01-03 02:51:33
+BdeEndTime: 2010-02-07 02:54:33
+BdeSize: 22172
+
+InputCount: 433
+OutputCount: 500
+ErrorCount: 0
+ResultStatus: success

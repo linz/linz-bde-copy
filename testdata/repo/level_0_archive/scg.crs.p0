@@ -1,0 +1,24 @@
+P0Execution stage of action checklist items|N|N|N|Y|T|S|ACCE|275|
+P0Adjustment Coefficient Code|Y|Y|N|Y|T|S|ADCC|276|
+P0Status of Adjustment Run|N|N|N|Y|T|S|ADJS|277|
+P0Status of Adjustment Method|N|N|N|Y|T|S|ADMS|278|
+P0Adjustment Method Type|Y|Y|N|Y|T|S|ADMT|279|
+P0Adjustment Method software used|Y|Y|N|Y|T|S|ADMU|280|
+P0Approved Form Type|Y|Y|Y|Y|T|S|AFMT|281|
+P0Type of affected parcel|Y|Y|Y|Y|T|S|AFPT|282|
+P0Appellation General Sub type position|N|N|N|Y|T|S|AGNP|283|
+P0Lock Statuses|N|N|N|Y|T|S|ALTS|284|
+P0Lock Types|N|N|N|Y|T|S|ALTT|285|
+P0Instrument Action Memorial Template Historical Flag|N|N|N|Y|T|S|AMTH|286|
+P0Observation Reliability|N|N|N|Y|T|S|AOCR|287|
+P0Appellation Format|N|N|N|Y|T|S|APPF|288|
+P0Parcel Part Indicator|N|N|N|Y|T|S|APPI|289|
+P0Appellation Status|N|N|N|Y|T|S|APPS|290|
+P0Appellation Type|N|N|N|Y|T|S|APPT|291|
+P0Appellation Parcel Type|Y|Y|N|Y|T|S|ASAP|292|
+P0Appellation Sub Type. Deposited Plan, Town etc.|Y|Y|N|Y|T|S|ASAU|293|
+P0Batch Control|N|N|N|Y|D|S|BCNT|294|
+P0Database Build Environment|N|Y|N|Y|T|S|BENV|295|
+P0Batch Process Configuration File|N|Y|N|Y|T|S|BPCF|296|
+P0Batch Process repeat flags|N|Y|N|Y|T|S|BPRP|297|
+P0Batch Queue Item Frequency|N|N|N|Y|T|S|BQIF|298|

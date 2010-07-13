@@ -1,0 +1,11 @@
+# Configuration PostGis copy - fixes up spatial entities
+#
+# Spatial field fixups - WKT prefix and longitude offset
+# wkt_prefix can be "leave", to leave the prefix completely unchanged,
+# "none", to remove the existing prefix, or any other string, which
+# will replace the existing prefix.
+# Longitude offset is added to all longitudes.
+
+wkt_prefix SRID=4167;
+longitude_offset 160.0
+

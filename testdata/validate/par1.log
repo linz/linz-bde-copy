@@ -1,0 +1,21 @@
+InputFile: par1.crs
+ConfigFile: ../vc/Debug/bde_copy.cfg
+ConfigFile: test1.cfg
+OutputFile: output\par1.out
+TableName: crs_parcel
+InputFields: id|test_date|img_id|fen_id|toc_code|alt_id|area|nonsurvey_def|appellation_date|parcel_intent|status|total_area|calculated_area|se_row_id|audit_id|shape
+OutputFields: id|test_date|img_id|fen_id|toc_code|alt_id|area|nonsurvey_def|appellation_date|parcel_intent|status|total_area|calculated_area|se_row_id|audit_id|shape
+BdeStartTime: 2009-10-14 23:26:56
+BdeEndTime: 2009-10-15 23:47:45
+BdeSize: 12708
+
+Warning:  Invalid pipe character in field in field nonsurvey_def
+At record 3 of par1.crs
+3007668|01/05/1010|||PRIM|||DCDB 
+Document 
+Id: \CT |247/5||DCDB|CURR|1202928.0||3007668|1917||
+
+InputCount: 10
+OutputCount: 10
+ErrorCount: 0
+ResultStatus: success
