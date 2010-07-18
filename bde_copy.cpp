@@ -12,6 +12,8 @@
 
 #define VERSION "1.0"
 
+#define RELEASE "$Id$"
+
 #define MAXFILES 16
 
 //////////////////////////////////////////////////////////////////
@@ -1192,6 +1194,9 @@ void help( char *exefile )
 		FILE *f = fopen(fname,"r");
 		if( f )
 		{
+			printf("bde_copy: Extracts data from BDE files\n");
+			printf("Version: %s (%s)\n",VERSION,__DATE__);
+			printf("Source version: %s\n\n",RELEASE);
 			char buf[256];
 			while(fgets(buf,256,f)){ puts(buf); }
 			fclose(f);
