@@ -1,5 +1,7 @@
 # Configuration PostGis copy - fixes up spatial entities
 #
+# $Id$
+#
 # Spatial field fixups - WKT prefix and longitude offset
 # wkt_prefix can be "leave", to leave the prefix completely unchanged,
 # "none", to remove the existing prefix, or any other string, which
