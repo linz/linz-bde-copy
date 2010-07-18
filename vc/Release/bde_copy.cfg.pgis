@@ -1,6 +1,6 @@
 # Configuration PostGis copy - fixes up spatial entities
 #
-# $Id$
+# $Id: bde_copy.cfg.pgis 555 2010-07-18 23:21:08Z ccrook $
 #
 # Spatial field fixups - WKT prefix and longitude offset
 # wkt_prefix can be "leave", to leave the prefix completely unchanged,

@@ -1,5 +1,5 @@
 # Configuration file to fix up characters to for simple clean loading
-# $Id$
+# $Id: bde_copy.cfg.clean 555 2010-07-18 23:21:08Z ccrook $
 
 keep_escapes no
 
