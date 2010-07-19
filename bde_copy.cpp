@@ -1198,7 +1198,7 @@ void help( char *exefile )
 			printf("Version: %s (%s)\n",VERSION,__DATE__);
 			printf("Source version: %s\n\n",RELEASE);
 			char buf[256];
-			while(fgets(buf,256,f)){ puts(buf); }
+			while(fgets(buf,256,f)){ fputs(buf,stdout); }
 			fclose(f);
 			exit(2);
 		}
