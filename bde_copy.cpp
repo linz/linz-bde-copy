@@ -1023,7 +1023,7 @@ int split_file_names( char *names, char **list, int *count )
 	return 1;
 }
 
-bool read_args( int argc, char *argv[] )
+bool read_args( char *image, int argc, char *argv[] )
 {
 	char **nxtarg = 0;
 	char *nxtopt;
@@ -1081,7 +1081,7 @@ bool read_args( int argc, char *argv[] )
 			case 'H': header_only = true; break;
 
 			case '?':
-					  help(argv[0]); break;
+					  help(image); break;
 
 			default:
 				printf("Invalid option %s\n",arg);
@@ -1211,12 +1211,14 @@ void help( char *exefile )
 
 int main( int argc, char *argv[] )
 {
+	char *image = strdup(_pgmptr);
+
 	// Trim ".exe" from the file name if it is present
 	{
-		int l = strlen(argv[0]);
-		if( l >= 4 && stricmp(argv[0]+l-4,".exe") == 0 )
+		int l = strlen(image);
+		if( l >= 4 && stricmp(image+l-4,".exe") == 0 )
 		{
-			*(argv[0]+l-4)=0;
+			*(image+l-4)=0;
 		}
 	}
 
@@ -1224,9 +1226,9 @@ int main( int argc, char *argv[] )
 	_set_new_handler(allocation_error);
 	_set_new_mode(1);
 
-	if( ! read_args(argc,argv) ) syntax();
+	if( ! read_args(image,argc,argv) ) syntax();
 
-	if( ! read_configuration(argv[0])) return 2;
+	if( ! read_configuration(image)) return 2;
 
 	if( cmd_maxerrors >= 0 ) max_errors = cmd_maxerrors;
 
