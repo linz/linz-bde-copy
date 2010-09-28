@@ -1,7 +1,7 @@
 InputFile: ./repo/level_0/20100401030201/scg.crs.gz
 AdditionalDataFile: ./repo/level_0_archive/scg.crs.p0
 AdditionalDataFile: ./repo/level_0_archive/scg.crs.p1.gz
-ConfigFile: ../vc/Debug/bde_copy.cfg
+ConfigFile: C:\ccrook\projects\bde_copy\vc\Debug\bde_copy.cfg
 ConfigFile: test1.cfg
 OutputFile: output\scg5.out
 TableName: crs_sys_code_group

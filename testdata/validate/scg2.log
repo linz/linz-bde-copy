@@ -1,5 +1,5 @@
 InputFile: ./repo/level_0/20100501030201/scg.crs.gz
-ConfigFile: ../vc/Debug/bde_copy.cfg
+ConfigFile: C:\ccrook\projects\bde_copy\vc\Debug\bde_copy.cfg
 ConfigFile: test1.cfg
 OutputFile: output\scg2.out
 TableName: crs_sys_code_group

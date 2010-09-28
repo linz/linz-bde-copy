@@ -1,5 +1,5 @@
 "id","test_date","img_id","fen_id","toc_code","alt_id","area","nonsurvey_def","appellation_date","parcel_intent","status","total_area","calculated_area","se_row_id","audit_id","shape"
-3007668,"01/05/2010",,,"PRIM",,,"abcCabcB abcocument Id: CT 247/5",,"abcCabcB","CURR",1202928.0,,3007668,1917,"MULTIPOLYGON (((170.9133899333 -45.0542126167)))"
+3007668,"01/05/2010",,,"PRIM",,,"abcCabcB \n\nabcocument Id: CT 247/5",,"abcCabcB","CURR",1202928.0,,3007668,1917,"MULTIPOLYGON (((170.9133899333 -45.0542126167)))"
 3007668,"01/05/2010",,,"PRIM",,,"abcCabcB abcocument Id: CT 247/5","1800-01-01 00:00:00","abcCabcB","CURR",1202928.0,,3007668,1917,"MULTIPOLYGON (((149.0866100667 -45.0542126167)))"
 3007668,"01/01/1800",,,"PRIM",,,"abcCabcB \nabcocument \nId:  CT  247/5",,"abcCabcB","CURR",1202928.0,,3007668,1917,
 3007668,"01/05/2010",,,"PRIM",,,"abcCabcB abcocument Id: CT 247/5","2012-10-01 02:33:44","abcCabcB","CURR",1202928.0,,3007668,1917,"MULTIPOLYGON (((170.9133899333 -45.0542126167)))"

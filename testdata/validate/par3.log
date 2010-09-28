@@ -1,5 +1,5 @@
 InputFile: par1.crs
-ConfigFile: ../vc/Debug/bde_copy.cfg
+ConfigFile: C:\ccrook\projects\bde_copy\vc\Debug\bde_copy.cfg
 ConfigFile: test3.cfg
 OutputFile: output\par3.out
 TableName: crs_parcel
@@ -7,7 +7,7 @@ InputFields: id|test_date|img_id|fen_id|toc_code|alt_id|area|nonsurvey_def|appel
 OutputFields: id|test_date|img_id|fen_id|toc_code|alt_id|area|nonsurvey_def|appellation_date|parcel_intent|status|total_area|calculated_area|se_row_id|audit_id|shape
 BdeStartTime: 2009-10-14 23:26:56
 BdeEndTime: 2009-10-15 23:47:45
-BdeSize: 12708
+BdeSize: 12710
 
 Warning: Date value of column appellation_date is outside valid range
 At record 2 of par1.crs

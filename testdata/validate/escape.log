@@ -1,5 +1,5 @@
 InputFile: escape.crs
-ConfigFile: ../vc/Debug/bde_copy.cfg
+ConfigFile: C:\ccrook\projects\bde_copy\vc\Debug\bde_copy.cfg
 ConfigFile: test1.cfg
 OutputFile: output\escape.out
 TableName: crs_mark
