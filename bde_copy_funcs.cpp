@@ -7,7 +7,7 @@
 
 bool file_exists( char *fname )
 {
-	FILE *f = fopen(fname,"r");
-	if( f ) fclose(f);
-	return f != 0;
+    FILE *f = fopen(fname,"r");
+    if( f ) fclose(f);
+    return f != 0;
 }

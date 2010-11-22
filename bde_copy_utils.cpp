@@ -88,8 +88,8 @@ readbuff::readbuff(char *name, int size)
     cp = ep = buffer = new unsigned char[size];
     eof = 0;
     bufsize = size;
-	nread = 0;
-	bname = strdup(name);
+    nread = 0;
+    bname = strdup(name);
 #if Singleton
     if( instance )
     {
@@ -102,7 +102,7 @@ readbuff::readbuff(char *name, int size)
 
 readbuff::~readbuff()
 {
-	free(bname);
+    free(bname);
     delete [] buffer;
 #if Singleton
     instance = 0;
@@ -284,10 +284,10 @@ int buffer::load( readbuff *buff, unsigned char terminator, unsigned char escape
         int c = buff->getc();
         if( c == terminator ) break;
         if( escape && c == escape ) 
-		    {
-			     if( keep_escape) add((char) c);
-			     c = buff->getc();
-		    }
+            {
+                 if( keep_escape) add((char) c);
+                 c = buff->getc();
+            }
         if( c == readbuff::FEOF ) { ok = 0; break; }
         if( ! add((char) c) ) break;
     }
@@ -324,7 +324,7 @@ bde_field::~bde_field()
 
 void bde_field::write_error( err_type type, char *message )
 {
-	if( error_func ) { error_func( type, (char *) name(),message); }
+    if( error_func ) { error_func( type, (char *) name(),message); }
 }
 
 void bde_field::set_default_delim( char *start, char *end )
@@ -382,63 +382,63 @@ buffer *number_field::fld_end_delim = 0;
 
 replace_def::replace_def()
 {
-	replace = false;
-	chars = 0;
-	nextchar = 0;
-	message = 0;
+    replace = false;
+    chars = 0;
+    nextchar = 0;
+    message = 0;
 }
 
 replace_def::~replace_def()
 {
-	if( chars ) delete chars;
-	if( message ) delete [] message;
-	if( nextchar ) delete [] nextchar;
+    if( chars ) delete chars;
+    if( message ) delete [] message;
+    if( nextchar ) delete [] nextchar;
 }
 
 void replace_def::set_replace( char *input_str, char *output_str, char *error_message )
 {
-	replace = true;
+    replace = true;
     unsigned char ch;
-	input_str = buffer::parse_char(input_str,&ch);
+    input_str = buffer::parse_char(input_str,&ch);
     if( input_str )
-	{
-		if( ! nextchar ) nextchar = new replace_def[256];
-		nextchar[ch].set_replace( input_str, output_str, error_message );
-	}
-	else
-	{
-		if( chars ) { delete chars; chars = 0; }
-		chars = new buffer(10);
-		if( _stricmp(output_str,"delete") != 0 )
-		{
-			chars->setchars(output_str);
-		}
-		if( message ) { delete [] message; message = 0; }
-		if( error_message ) 
-		{ 
-			message = new char[ strlen(error_message) + 1 ];
-			strcpy( message, error_message );
-		}
-	}
+    {
+        if( ! nextchar ) nextchar = new replace_def[256];
+        nextchar[ch].set_replace( input_str, output_str, error_message );
+    }
+    else
+    {
+        if( chars ) { delete chars; chars = 0; }
+        chars = new buffer(10);
+        if( _stricmp(output_str,"delete") != 0 )
+        {
+            chars->setchars(output_str);
+        }
+        if( message ) { delete [] message; message = 0; }
+        if( error_message ) 
+        { 
+            message = new char[ strlen(error_message) + 1 ];
+            strcpy( message, error_message );
+        }
+    }
 }
 
 int replace_def::apply( unsigned char **cp, char **error_message, data_writer *out, bool &applied )
 {
-	int result = 1;
+    int result = 1;
     (*cp)++;
-	unsigned char ch=**cp;
-	if( ch && nextchar && nextchar[ch].replaced() )
-	{
-		nextchar[ch].apply(cp,error_message,out,applied);
-	}
-	if( chars && ! applied )
-	{
-		result = chars->write(out);
-		applied = true;
-		(*error_message) = message;
-	}
-	if( ! applied ) (*cp)--;
-	return result;
+    unsigned char ch=**cp;
+    if( ch && nextchar && nextchar[ch].replaced() )
+    {
+        nextchar[ch].apply(cp,error_message,out,applied);
+    }
+    if( chars && ! applied )
+    {
+        result = chars->write(out);
+        applied = true;
+        (*error_message) = message;
+    }
+    if( ! applied ) (*cp)--;
+    return result;
 }
 
 text_field::text_field( char *name ) : bde_field( name, ft_text )
@@ -468,7 +468,7 @@ int text_field::set_output_char( char *input_chr, char *output_str, char *messag
     unsigned char ch;
     input_chr = parse_char(input_chr,&ch);
     if( ! input_chr ) return 0;
-	replace[ch].set_replace(input_chr,output_str,message);
+    replace[ch].set_replace(input_chr,output_str,message);
     return 1;
 }
 
@@ -476,7 +476,7 @@ int text_field::set_output_char( char *input_chr, char *output_str, char *messag
 bool text_field::write_field( data_writer *out )
 {
     if( start_delim && ! start_delim->write(out) ) return false;
-	  str();  // Ensure null terminator
+      str();  // Ensure null terminator
     unsigned char *sp = data();
     int len = this->len();
     unsigned char *cp;
@@ -484,31 +484,31 @@ bool text_field::write_field( data_writer *out )
     {
         if( replace[*cp].replaced() )
         {
-			char *message = 0;
+            char *message = 0;
             if( cp > sp ){ int nc = cp-sp; if( ! out->write(sp,nc) ) return false; }
             sp = cp;
-			if( ! replace[*cp].apply( &cp, &message, out ) ) return false;
-			if( cp == sp ) 
-			{
-				cp++;
-				len--;
-			}
-			else
-			{
-				len -= cp-sp;
-				sp = cp;
-			}
-			if( message )
-			{
-				write_error(et_invalid_char, message);
-			}
+            if( ! replace[*cp].apply( &cp, &message, out ) ) return false;
+            if( cp == sp ) 
+            {
+                cp++;
+                len--;
+            }
+            else
+            {
+                len -= cp-sp;
+                sp = cp;
+            }
+            if( message )
+            {
+                write_error(et_invalid_char, message);
+            }
 
         }
-		else
-		{
-			len--;
-			cp++;
-		}
+        else
+        {
+            len--;
+            cp++;
+        }
     }
     if( cp > sp ){ int nc = cp-sp; if( ! out->write(sp,nc) ) return false; }
     if( end_delim && ! end_delim->write(out) ) return false;
@@ -541,23 +541,23 @@ buffer *date_field::fld_end_delim = 0;
 
 int date_field::year()
 {
-	str();
-	int nf = 0;
-	int inf = 1;
-	for( char *s = str(); s; s++ )
-	{
-		if( isdigit(*s))
-		{
-			nf+=inf;
-			if( nf == 3 ) return atoi(s);
-			inf=0;
-		}
-		else
-		{
-			inf = 1;
-		}
-	}
-	return -1;
+    str();
+    int nf = 0;
+    int inf = 1;
+    for( char *s = str(); s; s++ )
+    {
+        if( isdigit(*s))
+        {
+            nf+=inf;
+            if( nf == 3 ) return atoi(s);
+            inf=0;
+        }
+        else
+        {
+            inf = 1;
+        }
+    }
+    return -1;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////
@@ -586,8 +586,8 @@ buffer *datetime_field::fld_end_delim = 0;
 
 int datetime_field::year()
 {
-	char *s = str();
-	if( ! isdigit(*s)) return -1;
+    char *s = str();
+    if( ! isdigit(*s)) return -1;
     return atoi(str());
 }
 
@@ -623,9 +623,9 @@ bool geometry_field::keep_prefix = true;
 
 void geometry_field::set_lon_offset(double offset)
 {
-	lon_offset = offset; 
-	ilon_offset = (int) offset;
-	int_offset = ilon_offset >= 0 && ilon_offset == offset;
+    lon_offset = offset; 
+    ilon_offset = (int) offset;
+    int_offset = ilon_offset >= 0 && ilon_offset == offset;
 }
 
 void geometry_field::set_wkt_prefix(char *prefix)
@@ -667,14 +667,14 @@ bool geometry_field::write_field( data_writer *out )
 
 inline char *inttobuf( int i, char *buffer )
 {
-	*buffer = 0;
-	for( ; ; )
-	{
-		*--buffer = '0'+(i % 10);
-		i /= 10;
-		if( i == 0 ) break;
-	}
-	return buffer;
+    *buffer = 0;
+    for( ; ; )
+    {
+        *--buffer = '0'+(i % 10);
+        i /= 10;
+        if( i == 0 ) break;
+    }
+    return buffer;
 }
 
 int geometry_field::write_offset_geom( char *sp, data_writer *out )
@@ -685,9 +685,9 @@ int geometry_field::write_offset_geom( char *sp, data_writer *out )
     char *np = 0;   // Start of number pointer
     int ndp = 0; 
     unsigned int state = 0;
-	unsigned int action = 0;
+    unsigned int action = 0;
     char lonbuf[32];
-	char *endbuf = lonbuf+31;
+    char *endbuf = lonbuf+31;
 
     for( cp = sp; *cp; cp++ )
     {
@@ -767,15 +767,15 @@ int geometry_field::write_offset_geom( char *sp, data_writer *out )
             switch(action)
             {
                 case sm_action_start: 
-					np = cp; 
-					if( int_offset ) break;
-					ndp = 0;
-					state = sm_state_number_fp;
-					break;
+                    np = cp; 
+                    if( int_offset ) break;
+                    ndp = 0;
+                    state = sm_state_number_fp;
+                    break;
 
-				case sm_action_endint: 
+                case sm_action_endint: 
                     // Print text up to start of number
-					{
+                    {
                     int len = np - sp;
                     if( len > 0 )
                     {
@@ -783,24 +783,24 @@ int geometry_field::write_offset_geom( char *sp, data_writer *out )
                     }
                     // Output the offset longitude
                     int lon = atoi(np)+ilon_offset;
-					np = inttobuf(lon,endbuf);
+                    np = inttobuf(lon,endbuf);
                     len = strlen(np);
                     if( ! out->write(np,len) ) return 0;
-					}
+                    }
                     // Reset the start pointer
                     sp = cp;
                     break;
 
                 case sm_action_startfp: 
-					np = cp; 
-					ndp = 0;
-					break;
+                    np = cp; 
+                    ndp = 0;
+                    break;
 
                 case sm_action_addndp: ndp++; break;
 
                 case sm_action_endfp: 
                     // Print text up to start of number
-					{
+                    {
                     int len = np - sp;
                     if( len > 0 )
                     {
@@ -812,7 +812,7 @@ int geometry_field::write_offset_geom( char *sp, data_writer *out )
                     sprintf(lonbuf,"%.*lf",ndp,lon );
                     len = strlen(lonbuf);
                     if( ! out->write(lonbuf,len) ) return 0;
-					}
+                    }
                     // Reset the start pointer
                     sp = cp;
                     break;
@@ -830,24 +830,24 @@ int geometry_field::write_offset_geom( char *sp, data_writer *out )
 
 data_writer *file_data_writer::open( char *fname, bool append )
 {
-	FILE *f = fopen(fname,append ? "ab" : "wb" );
-	if( ! f ) return 0;
-	file_data_writer *fdw = new file_data_writer(f);
-	if( append && ftell(f) > 0 ) fdw->empty = false;
-	return fdw;
+    FILE *f = fopen(fname,append ? "ab" : "wb" );
+    if( ! f ) return 0;
+    file_data_writer *fdw = new file_data_writer(f);
+    if( append && ftell(f) > 0 ) fdw->empty = false;
+    return fdw;
 }
 
 file_data_writer::~file_data_writer()
 {
-	fclose(f);
+    fclose(f);
 }
 
 bool file_data_writer::write( const void *buffer, int length )
 {
-	if( length )
-	{
-		empty = false;
-		return fwrite(buffer,1,length,f) == (size_t) length;
-	}
-	return true;
+    if( length )
+    {
+        empty = false;
+        return fwrite(buffer,1,length,f) == (size_t) length;
+    }
+    return true;
 }
