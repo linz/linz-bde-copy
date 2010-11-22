@@ -15,5 +15,5 @@ HOW TO BUILD -- UNIX
 
 TESTING
 
-cd into testdata directory and run tests using "runtests" script. Use a programme like kdiff3 or BeyondCompare and do a directory comparison between the output and validate directories.
+Make sure you have perl installed on your system. Change into testdata directory and run tests using "runtests" script. Use a programme like kdiff3 or BeyondCompare and do a directory comparison between the output and validate directories.
 
