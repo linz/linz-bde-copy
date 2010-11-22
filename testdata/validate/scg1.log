@@ -1,8 +1,8 @@
-InputFile: scg.crs
-InputFile: scg1.crs
-ConfigFile: C:\ccrook\projects\bde_copy\vc\Debug\bde_copy.cfg
-ConfigFile: test1.cfg
-OutputFile: output\scg1.out
+InputFile: ../scg.crs
+InputFile: ../scg1.crs
+ConfigFile: bde_copy.cfg
+ConfigFile: ../test1.cfg
+OutputFile: scg1.out
 TableName: crs_sys_code_group
 InputFields: desc|user_create_flag|user_modify_flag|user_delete_flag|user_view_flag|data_type|group_type|code|audit_id
 OutputFields: desc|user_create_flag|user_modify_flag|user_delete_flag|user_view_flag|data_type|group_type|code|audit_id
@@ -10,7 +10,7 @@ BdeStartTime: 2010-01-03 02:51:33
 BdeEndTime: 2010-02-07 02:54:33
 BdeSize: 22172
 
-Warning: Size of file scg1.crs (1332) doesn't match size in header (22172)
+Warning: Size of file ../scg1.crs (1332) doesn't match size in header (22172)
 
 InputCount: 10
 OutputCount: 443

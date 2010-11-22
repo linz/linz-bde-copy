@@ -1,7 +1,7 @@
-InputFile: par1.crs
-ConfigFile: C:\ccrook\projects\bde_copy\vc\Debug\bde_copy.cfg
-ConfigFile: test1.cfg
-OutputFile: output\par1.out
+InputFile: ../par1.crs
+ConfigFile: bde_copy.cfg
+ConfigFile: ../test1.cfg
+OutputFile: par1.out
 TableName: crs_parcel
 InputFields: id|test_date|img_id|fen_id|toc_code|alt_id|area|nonsurvey_def|appellation_date|parcel_intent|status|total_area|calculated_area|se_row_id|audit_id|shape
 OutputFields: id|test_date|img_id|fen_id|toc_code|alt_id|area|nonsurvey_def|appellation_date|parcel_intent|status|total_area|calculated_area|se_row_id|audit_id|shape
@@ -10,7 +10,7 @@ BdeEndTime: 2009-10-15 23:47:45
 BdeSize: 12710
 
 Warning:  Invalid pipe character in field in field nonsurvey_def
-At record 3 of par1.crs
+At record 3 of ../par1.crs
 3007668|01/05/1010|||PRIM|||DCDB 
 Document 
 Id: \CT |247/5||DCDB|CURR|1202928.0||3007668|1917||

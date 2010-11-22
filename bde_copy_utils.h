@@ -3,6 +3,31 @@
 
 #include <stdio.h>
 
+#if !defined(_WIN32) && !defined(_MSC_VER)
+#ifndef _stricmp
+#define _stricmp strcasecmp
+#endif
+
+#ifndef stricmp
+#define stricmp strcasecmp
+#endif
+
+#ifndef _strdup
+#define _strdup strdup
+#endif
+
+#ifndef _strnicmp
+#define _strnicmp strncasecmp
+#endif
+
+char* get_image_path();
+
+#ifndef _strlwr
+char* _strlwr ( char* __s);
+#endif
+
+#endif
+
 enum err_type { et_date_range=0, et_invalid_char, et_column_count, et_file_size, et_count };
 enum err_severity { es_ignore, es_warning, es_error, es_fatal };
 

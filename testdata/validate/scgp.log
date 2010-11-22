@@ -1,9 +1,9 @@
-InputFile: scg.crs
-AdditionalDataFile: scg.crs.p0
-AdditionalDataFile: scg.crs.p1.gz
-ConfigFile: C:\ccrook\projects\bde_copy\vc\Debug\bde_copy.cfg
-ConfigFile: test1.cfg
-OutputFile: output\scgp.out
+InputFile: ../scg.crs
+AdditionalDataFile: ../scg.crs.p0
+AdditionalDataFile: ../scg.crs.p1.gz
+ConfigFile: bde_copy.cfg
+ConfigFile: ../test1.cfg
+OutputFile: scgp.out
 TableName: crs_sys_code_group
 InputFields: desc|user_create_flag|user_modify_flag|user_delete_flag|user_view_flag|data_type|group_type|code|audit_id
 OutputFields: desc|user_create_flag|user_modify_flag|user_delete_flag|user_view_flag|data_type|group_type|code|audit_id

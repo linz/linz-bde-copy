@@ -1,0 +1,30 @@
+HEDR	 1.0.0
+SOFTWARE cbe_b30 V1.0.0
+SCHEMA	 V1.0                
+USER	 crs_bde
+START	 2010-01-03 02:51:33
+END	 2010-02-07 02:54:33
+SQL	 SELECT * FROM crs_sys_code_group
+TABLE	 crs_sys_code_group                                                                                                              
+COLUMN	 desc                          varchar NOT NULL
+COLUMN	 user_create_flag              char NOT NULL
+COLUMN	 user_modify_flag              char NOT NULL
+COLUMN	 user_delete_flag              char NOT NULL
+COLUMN	 user_view_flag                char NOT NULL
+COLUMN	 data_type                     char NOT NULL
+COLUMN	 group_type                    varchar NULL
+COLUMN	 code                          varchar NOT NULL
+COLUMN	 audit_id                      serial NOT NULL
+DESC	 
+SIZE            1332
+{CRS-DATA}
+++Execution stage of action checklist items|N|N|N|Y|T|S|ACCE|275|
+++Adjustment Coefficient Code|Y|Y|N|Y|T|S|ADCC|276|
+++Status of Adjustment Run|N|N|N|Y|T|S|ADJS|277|
+++Status of Adjustment Method|N|N|N|Y|T|S|ADMS|278|
+++Adjustment Method Type|Y|Y|N|Y|T|S|ADMT|279|
+++Adjustment Method software used|Y|Y|N|Y|T|S|ADMU|280|
+++Approved Form Type|Y|Y|Y|Y|T|S|AFMT|281|
+++Type of affected parcel|Y|Y|Y|Y|T|S|AFPT|282|
+++Appellation General Sub type position|N|N|N|Y|T|S|AGNP|283|
+++Lock Statuses|N|N|N|Y|T|S|ALTS|284|

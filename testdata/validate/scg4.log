@@ -1,10 +1,10 @@
-InputFile: ./repo/level_0/20100501030201/scg.crs.gz
-AdditionalDataFile: ./repo/level_0_archive/scg.crs.20100501000000
-AdditionalDataFile: ./repo/level_0_archive/scg.crs.p0
-AdditionalDataFile: ./repo/level_0_archive/scg.crs.p1.gz
-ConfigFile: C:\ccrook\projects\bde_copy\vc\Debug\bde_copy.cfg
-ConfigFile: test1.cfg
-OutputFile: output\scg4.out
+InputFile: ../repo/level_0/20100501030201/scg.crs.gz
+AdditionalDataFile: ../repo/level_0_archive/scg.crs.20100501000000
+AdditionalDataFile: ../repo/level_0_archive/scg.crs.p0
+AdditionalDataFile: ../repo/level_0_archive/scg.crs.p1.gz
+ConfigFile: bde_copy.cfg
+ConfigFile: ../test1.cfg
+OutputFile: scg4.out
 TableName: crs_sys_code_group
 InputFields: desc|user_create_flag|user_modify_flag|user_delete_flag|user_view_flag|data_type|group_type|code|audit_id
 OutputFields: desc|user_create_flag|user_modify_flag|user_delete_flag|user_view_flag|data_type|group_type|code|audit_id

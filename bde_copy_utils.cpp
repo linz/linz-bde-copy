@@ -5,6 +5,54 @@
 
 #include "bde_copy_utils.h"
 
+#if !defined(_WIN32) && !defined(_MSC_VER)
+#include <sys/types.h>
+#include <unistd.h>
+
+char* get_image_path()
+{
+    char* path;
+    char _link[20];
+    char buf[10];
+    pid_t pid = getpid();
+    sprintf( buf,"%d", pid );
+    strcpy( _link, "/proc/" );
+    strcat( _link, buf );
+#if defined(__linux) || defined(linux)
+    strcat( _link, "/exe" );
+#endif
+#if defined(sun) || defined(__sun)
+    strcat( _link, "/path/a.out" );
+#endif
+#if defined(__bsdi__)
+    strcat( _link, "/file" );
+#endif
+    char proc[512];
+    ssize_t len = readlink( _link, proc, 512);
+    if ( len != -1 )
+    {
+      proc[len] = '\0';
+      path = new char[strlen( proc )];
+      path = strcpy( path, proc );
+    }
+    return path;
+}
+
+#ifndef _strlwr
+char* _strlwr ( char* string)
+{
+    char *cp;
+    for ( cp=string; *cp; ++cp )
+    {
+        if ( 'A' <= *cp && *cp <= 'Z' )
+          *cp += 'a' - 'A';
+    }
+    return(string);
+}
+#endif
+
+#endif
+
 char *clean_string(char *cp)
 {
     char *sp=0;
@@ -87,7 +135,7 @@ int readbuff::getline(char *buffer, int bufsize)
         ok = OK;
         if( c == '\r' ) continue;
         if( c == '\n' ) break;
-        *b++ = c;
+        *b++ = (char) c;
         if( b >= eb ) break;
     }
     *b++ = 0;
@@ -119,7 +167,8 @@ filebuff::filebuff( char *name ) : readbuff( name, filebuffsize )
 
 filebuff::~filebuff()
 {
-    fclose(fh);
+    if ( fh != NULL )
+      fclose(fh);
 }
 
 int filebuff::fill()
@@ -205,7 +254,7 @@ void buffer ::setchars( char *source )
     source = clean_string(source);
     if( _stricmp(source,"none") != 0 )
     {
-        while( source = parse_char(source,&ch)){ add(ch); }
+        while( (source = parse_char(source,&ch)) != NULL ){ add(ch); }
     }
 }
 
@@ -230,17 +279,17 @@ int buffer::load( readbuff *buff, unsigned char terminator, unsigned char escape
 {
     int ok = 1;
     reset();
-    while(1)
+    for ( ; ; )
     {
         int c = buff->getc();
         if( c == terminator ) break;
         if( escape && c == escape ) 
-		{
-			if( keep_escape) add(c);
-			c = buff->getc();
-		}
+		    {
+			     if( keep_escape) add((char) c);
+			     c = buff->getc();
+		    }
         if( c == readbuff::FEOF ) { ok = 0; break; }
-        if( ! add(c) ) break;
+        if( ! add((char) c) ) break;
     }
     return ok;
 }
@@ -380,7 +429,7 @@ int replace_def::apply( unsigned char **cp, char **error_message, data_writer *o
 	unsigned char ch=**cp;
 	if( ch && nextchar && nextchar[ch].replaced() )
 	{
-		int result = nextchar[ch].apply(cp,error_message,out,applied);
+		nextchar[ch].apply(cp,error_message,out,applied);
 	}
 	if( chars && ! applied )
 	{
@@ -427,7 +476,7 @@ int text_field::set_output_char( char *input_chr, char *output_str, char *messag
 bool text_field::write_field( data_writer *out )
 {
     if( start_delim && ! start_delim->write(out) ) return false;
-	char *sp0 = str();  // Ensure null terminator
+	  str();  // Ensure null terminator
     unsigned char *sp = data();
     int len = this->len();
     unsigned char *cp;
@@ -492,7 +541,7 @@ buffer *date_field::fld_end_delim = 0;
 
 int date_field::year()
 {
-	char *s = str();
+	str();
 	int nf = 0;
 	int inf = 1;
 	for( char *s = str(); s; s++ )
@@ -619,7 +668,7 @@ bool geometry_field::write_field( data_writer *out )
 inline char *inttobuf( int i, char *buffer )
 {
 	*buffer = 0;
-	while(1)
+	for( ; ; )
 	{
 		*--buffer = '0'+(i % 10);
 		i /= 10;
@@ -798,7 +847,7 @@ bool file_data_writer::write( const void *buffer, int length )
 	if( length )
 	{
 		empty = false;
-		return fwrite(buffer,1,length,f) == length;
+		return fwrite(buffer,1,length,f) == (size_t) length;
 	}
 	return true;
 }

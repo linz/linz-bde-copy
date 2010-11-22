@@ -3,12 +3,18 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <stdarg.h>
-#include <new.h>
+#include <new>
 #include <malloc.h>
 
 #include "bde_copy_utils.h"
 #include "bde_copy_gzip.h"
 #include "bde_copy_funcs.h"
+
+#if defined(_WIN32) && defined(_MSC_VER)
+#include "support/win32/dirent.h"
+#else
+#include <dirent.h>
+#endif
 
 #define VERSION "1.0"
 
@@ -121,7 +127,7 @@ void message_base( err_severity severity, bool showloc, char *fmt, va_list fmtar
 		fprintf(meta,"\nResultStatus: fail\n");
 
 		close_files();
-		if( outfile ) { _unlink(outfile); }
+		if( outfile ) { remove(outfile); }
 
 		exit(1);
 	}
@@ -136,10 +142,9 @@ void message( err_severity severity, char *fmt, ... )
 	va_end(fmtargs);
 }
 
-int allocation_error( size_t )
+void allocation_error( )
 {
 	message(es_fatal,"Cannot allocate sufficient memory\n");
-	return 0;
 }
 
 void data_error( err_type et, char *fmt, ... )
@@ -183,7 +188,6 @@ int add_field(char *name,char *type)
 		message(es_fatal,"Too many columns in CRS file\n");
 	}
 	bde_field *f = 0;
-	field_type ft = ft_text;
 	if( _stricmp(type,"st_geometry") == 0 ){ f = new geometry_field(name); }
 	else if (_stricmp(type,"date") == 0 ){ f = new date_field(name); }
 	else if (_stricmp(type,"datetime") == 0 ){ f = new datetime_field(name); }
@@ -261,6 +265,7 @@ void init_checkfuncs()
 		{
 		case ft_date: checkfunc[i] = check_date_field; break;
 		case ft_datetime: checkfunc[i] = check_datetime_field; break;
+    default : break;
 		}
 	}
 }
@@ -295,7 +300,7 @@ bool apply_field_overrides( bool addfields )
 	bool result = false;
 	for( field_override_def *fo = field_overrides; fo; fo=fo->next )
 	{
-		if( stricmp(n,fo->file) == 0 )
+		if( _stricmp(n,fo->file) == 0 )
 		{
 			if( addfields ) set_fields( fo->fields );
 			result = true;
@@ -372,7 +377,7 @@ void skip_header()
 		if( _strnicmp(line,"COLUMN ",7) == 0 && readcols )
 		{
 			char *name = strtok(line+7," ");
-			if( ncol < nfields && stricmp(field[ncol]->name(),name) != 0 )
+			if( ncol < nfields && _stricmp(field[ncol]->name(),name) != 0 )
 			{
 				message(es_fatal,"Inconsistent column names %s and %s in %s\n",
 					name,field[ncol]->name(),input->name());
@@ -392,27 +397,39 @@ void skip_header()
 
 int read_data()
 {
-	while(1)
-	{
-		n_rec++;
-		int ok = 1;
-		for( int i = 0; i < nfields; i++ )
-		{
-			bde_field &f = *(field[i]);
-			f.reset();
-			if( ! f.load(input)) 
-			{
-				n_rec--;
-				if( i == 0 && f.len() == 0 ) return 0;
-				ok = 0;
-				break;
-			}
-		}
-		if( input->endline() == readbuff::EOL ) return 1;
-		data_error(et_column_count,"Incorrect number of field\n");
-	}
-	return 0;
+  int result=0;
+  int ok = 1;
+  for(; ;)
+  {
+    n_rec++;
+    for( int i = 0; i < nfields; i++ )
+    {
+      bde_field &f = *(field[i]);
+      f.reset();
+      if( ! f.load(input)) 
+      {
+        n_rec--;
+        if( i == 0 && f.len() == 0 )
+        {
+          ok = 0;
+        }
+        break;
+      }
+    }
+    if (ok==0)
+    {
+      break;
+    }
+    if( input->endline() == readbuff::EOL )
+    {
+      result = 1;
+      break;
+    }
+    data_error(et_column_count,"Incorrect number of field\n");
+  }
+  return result;
 }
+
 
 
 int write_column_headers( data_writer *out )
@@ -531,7 +548,7 @@ int copy_prefix_files()
 
 void check_bde_size()
 {
-	if( input->loc() != size )
+	if( ( (unsigned long)input->loc() ) != size )
 	{
 		data_error(et_file_size,"Size of file %s (%lu) doesn't match size in header (%lu)\n",
 			input->name(),input->loc(), size );
@@ -548,7 +565,7 @@ bool valid_dataset( char *dirname )
 
 int cmp_filename( const void *fp1, const void *fp2 )
 {
-	return stricmp( * (char **) fp1, * (char **) fp2 );
+	return _stricmp( * (char **) fp1, * (char **) fp2 );
 }
 
 char *get_input_file( char *name)
@@ -573,23 +590,28 @@ char *get_input_file( char *name)
 	else
 	{
 		// Find the last dataset
-		void *dir = dir_open(filename);
+		DIR *dir = opendir(filename);
 		
-		if( ! dir ) 
+		if( dir == NULL ) 
 		{
 			message(es_fatal,"Invalid bde repository %s\n",filename);
 			return 0;
 		}
 		strcat(filename,"/");
 		char *end = filename + strlen(filename);
-		while( char *d = dir_next(dir,dt_dir))
+		struct dirent *ent;
+		while ( ( ent = readdir( dir ) ) != NULL )
 		{
+			if( ent->d_type != DT_DIR ) continue;
+			if( strcmp(ent->d_name,".") == 0 || strcmp(ent->d_name,"..") == 0 ) continue;
+			char *d = strdup(ent->d_name);
 			if( ! valid_dataset(d) ) continue;
 			if( *end && strcmp(d,end) < 0 ) continue;
 			strcpy(end,d);
 			fdataset = end;
+			free(d);
 		}
-		dir_close(dir);
+		closedir(dir);
 		if( ! *end )
 		{
 			message(es_fatal,"Could not find a dataset in %s\n",filename);
@@ -607,15 +629,17 @@ char *get_input_file( char *name)
 		strcat(archive,"/level_");
 		strcat(archive,level);
 		strcat(archive,"_archive");
-		void *dir = dir_open(archive);
-		if( dir )
+		DIR *dir = opendir(archive);
+		if( dir != NULL )
 		{
-			while( char *f = dir_next(dir,dt_file))
+				struct dirent *ent;
+			while ( ( ent = readdir( dir ) ) != NULL )
 			{
+				if( ent->d_type != DT_REG ) continue;
 				// Check that the file name matches the file being copied
-				char *f1 = strdup(f);
+				char *f1 = strdup(ent->d_name);
 				char *fname = strtok(f1,".");
-				if( stricmp(fname,name) != 0 ) continue;
+				if( _stricmp(fname,name) != 0 ) continue;
 
 				// Check that the file applies to this dataset, not only to those
 				// after this date.
@@ -631,10 +655,10 @@ char *get_input_file( char *name)
 					message(es_fatal,"Too many archive files for program - increase MAXFILES\n");
 					continue;
 				}
-				char *archive_file = new char[strlen(archive)+strlen(f)+2];
+				char *archive_file = new char[strlen(archive)+strlen(ent->d_name)+2];
 				strcpy(archive_file, archive);
 				strcat(archive_file,"/");
-				strcat(archive_file,f);
+				strcat(archive_file,ent->d_name);
 				addfile[naddfile] = archive_file;
 				naddfile++;
 			}
@@ -643,6 +667,7 @@ char *get_input_file( char *name)
 				qsort(addfile,naddfile,sizeof(char *),cmp_filename);
 			}
 		}
+		closedir(dir);
 	}
 
 
@@ -732,21 +757,21 @@ bool read_configuration_file( char *configfile, bool isdefault )
 
 			unsigned char ch;
 			fieldseparator.reset();
-			while( value = parse_char(value,&ch)){ fieldseparator.add(ch); }
+			while( (value = parse_char(value,&ch)) != NULL ){ fieldseparator.add(ch); }
 			cmdok = true;
 		}
 		else if( strcmp(cmd,"file_prefix") == 0 )
 		{
 			unsigned char ch;
 			fileheader.reset();
-			while( value = parse_char(value,&ch)){ fileheader.add(ch); }
+			while( (value = parse_char(value,&ch)) != NULL ){ fileheader.add(ch); }
 			cmdok = true;
 		}
 		else if( strcmp(cmd,"line_terminator") == 0 )
 		{
 			unsigned char ch;
 			lineterminator.reset();
-			while( value = parse_char(value,&ch)){ lineterminator.add(ch); }
+			while( (value = parse_char(value,&ch)) != NULL ){ lineterminator.add(ch); }
 			cmdok = true;
 		}
 		else if( strcmp(cmd,"field_delimiter") == 0)
@@ -775,8 +800,8 @@ bool read_configuration_file( char *configfile, bool isdefault )
 		if( strcmp(cmd,"column_header") == 0 && value)
 		{
 			char *s1 = strtok(value," ");
-			if( s1 && stricmp(s1,"yes") == 0 ) { col_headers = true; cmdok = true; }
-			else if( s1 && stricmp(s1,"no") == 0 ) { col_headers = false, cmdok = true; }
+			if( s1 && _stricmp(s1,"yes") == 0 ) { col_headers = true; cmdok = true; }
+			else if( s1 && _stricmp(s1,"no") == 0 ) { col_headers = false, cmdok = true; }
 		}
 		else if( strcmp(cmd,"error_type") == 0 )
 		{
@@ -869,7 +894,6 @@ bool read_configuration_file( char *configfile, bool isdefault )
 		}
 		else if( strcmp(cmd,"max_fields") == 0 && value )
 		{
-			int bufsize = 0;
 			if( sscanf(value,"%d",&maxfields) == 1 && maxfields > 0) 
 			{
 				cmdok = true;
@@ -896,8 +920,8 @@ bool read_configuration_file( char *configfile, bool isdefault )
 			cmdok = true;
 			if( value )
 			{
-				if( stricmp(value,"no") == 0 ) keep = false;
-				else if(stricmp(value,"yes") != 0 ) cmdok = false;
+				if( _stricmp(value,"no") == 0 ) keep = false;
+				else if(_stricmp(value,"yes") != 0 ) cmdok = false;
 			}
 			buffer::keep_escape = keep;
 		}
@@ -922,7 +946,6 @@ bool read_configuration_file( char *configfile, bool isdefault )
 
 bool read_configuration_part( char *exefile, char *cfgext )
 {
-	FILE *cfg = 0;
 	char *ext = ".cfg";
 	char *configfile = 0;
 
@@ -992,7 +1015,6 @@ void print_metadata()
 	}
 	fprintf(meta,"\n");
 	fprintf(meta,"OutputFields: ");
-	bool pdelim = false;
 	for( int i = 0; i < noutfields; i++ )
 	{
 		if( i ) { fprintf(meta,"|"); }
@@ -1211,20 +1233,23 @@ void help( char *exefile )
 
 int main( int argc, char *argv[] )
 {
+#if defined(_WIN32) && defined(_MSC_VER)
 	char *image = strdup(_pgmptr);
+#else
+	char *image = get_image_path();
+#endif
 
 	// Trim ".exe" from the file name if it is present
 	{
 		int l = strlen(image);
-		if( l >= 4 && stricmp(image+l-4,".exe") == 0 )
+		if( l >= 4 && _stricmp(image+l-4,".exe") == 0 )
 		{
 			*(image+l-4)=0;
 		}
 	}
 
 	meta = stdout;
-	_set_new_handler(allocation_error);
-	_set_new_mode(1);
+	std::set_new_handler(allocation_error);
 
 	if( ! read_args(image,argc,argv) ) syntax();
 
