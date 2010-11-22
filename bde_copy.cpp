@@ -1,3 +1,10 @@
+/*
+Copyright (C) 2010 LAND INFORMATION NEW ZEALAND
+
+This program is released under the terms of the license contained
+in the file LICENSE.
+*/
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>

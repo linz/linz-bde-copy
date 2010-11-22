@@ -1,3 +1,10 @@
+/*
+Copyright (C) 2010 LAND INFORMATION NEW ZEALAND
+
+This program is released under the terms of the license contained
+in the file LICENSE.
+*/
+
 #include "bde_copy_gzip.h"
 #include "bde_copy_funcs.h"
 #include "zlib.h"
