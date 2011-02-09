@@ -47,6 +47,10 @@ readbuff *input = 0;
 
 buffer repository ("\\\\bde_server\\bde_data");
 buffer crs_ext(".crs.gz");
+buffer gzip_ext(".gz");
+buffer metadata_ext("");
+bool use_infile_metadata=false;
+
 char *level="0";
 char *dataset = 0;
 
@@ -317,7 +321,7 @@ bool apply_field_overrides( bool addfields )
     return result;
 }
 
-int read_header()
+int read_header( bool external_header )
 {
     bool readcols = true;
     if( specfields ) 
@@ -363,7 +367,8 @@ int read_header()
         }
     }
 
-    return input->status() == readbuff::OK && tablename && start && end && size != 0;
+    return (external_header || input->status() == readbuff::OK) 
+           && tablename && start && end && size != 0;
 }
 
 void skip_header()
@@ -516,10 +521,16 @@ void close_file()
     }
 }
 
+bool file_is_gzip( char *file )
+{
+    return strlen(file) > gzip_ext.len() && 
+          _stricmp(file+strlen(file)-gzip_ext.len(),gzip_ext.str()) == 0;
+}
+
 bool open_file( char *file )
 {
     if( input ) close_file();
-    if( strlen(file) > 3 && _stricmp(file+strlen(file)-3,".gz") == 0 )
+    if( file_is_gzip( file ) )
     {
         input = new gzipbuff(file,gzipbuffsize);
     }
@@ -683,16 +694,61 @@ char *get_input_file( char *name)
 
 readbuff *open_bde_file(char *filename, bool readheader)
 {
-    open_file( filename );
-    if( input->status() != readbuff::OK )
+    bool external_header = false;
+    char *header_file = new char[strlen(filename)+strlen(metadata_ext.str())+1];
+    strcpy(header_file,filename);
+
+    if( metadata_ext.len() > 0 )
     {
-        message(es_fatal,"Cannot open file %s\n",filename);
+
+        if( file_is_gzip(filename))
+        {
+            header_file[strlen(header_file)-gzip_ext.len()] = 0;
+        }
+        strcat(header_file,metadata_ext.str());
+
+        if( file_exists( header_file ) )
+        {
+            open_file( header_file );
+
+            if( input->status() == readbuff::OK )
+            {
+                external_header = true;
+            }
+        }
+        if( ! external_header && ! use_infile_metadata )
+        {
+            message(es_fatal,"Cannot open metadata file %s\n",header_file);
+        }
     }
-    if( readheader && ! read_header() )
+
+    if( ! external_header )
     {
-        message(es_fatal,"Cannot read CRS header in %s\n",infile[0]);
+        open_file( filename );
+        if( input->status() != readbuff::OK )
+        {
+            message(es_fatal,"Cannot open file %s\n",filename);
+        }
     }
-    if( ! readheader ) skip_header();
+
+    if( readheader && ! read_header( external_header ) )
+    {
+        message(es_fatal,"Cannot read CRS header in %s\n", header_file);
+    }
+
+    if( external_header )
+    {
+        open_file( filename );
+        if( input->status() != readbuff::OK )
+        {
+            message(es_fatal,"Cannot open file %s\n",filename);
+        }
+    }
+
+    if( ! readheader && ! external_header ) skip_header();
+
+    delete [] header_file;
+
     return input;
 }
 
@@ -931,6 +987,38 @@ bool read_configuration_file( char *configfile, bool isdefault )
                 else if(_stricmp(value,"yes") != 0 ) cmdok = false;
             }
             buffer::keep_escape = keep;
+        }
+        else if( strcmp(cmd,"metadata_extension") == 0 && value )
+        {
+            char *ext = strtok(value," ");
+            char *optional = strtok(NULL," ");
+
+            if(_stricmp(ext,"none") == 0 )
+            {
+                metadata_ext.setstring("");
+                use_infile_metadata = true;
+                cmdok = true;
+            }
+            else
+            {
+                metadata_ext.setstring(ext);
+                if( ! optional )
+                {
+                    use_infile_metadata = false;
+                    cmdok = true;
+                }
+                else if( _stricmp(optional,"optional") == 0 )
+                {
+                    use_infile_metadata = true;
+                    cmdok = true;
+                }
+            }
+        }
+        else if( strcmp(cmd,"use_infile_metadata") == 0 && value )
+        {
+            char *s1 = strtok(value," ");
+            if( s1 && _stricmp(s1,"yes") == 0 ) { use_infile_metadata = true; cmdok = true; }
+            else if( s1 && _stricmp(s1,"no") == 0 ) { use_infile_metadata = false, cmdok = true; }
         }
         else if( strcmp(cmd,"bde_repository") == 0 && value )
         {

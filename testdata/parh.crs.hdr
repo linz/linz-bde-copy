@@ -1,0 +1,26 @@
+HEDR	 1.0.0
+SOFTWARE cbe_b30 V1.0.0
+SCHEMA	 V1.0                
+USER	 crs_bde
+START	 2009-10-14 23:26:56
+END	 2009-10-15 23:47:45
+SQL	 SELECT par1.* FROM viw_cbe_par1 par1 WHERE par1.id IN (SELECT aud.identifier_1 FROM crs_audit_detail aud WHERE aud.table_name = 'crs_parcel' AND aud.timestamp > '2009-10-14 23:26:56')
+TABLE	 crs_parcel                                                                                                                      
+COLUMN	 id                            integer NOT NULL
+COLUMN	 test_date                     date NULL
+COLUMN	 img_id                        integer NULL
+COLUMN	 fen_id                        integer NULL
+COLUMN	 toc_code                      varchar NOT NULL
+COLUMN	 alt_id                        integer NULL
+COLUMN	 area                          decimal NULL
+COLUMN	 nonsurvey_def                 varchar NULL
+COLUMN	 appellation_date              datetime NULL
+COLUMN	 parcel_intent                 varchar NOT NULL
+COLUMN	 status                        varchar NOT NULL
+COLUMN	 total_area                    decimal NULL
+COLUMN	 calculated_area               decimal NULL
+COLUMN	 se_row_id                     integer NULL
+COLUMN	 audit_id                      serial NOT NULL
+COLUMN	 shape                         st_geometry        NULL
+DESC	 
+SIZE           11371

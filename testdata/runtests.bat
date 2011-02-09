@@ -1,6 +1,6 @@
 rem @echo off
 setlocal
-set exe="../../vc/Debug/bde_copy.exe"
+set exe="../../ms/Debug/bde_copy.exe"
 if not "%1" == "r" echo Use "r" argument to test release version
 if "%1" == "r" set exe="../../vc/Release/bde_copy.exe"
 
@@ -13,6 +13,11 @@ del /q *.*
 %exe% -c ../test3.cfg ../par1.crs par3.out par3.log
 %exe% -c ../test1.cfg ../escape.crs escape.out escape.log
 %exe% -c ../test4.cfg ../par1.crs par4.out par4.log
+%exe% -c ../test5.cfg ../par1.crs par5a.out par5a.log
+%exe% -c ../test5.cfg ../parh.crs par5b.out par5b.log
+%exe% -c ../test5.cfg ../parhz.crs.gz par5c.out par5c.log
+%exe% -c ../test6.cfg ../par1.crs par6a.out par6a.log
+%exe% -c ../test6.cfg ../parh.crs par6b.out par6b.log
 %exe% -c ../test1.cfg -p ../scg.crs.p0+../scg.crs.p1.gz ../scg.crs scgp.out scgp.log
 %exe% -c ../test1.cfg ../scg.crs+../scg1.crs scg1.out scg1.log
 %exe% -c ../test1.cfg -l 0 scg scg2.out scg2.log
