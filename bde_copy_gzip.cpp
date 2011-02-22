@@ -1,9 +1,13 @@
-/*
-Copyright (C) 2010 LAND INFORMATION NEW ZEALAND
+/***************************************************************************
+ $Id$
 
-This program is released under the terms of the license contained
-in the file LICENSE.
-*/
+ Copyright 2011 Crown copyright (c)
+ Land Information New Zealand and the New Zealand Government.
+ All rights reserved
+
+ This program is released under the terms of the new BSD license. See 
+ the LICENSE file for more information.
+****************************************************************************/
 
 #include "bde_copy_gzip.h"
 #include "bde_copy_funcs.h"
