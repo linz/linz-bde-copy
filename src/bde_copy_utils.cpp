@@ -64,6 +64,48 @@ char* _strlwr ( char* string)
 
 #endif
 
+#if defined(_WIN32)
+char *basename (const char *name)
+{
+    const char *base;
+    
+    #if defined (_WIN32) || defined (_MSC_VER)
+    if (isalpha(name[0]) && name[1] == ':') 
+        name += 2;
+    #endif
+    for (base = name; *name; name++)
+    {
+        if (*name == DIR_SEPARATOR)
+        {
+            base = name + 1;
+        }
+    }
+    return (char *) base;
+}
+#endif
+
+char *catdir (const char *dir1, const char *dir2)
+{
+    bool need_sep = false;
+    size_t len1 = strlen(dir1);
+    size_t len2 = strlen(dir2);
+    size_t new_len = len1 + len2 + 1;
+    if (dir1[len1-1] != DIR_SEPARATOR)
+        need_sep = true;
+    if (need_sep)
+        new_len++;
+
+    char *result = new char[new_len];
+    strcpy(result, dir1);
+    if (need_sep)
+    {
+        result[len1] = DIR_SEPARATOR;
+        len1++;
+    }
+    strcpy(result+len1, dir2);
+    return result;
+}
+
 char *clean_string(char *cp)
 {
     char *sp=0;

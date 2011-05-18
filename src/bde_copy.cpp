@@ -17,6 +17,8 @@
 #include <new>
 #include <malloc.h>
 
+#include "bde_copy_revision.h"
+#include "bde_copy_config.h"
 #include "bde_copy_utils.h"
 #include "bde_copy_gzip.h"
 #include "bde_copy_funcs.h"
@@ -26,10 +28,6 @@
 #else
 #include <dirent.h>
 #endif
-
-#define VERSION "1.0"
-
-#define RELEASE "$Id$"
 
 #define MAXFILES 16
 
@@ -99,6 +97,7 @@ int min_year=0;
 buffer err_date("01/01/1800");
 buffer err_datetime("1800-01-01 00:00:00");
 
+char *default_cfg_ext = ".cfg";
 int gzipbuffsize = 0;
 
 struct field_override_def
@@ -527,7 +526,7 @@ void close_file()
 
 bool file_is_gzip( char *file )
 {
-    return strlen(file) > gzip_ext.len() && 
+    return strlen(file) > (size_t)gzip_ext.len() && 
           _stricmp(file+strlen(file)-gzip_ext.len(),gzip_ext.str()) == 0;
 }
 
@@ -787,6 +786,61 @@ char *parse_char( char *source, unsigned char *value )
     return source+1;
 }
 
+char *get_data_path( char *exefile, char *ext )
+{
+    char *path = 0;
+    int path_count = 3;
+    char **search_path = new char*[path_count];
+    search_path[0] = new char[strlen(exefile)+1];
+    strcpy(search_path[0],exefile);
+
+    char *base_name = basename(exefile);
+    char *env_path = getenv("BDECOPY_DATADIR");
+    if (env_path != 0)
+    {
+        search_path[1] = catdir(env_path, base_name);
+    }
+    else
+    {
+        search_path[1] = 0;
+    }
+    search_path[2] = catdir(DATADIR, base_name);
+
+    int i = 0;
+    char* temp_base_path = 0;
+    size_t ext_len = strlen(ext);
+    while (i < path_count && temp_base_path == 0)
+    {
+        if (search_path[i])
+        {
+            size_t path_len = strlen(search_path[i]);
+            char *temp_file = new char[path_len + ext_len + 1];
+            strcpy(temp_file, search_path[i]);
+            strcat(temp_file, ext);
+            if ( file_exists(temp_file) )
+            {
+                temp_base_path = search_path[i];
+            }
+            delete[] temp_file;
+        }
+        i++;
+    }
+
+    if ( temp_base_path )
+    {
+        path = new char[strlen(temp_base_path) + 1];
+        strcpy(path, temp_base_path);
+    }
+
+    for (int j=0; j < path_count; j++)
+    {
+        if( search_path[j] )
+            delete[] search_path[j];
+    }
+    delete[] search_path;
+
+    return path;
+}
 
 bool read_configuration_file( char *configfile, bool isdefault )
 {
@@ -1045,7 +1099,6 @@ bool read_configuration_file( char *configfile, bool isdefault )
 
 bool read_configuration_part( char *exefile, char *cfgext )
 {
-    char *ext = ".cfg";
     char *configfile = 0;
 
     if( cfgext && (strchr(cfgext,'.') || strchr(cfgext,'/') || strchr(cfgext,'\\')) )
@@ -1056,12 +1109,12 @@ bool read_configuration_part( char *exefile, char *cfgext )
     else
     {
         int len = strlen(exefile);
-        len += strlen(ext);
+        len += strlen(default_cfg_ext);
         if( cfgext ) len += strlen(cfgext);
         len+=2;
         configfile = new char[len];
         strcpy(configfile,exefile);
-        strcat(configfile,ext);
+        strcat(configfile,default_cfg_ext);
         if( cfgext ) { strcat(configfile,"."); strcat(configfile,cfgext); }
     }
     bool result = read_configuration_file(configfile, cfgext == 0);
@@ -1072,25 +1125,34 @@ bool read_configuration_part( char *exefile, char *cfgext )
 bool read_configuration( char *exefile )
 {
     bool ok = true;
-    char *c = cfgfile;
-    read_configuration_part(exefile,0);
-    if( c && *c )
+    char *base_config_path = get_data_path(exefile, default_cfg_ext);
+
+    if (base_config_path)
     {
-        while( *c )
+        read_configuration_part(base_config_path, 0);
+        char *c = cfgfile;
+        if( c && *c )
         {
-            char *e = c;
-            while( *e && *e != '+') e++;
-            char es = *e;
-            *e = 0;
-            if( ! read_configuration_part(exefile,c) ) ok = false;
-            *e = es;
-            c = e;
-            if( *c ) c++;
+            while( *c )
+            {
+                char *e = c;
+                while( *e && *e != '+') e++;
+                char es = *e;
+                *e = 0;
+                if( ! read_configuration_part(base_config_path,c) ) ok = false;
+                *e = es;
+                c = e;
+                if( *c ) c++;
+            }
         }
+        delete[] base_config_path;
+    }
+    else
+    {
+        ok = false;
     }
     return ok;
 }
-
 
 void print_metadata()
 {
@@ -1307,17 +1369,19 @@ void syntax()
 
 void help( char *exefile )
 {
-    if( exefile )
+    char *help_ext = ".help";
+    char *help_path = get_data_path (exefile, help_ext);
+    if( help_path )
     {
-        char *fname = (char *) alloca(strlen(exefile)+8);
-        strcpy(fname,exefile);
-        strcat(fname,".help");
+        char *fname = new char[strlen(help_path)+8];
+        strcpy(fname,help_path);
+        strcat(fname,help_ext);
         FILE *f = fopen(fname,"r");
         if( f )
         {
             printf("bde_copy: Extracts data from BDE files\n");
             printf("Version: %s (%s)\n",VERSION,__DATE__);
-            printf("Source version: %s\n\n",RELEASE);
+            printf("Source version: %s\n\n",REVISION);
             char buf[256];
             while(fgets(buf,256,f)){ fputs(buf,stdout); }
             fclose(f);

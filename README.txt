@@ -1,19 +1,69 @@
-This is the README for bde_copy which is a programme that extracts data from LINZ Bulk Data Extracts (BDE_ files and copies them to the uncompressed data files. If you would like to know more about the LINZ BDE format and the Landonline BDE see http://www.linz.govt.nz/survey-titles/landonline-data/landonline-bde/index.aspx
+= LINZ bde_copy
 
-This program is released under the terms of the license contained in the file LICENSE.
+Programme that extracts LINZ Bulk Data Extracts (BDE) files and optionally
+creates normalised files that are more suitable for loading into external
+systems. If you would like to know more about the LINZ BDE format and the
+Landonline BDE see http://www.linz.govt.nz/survey-titles/landonline-data/landonline-bde/index.aspx
 
-HOW TO BUILD -- Win32 using Visual Studio 2008
+== Copyright
 
-1) Unzip zlib125.zip
-2) Unzip contents of zlib124_masm_obj.zip to zlib-1.2.5\contrib\masmx86
-3) Build the VS project file vc\bde_copy.vcproj
+Copyright 2011 Crown copyright (c) Land Information New Zealand and the New
+Zealand Government. All rights reserved.
 
-HOW TO BUILD -- UNIX
+== License
 
-1) make sure zlib 1.25 is compiled or installed on system
-2) cd into unix directory and run "make dist" to build and make distributable copy of programme in unix/release/bdecopy-release.tar.gz. This tarball include the programme and all required config files. These files can be installed and run from any directory. At some stage in the future a more *unix style build and install system will be created.
+This program is released under the terms of the license contained in the file
+LICENSE.
 
-TESTING
+== Runing bde_copy
 
-Make sure you have perl installed on your system. Change into testdata directory and run tests using "runtests" script. Use a programme like kdiff3 or BeyondCompare and do a directory comparison between the output and validate directories.
+See bde_copy.help or run bde_copy -? for more information
 
+== Build Requirements
+
+bde_copy requires the cross platform make system cmake. Version 2.8 or greater
+must be downloaded and installed. See www.cmake.org for more information
+
+Bde_copy also requires zlib for gzip compression support. www.zlib.net
+
+== How to Build on Windows (Visual Studio 2008)
+
+- Install cmake 2.8 from www.cmake.org. Make sure you have cmake in your path
+- Install the complete zlib development library from http://gnuwin32.sourceforge.net/packages/zlib.htm
+- In the top level of bde_copy source directory create a "build" directory:
+
+    mkdir build
+    cd build
+
+- Run cmake for a visual studio release project
+    
+    cmake -G "Visual Studio 9 2008" -DCMAKE_BUILD_TYPE=Release ..
+    
+- Open up the Visual Studio solution file bde_copy.sln and then build the solution
+- You should now have new build bde_copy in MSWin32/Release directory.
+
+== How to Build on UNIX (GNU make)
+
+- Make sure cmake is installed
+- Make sure zlib runtime library and development headers are installed
+- In the top level of bde_copy source directory create a "build" directory:
+
+    mkdir build && cd build
+
+- Run cmake (setting the install path to /usr:
+    
+    cmake -DCMAKE_INSTALL_PREFIX=/usr ..
+
+- Make and (optionally install):
+    
+    make
+    make install
+
+== Testing
+
+
+Make sure you have Perl installed on your system. Change into testdata directory
+and run tests using "runtests" script. Use a programme like kdiff3 or
+BeyondCompare and do a directory comparison between the output and validate
+directories. At a future point this will be automated so file comparisons are
+not required.
