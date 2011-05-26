@@ -1,8 +1,8 @@
 rem @echo off
 setlocal
-set exe="../../ms/Debug/bde_copy.exe"
+set exe="../../MSWin32/Debug/bde_copy.exe"
 if not "%1" == "r" echo Use "r" argument to test release version
-if "%1" == "r" set exe="../../vc/Release/bde_copy.exe"
+if "%1" == "r" set exe="../../MSWin32/Release/bde_copy.exe"
 
 cd output
 del /q *.*

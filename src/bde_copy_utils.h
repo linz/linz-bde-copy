@@ -14,6 +14,12 @@
 
 #include <stdio.h>
 
+#if defined (_WIN32) || defined (_MSC_VER)
+#define DIR_SEPARATOR '\\'
+#else
+#define DIR_SEPARATOR '/'
+#endif
+
 #if !defined(_WIN32) && !defined(_MSC_VER)
 #ifndef _stricmp
 #define _stricmp strcasecmp
@@ -44,6 +50,10 @@ enum err_severity { es_ignore, es_warning, es_error, es_fatal };
 
 typedef void (*field_error_func)(err_type type, char *name, char *message);
 
+#if defined(_WIN32)
+char *basename (const char *name);
+#endif
+char *catdir (const char *dir1, const char *dir2);
 char *clean_string( char *str );
 
 #define Singleton 1

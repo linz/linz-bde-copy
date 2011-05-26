@@ -1,0 +1,19 @@
+/***************************************************************************
+ $Id$
+
+ Copyright 2011 Crown copyright (c)
+ Land Information New Zealand and the New Zealand Government.
+ All rights reserved
+
+ This program is released under the terms of the new BSD license. See 
+ the LICENSE file for more information.
+****************************************************************************/
+
+#ifndef BDE_COPY_CONFIG_H
+#define BDE_COPY_CONFIG_H
+
+#define VERSION "${CPACK_PACKAGE_VERSION_MAJOR}.${CPACK_PACKAGE_VERSION_MINOR}.${CPACK_PACKAGE_VERSION_PATCH}"
+#cmakedefine DATADIR "@DATADIR_FULL@"
+
+#endif // BDE_COPY_CONFIG_H
+

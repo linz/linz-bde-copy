@@ -20,8 +20,10 @@ gzipbuff::gzipbuff( char *name, int zipbuffsize ) : readbuff( name, filebuffsize
     if( gz ) 
     {
         setstatus(OK);
+#if ZLIB_VERNUM >= 0x1235
         if( zipbuffsize == 0 ) zipbuffsize = filebuffsize;
         gzbuffer(gz,zipbuffsize);
+#endif
     }
     else 
     {
@@ -47,8 +49,10 @@ data_writer *gzip_data_writer::open( char *fname, bool append, int zipbuffsize )
     if( append && file_exists(fname)) return 0;
     void *gz = gzopen(fname,"wb" );
     if( ! gz ) return 0;
+#if ZLIB_VERNUM >= 0x1235
     if( zipbuffsize == 0 ) zipbuffsize = readbuff::filebuffsize;
     gzbuffer(gz,zipbuffsize);
+#endif
     return new gzip_data_writer(gz);
 }
 
