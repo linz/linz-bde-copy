@@ -88,7 +88,7 @@ IF (NOT REVISION_FOUND AND GIT_MARKER)
     ELSE(MSVC)
       ADD_CUSTOM_COMMAND(
         OUTPUT ${REVISION_HEADER}
-        COMMAND echo \\\#define REVISION \\\"$$\( ${GIT} log -n1 --pretty=%h \)\\\" ${REVISION_HEADER}
+        COMMAND echo \\\#define REVISION \\\"$$\( ${GIT} log -n1 --pretty=%h \)\\\" > ${REVISION_HEADER}
         MAIN_DEPENDENCY ${GIT_MARKER}
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
       )
