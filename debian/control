@@ -1,10 +1,7 @@
 Source: linz-bde-copy
-Section: Miscellaneous
+Section: misc
 Priority: optional
-Build-Depends: debhelper (>= 8)
-Build-Depends-Indep: perl (>= 5.8),
- zlib1g-dev,
- cmake
+Build-Depends: debhelper (>= 7), perl (>= 5.8), zlib1g-dev, cmake
 Maintainer: Jeremy Palmer (LINZ) <jpalmer@linz.govt.nz>
 Homepage: http://www.linz.govt.nz
 Vcs-Svn: git://github.com/linz/linz_bde_linz_bde_copy.git
