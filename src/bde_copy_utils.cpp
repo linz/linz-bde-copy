@@ -43,7 +43,7 @@ char* get_image_path()
     if ( len != -1 )
     {
       proc[len] = '\0';
-      path = new char[strlen( proc )];
+      path = new char[strlen( proc ) + 1];
       path = strcpy( path, proc );
     }
     return path;
