@@ -22,7 +22,10 @@ Options:
   -f xxx   Overrides the field defined in the BDE header.  xxx is formatted
            as name1=type1:name2=type2: ... Generally the BDE header is
            correct and this can be ignored.
-  -o xxx   Specifies which field are required in the output file.  Field names
+  -w xxx   Where condition to filter fields. xxx is formatted as 
+           name1=value1:name2=value2.  The operator can be = or !=.  This is
+           interpreted as "where name1 = value1 and name2 = value2 ...."
+  -o xxx   Specifies which field are copied to the output file.  Field names
            are specified as name1:name2:name3...  The default is to output
            all fields
   -e ##    Specifies the maximum number of errors permitted before the 

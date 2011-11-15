@@ -72,6 +72,7 @@ char *metafile = 0;
 char *cfgfile = "";
 char *reqfields = 0;
 char *specfields = 0;
+char *whereclause = 0;
 
 char *infile[MAXFILES];
 int ninfile = 0;
@@ -84,6 +85,7 @@ FILE *meta = 0;
 int n_errors = 0;
 int n_rec = 0;
 int n_recout = 0;
+int n_recskip = 0;
 int max_errors = 0;
 int cmd_maxerrors = -1;
 bool append = false;
@@ -108,6 +110,16 @@ struct field_override_def
 };
 
 field_override_def *field_overrides = 0;
+
+struct filter_def
+{
+    bde_field *field;
+    char *value;
+    bool negate;
+    filter_def *next;
+};
+
+filter_def *filters = 0;
 
 void close_files()
 {
@@ -249,6 +261,60 @@ void select_fields(char *flds)
         noutfields++;
     }
 }
+
+
+void parse_whereclause(char *whereclause)
+{
+    for( char *name = strtok(whereclause,":"); name; name = strtok(NULL,":"))
+    {
+        char save;
+        char *saveptr;
+        char *value;
+        for( value = name; *value && *value != '=' && *value != '!'; value++ ){}
+        saveptr = value;
+        save = *value; 
+        if( save == '!' ) value++;
+        if( *value != '=' || value == name )
+        {
+            message(es_error,"Invalid conditional expression %s specified\n",name);
+            continue;
+        }
+        value++;
+        bde_field *ftest = 0;
+        *saveptr = 0;
+        for( int i = 0; i < nfields; i++ )
+        {
+            if( _stricmp(field[i]->name(),name) == 0 )
+            {
+                ftest = field[i];
+                break;
+            }
+        }
+        *saveptr = save;
+        if( ! ftest )
+        {
+            message(es_error,"Conditional expression %s refers to invalid field\n",name);
+            continue;
+        }
+        filter_def *filter = new filter_def();
+        filter->field = ftest;
+        filter->value = _strdup(value);
+        filter->negate = save == '!';
+        filter->next = 0;
+        if( ! filters ) 
+        { 
+            filters = filter; 
+        }
+        else
+        {
+            for( filter_def *f = filters; f; f=f->next )
+            {
+                if( ! f->next ){ f->next = filter; break; }
+            }
+        }
+    }
+}
+
 
 void check_date_field( bde_field &df )
 {
@@ -502,6 +568,20 @@ int copy_data( data_writer *out )
     n_rec = 0;
     while( read_data() )
     {
+        if( filters )
+        {
+            bool ok = true;
+            for( filter_def *f = filters; f; f=f->next )
+            {
+                ok = (strcmp( f->value, f->field->str()) == 0) ^ f->negate;
+                if( ! ok ) break;
+            }
+            if( ! ok )
+            {
+                n_recskip++;
+                continue;
+            }
+        }
         if( ! write_data(out) )
         {
             message(es_fatal,"Failed to write data to %s\n",outfile);
@@ -1181,7 +1261,21 @@ void print_metadata()
         if( i ) { fprintf(meta,"|"); }
         fprintf(meta,"%s",outfield[i]->name());
     }
-    fprintf(meta,"\n");
+    fprintf(meta,"\n");    
+    if( filters )
+    {
+        fprintf(meta,"Filters:");
+        bool first = true;
+        for( filter_def *f = filters; f; f=f->next)
+        {
+            if( ! first ) fprintf(meta," AND");
+            first = false;
+            fprintf(meta," %s %s \"%s\"",f->field->name(),
+                f->negate ? "!=" : "=", f->value );
+        }
+        fprintf(meta,"\n");
+    }
+
     fprintf(meta,"BdeStartTime: %s\n",start ? start : "");
     fprintf(meta,"BdeEndTime: %s\n",end ? end : "");
     fprintf(meta,"BdeSize: %lu\n",size);
@@ -1238,6 +1332,9 @@ bool read_args( char *image, int argc, char *argv[] )
 
             case 'f':
             case 'F': nxtarg = &specfields; break;
+
+            case 'w':
+            case 'W': nxtarg = &whereclause; break;
 
             case 'o':
             case 'O': nxtarg = &reqfields; break;
@@ -1443,6 +1540,8 @@ int main( int argc, char *argv[] )
 
     if( reqfields ) { select_fields(reqfields); }
 
+    if( whereclause ){ parse_whereclause(whereclause); }
+
     if( nfields == 0 )
     {
         message(es_fatal,"No columns specified file header of %s\n",infile[0]);
@@ -1507,6 +1606,7 @@ int main( int argc, char *argv[] )
 
     fprintf(meta,"\nInputCount: %d\n",n_rec);
     fprintf(meta,"OutputCount: %d\n",n_recout);
+    if( n_recskip ) fprintf(meta,"RejectedCount: %d\n",n_recskip);
     fprintf(meta,"ErrorCount: %d\n",n_errors);
     fprintf(meta,"ResultStatus: success\n");
 

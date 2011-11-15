@@ -4,6 +4,7 @@ set exe="../../MSWin32/Debug/bde_copy.exe"
 if not "%1" == "r" echo Use "r" argument to test release version
 if "%1" == "r" set exe="../../MSWin32/Release/bde_copy.exe"
 
+mkdir output
 cd output
 del /q *.*
 
@@ -26,6 +27,9 @@ del /q *.*
 %exe% -c ../test1.cfg -x -l 0 -d 20100401030201 scg scg5.out scg5.log
 
 %exe% -c ../test1.cfg ../par1.crs -z par6.out.gz par6.log
+
+%exe% -c ../test1.cfg -w user_modify_flag=N ../scg.crs scgw1.out scgw1.log
+%exe% -c ../test1.cfg -w user_modify_flag=N:data_type!=T ../scg.crs scgw2.out scgw2.log
 
 for %%f in (*.log) do perl -pi.bak -e "s/^(ConfigFile\:\s)\w.*\\(.+\.cfg)$/$1$2/g" %%f
 del /q *.bak
