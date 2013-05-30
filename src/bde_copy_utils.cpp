@@ -240,7 +240,7 @@ buffer::buffer( int bufsize )
     init(bufsize);
 }
 
-buffer::buffer( char *str )
+buffer::buffer(const char *str )
 {
     size = str ? strlen(str)+1 : 32;
     init(size);
@@ -256,7 +256,7 @@ void buffer::init( int bufsize )
     cp = sp;
 }
 
-void buffer::setstring( char *str )
+void buffer::setstring(const char *str )
 {
     reset();
     if( str )

@@ -133,13 +133,13 @@ class buffer
 {
 public:
 	buffer(int bufsize=256);
-	buffer(char *str );
+    buffer(const char *str );
 	~buffer();
 	int add( unsigned char c ){ if( cp >= ep ) expand(); *cp++ = c; return 1;}
-	int add( char *c ){ while(*c){ add(*c); c++; }; return 1; }
+    int add( const char *c ){ while(*c){ add(*c); c++; }; return 1; }
 	int len(){ return cp - sp; }
 	unsigned char *data(){ return sp; }
-	void setstring( char *str );
+    void setstring( const char *str );
 	void setchars( char *source );
 	void reset(){ cp = sp; }
 	char *str(){ *cp=0; return (char *) sp; }
