@@ -1223,7 +1223,8 @@ bool read_configuration( char *exefile )
         read_configuration_part(base_config_path, 0);
         if( cfgfile && *cfgfile )
         {
-          char *c = copy_string(cfgfile);
+            char *cfgf = copy_string(cfgfile);
+            char *c = cfgf;
             while( *c )
             {
                 char *e = c;
@@ -1235,7 +1236,7 @@ bool read_configuration( char *exefile )
                 c = e;
                 if( *c ) c++;
             }
-            delete [] c;
+            delete [] cfgf;
         }
         delete[] base_config_path;
     }

@@ -795,7 +795,7 @@ int geometry_field::write_offset_geom( char *sp, data_writer *out )
            {0,4,5,0,1024,0},
            {0,1285,0,0,1024,0}};
 
-        unsigned short sm_result = sm_trans[state][sm_class[*cp]];
+        unsigned short sm_result = sm_trans[state][sm_class[(int)(*cp)]];
         state = (unsigned char)(sm_result & 0xFF);
         action = (unsigned char)(sm_result >> 8);
 
