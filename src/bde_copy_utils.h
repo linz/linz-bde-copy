@@ -202,17 +202,19 @@ class replace_def
 public:
 	replace_def();
 	~replace_def();
-	bool replaced(){ return replace; }
+    bool replacing(){ return replace; }
 	void set_replace( char *input_str, char *output_str, char *error_message );
-	int apply( unsigned char **cp, char **error_message, data_writer *out )
+    int apply( unsigned char *cp, char **error_message, data_writer *out )
 	{
 		bool applied = false;
 		(*error_message) = 0;
 		return apply(cp, error_message, out, applied);
-	};
+    }
+    bool write( data_writer *out, char **error_message );
+    bool passthru;   // True if a message, but string is to be left unchanged
 private:
-	int apply(unsigned char **cp, char **error_message, data_writer *out, bool &applied);
-	bool replace;
+    int apply(unsigned char *cp, char **error_message, data_writer *out, bool &applied);
+    bool replace;    // True if a replacement is specified
 	buffer *chars;
 	char *message;
 	replace_def *nextchar;
@@ -225,7 +227,11 @@ public:
 	virtual bool write_field( data_writer *out );
 	static void set_delim( char *start, char *end );
 	static int set_output_char( char *input_chr, char *output_str, char *error_message );
+    static replace_def replace_utf8_invalid;
+    static bool detect_utf8;
+    static bool expect_utf8;
 private:
+    int utf8_mb_length( unsigned char *input_chr, int len );
 	static buffer *fld_start_delim;
 	static buffer *fld_end_delim;
 	static replace_def replace[256];

@@ -1045,6 +1045,25 @@ bool read_configuration_file( char *configfile, bool isdefault )
                 error_severity[et] = es;
             }
         }
+        else if( strcmp(cmd,"utf8_encoding") == 0 )
+        {
+            cmdok=true;
+            char *s1 = strtok(value," ");
+            if( s1 && _stricmp(s1,"enforced") == 0 ) { text_field::detect_utf8 = true; text_field::expect_utf8 = true; }
+            else if( s1 && _stricmp(s1,"invalid") == 0 ) { text_field::detect_utf8 = true; text_field::expect_utf8 = false; }
+            else if( s1 && _stricmp(s1,"ignored") == 0 ) { text_field::detect_utf8 = false; text_field::expect_utf8 = false; }
+            else cmdok = false;
+        }
+        else if( strcmp(cmd, "utf8_replace_invalid") == 0 )
+        {
+            char *repstr = strtok(value," ");
+            if( repstr )
+            {
+                char *message = strtok(NULL,"");
+                text_field::replace_utf8_invalid.set_replace(0, repstr, message );
+                cmdok = true;
+            }
+        }
         else if( strcmp(cmd,"replace") == 0 )
         {
             char *chrstr = strtok(value," ");

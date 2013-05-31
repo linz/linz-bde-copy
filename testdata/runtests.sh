@@ -30,6 +30,9 @@ $EXE -c ../test1.cfg ../par1.crs -z par6.out.gz par6.log
 $EXE -c ../test1.cfg -w user_modify_flag=N ../scg.crs scgw1.out scgw1.log
 $EXE -c ../test1.cfg -w user_modify_flag=N:data_type!=T ../scg.crs scgw2.out scgw2.log
 
+$EXE -c ../testutf1.cfg ../mixutf.crs mixutf1.out testutf1.log
+$EXE -c ../testutf2.cfg ../mixutf.crs mixutf2.out testutf2.log
+
 perl -pi.bak -e 's/^(ConfigFile\:\s)[^\.].*[\\|\/](.+\.cfg)$/$1$2/g' *log
 rm -f *.bak
 

@@ -436,6 +436,7 @@ buffer *number_field::fld_end_delim = 0;
 replace_def::replace_def()
 {
     replace = false;
+    passthru = false;
     chars = 0;
     nextchar = 0;
     message = 0;
@@ -451,47 +452,64 @@ replace_def::~replace_def()
 void replace_def::set_replace( char *input_str, char *output_str, char *error_message )
 {
     replace = true;
-    unsigned char ch;
-    input_str = buffer::parse_char(input_str,&ch);
     if( input_str )
     {
-        if( ! nextchar ) nextchar = new replace_def[256];
-        nextchar[ch].set_replace( input_str, output_str, error_message );
-    }
-    else
-    {
-        if( chars ) { delete chars; chars = 0; }
-        chars = new buffer(10);
-        if( _stricmp(output_str,"delete") != 0 )
+        unsigned char ch;
+        input_str = buffer::parse_char(input_str,&ch);
+        if( input_str )
         {
-            chars->setchars(output_str);
+            if( ! nextchar ) nextchar = new replace_def[256];
+            nextchar[ch].set_replace( input_str, output_str, error_message );
+            return;
         }
-        if( message ) { delete [] message; message = 0; }
-        if( error_message ) 
-        { 
-            message = new char[ strlen(error_message) + 1 ];
-            strcpy( message, error_message );
-        }
+    }
+    if( chars ) { delete chars; chars = 0; }
+    chars = new buffer(10);
+    if( _stricmp(output_str,"passthru") == 0 )
+    {
+        passthru = true;
+    }
+    else if( _stricmp(output_str,"delete") != 0 )
+    {
+        chars->setchars(output_str);
+    }
+    if( message ) { delete [] message; message = 0; }
+    if( error_message )
+    {
+        message = new char[ strlen(error_message) + 1 ];
+        strcpy( message, error_message );
     }
 }
 
-int replace_def::apply( unsigned char **cp, char **error_message, data_writer *out, bool &applied )
+// replace_def::apply is called recursively to handle multibyte replacements.
+// Returns the number of characters that have been replaced.  replacement
+// characters are written to *out.  applied is used to manage recursive calls.
+// cp is
+int replace_def::apply( unsigned char *cp, char **error_message, data_writer *out, bool &applied )
 {
-    int result = 1;
-    (*cp)++;
-    unsigned char ch=**cp;
-    if( ch && nextchar && nextchar[ch].replaced() )
+    int result = 0;
+    cp++;
+    unsigned char ch=*cp;
+    // Is this multibyte
+    if( ch && nextchar && nextchar[ch].replacing() )
     {
-        nextchar[ch].apply(cp,error_message,out,applied);
+        result = nextchar[ch].apply(cp,error_message,out,applied);
+        if( result ) result++;
     }
+    // Not yet processed, should it be
     if( chars && ! applied )
     {
-        result = chars->write(out);
+        write( out, error_message );
         applied = true;
-        (*error_message) = message;
+        result = passthru ? 0 : 1;
     }
-    if( ! applied ) (*cp)--;
     return result;
+}
+
+bool replace_def::write( data_writer *out, char **error_message )
+{
+    (*error_message) = message;
+    return chars ? chars->write(out) : true;
 }
 
 text_field::text_field( char *name ) : bde_field( name, ft_text )
@@ -515,6 +533,9 @@ void text_field::set_delim(char *start, char *end)
 buffer *text_field::fld_start_delim = 0;
 buffer *text_field::fld_end_delim = 0;
 replace_def text_field::replace[256];
+bool text_field::expect_utf8=true;
+bool text_field::detect_utf8=false;
+replace_def text_field::replace_utf8_invalid;
 
 int text_field::set_output_char( char *input_chr, char *output_str, char *message )
 {
@@ -525,6 +546,19 @@ int text_field::set_output_char( char *input_chr, char *output_str, char *messag
     return 1;
 }
 
+int text_field::utf8_mb_length(unsigned char *input_chr, int len)
+{
+    int mblen = 1;
+    if( ((*input_chr) & '\xE0') == (unsigned char) '\xC0') mblen=2;
+    else if( ((*input_chr) & '\xF0') == (unsigned char) '\xE0') mblen=3;
+    else if( ((*input_chr) & '\xF1') == (unsigned char) '\xF0') mblen=4;
+    if( mblen > len ) mblen = 1;
+    for( int mb = 1; mb < mblen; mb++ )
+    {
+        if( (input_chr[mb] & '\xC0') != (unsigned char) '\x80' ) { mblen=1; break; }
+    }
+    return mblen;
+}
 
 bool text_field::write_field( data_writer *out )
 {
@@ -535,22 +569,38 @@ bool text_field::write_field( data_writer *out )
     unsigned char *cp;
     for( cp = sp; len ; )
     {
-        if( replace[*cp].replaced() )
+        int mblen = 1;
+        // If processing high bits as potential utf8 strings ...
+        if( detect_utf8 && (*cp & '\x80'))
+        {
+            if( cp > sp && ! out->write(sp, (int)(cp-sp)) ) return false;
+            sp = cp;
+            mblen = utf8_mb_length( cp, len );
+            // If this is invalid then apply replacement and continue..
+            if( (mblen>1 && !expect_utf8) || (mblen==1 && expect_utf8) )
+            {
+                cp += mblen;
+                len -= mblen;
+                if( replace_utf8_invalid.replacing())
+                {
+                    char *message;
+                    if( ! replace_utf8_invalid.write( out, &message )) return false;
+                    if( message ) write_error( et_invalid_char, message );
+                    if( ! replace_utf8_invalid.passthru ) sp = cp;
+                }
+                continue;
+            }
+        }
+        // If characters are valid, do replacement
+        if( replace[*cp].replacing() )
         {
             char *message = 0;
-            if( cp > sp ){ int nc = cp-sp; if( ! out->write(sp,nc) ) return false; }
-            sp = cp;
-            if( ! replace[*cp].apply( &cp, &message, out ) ) return false;
-            if( cp == sp ) 
-            {
-                cp++;
-                len--;
-            }
-            else
-            {
-                len -= cp-sp;
-                sp = cp;
-            }
+            if( cp > sp && ! out->write(sp,(int)(cp-sp)) ) return false;
+            int nreplaced = replace[*cp].apply( cp, &message, out );
+            sp = cp + nreplaced;
+            if( ! nreplaced ) nreplaced = mblen;
+            cp += nreplaced;
+            len -= nreplaced;
             if( message )
             {
                 write_error(et_invalid_char, message);
@@ -559,11 +609,11 @@ bool text_field::write_field( data_writer *out )
         }
         else
         {
-            len--;
-            cp++;
+            len -= mblen;
+            cp += mblen;
         }
     }
-    if( cp > sp ){ int nc = cp-sp; if( ! out->write(sp,nc) ) return false; }
+    if( cp > sp && ! out->write(sp,(int)(cp-sp)) ) return false;
     if( end_delim && ! end_delim->write(out) ) return false;
     return true;
 }
