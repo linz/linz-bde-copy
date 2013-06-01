@@ -53,8 +53,8 @@ buffer gzip_ext(".gz");
 buffer metadata_ext("");
 bool use_infile_metadata=false;
 
-char *level="0";
-char *dataset = 0;
+const char *level="0";
+const char *dataset = 0;
 
 buffer fileheader("");
 buffer fieldseparator("|");
@@ -69,10 +69,10 @@ char *tablename = 0;
 
 char *outfile = 0;
 char *metafile = 0;
-char *cfgfile = "";
-char *reqfields = 0;
-char *specfields = 0;
-char *whereclause = 0;
+const char *cfgfile = "";
+const char *reqfields = 0;
+const char *specfields = 0;
+const char *whereclause = 0;
 
 char *infile[MAXFILES];
 int ninfile = 0;
@@ -99,7 +99,7 @@ int min_year=0;
 buffer err_date("01/01/1800");
 buffer err_datetime("1800-01-01 00:00:00");
 
-char *default_cfg_ext = ".cfg";
+const char *default_cfg_ext = ".cfg";
 int gzipbuffsize = 0;
 
 struct field_override_def
@@ -128,7 +128,14 @@ void close_files()
     if( out ) { delete(out); out = 0; }
 }
 
-void message_base( err_severity severity, bool showloc, char *fmt, va_list fmtargs )
+char *copy_string( const char *s )
+{
+  char *c = new char[strlen(s)+1];
+  strcpy(c,s);
+  return c;
+}
+
+void message_base( err_severity severity, bool showloc, const char *fmt, va_list fmtargs )
 {
     if( severity == es_ignore ) return;
 
@@ -160,7 +167,7 @@ void message_base( err_severity severity, bool showloc, char *fmt, va_list fmtar
 }
 
 
-void message( err_severity severity, char *fmt, ... )
+void message( err_severity severity, const char *fmt, ... )
 {
     va_list fmtargs;
     va_start(fmtargs,fmt);
@@ -173,7 +180,7 @@ void allocation_error( )
     message(es_fatal,"Cannot allocate sufficient memory\n");
 }
 
-void data_error( err_type et, char *fmt, ... )
+void data_error( err_type et, const char *fmt, ... )
 {
     err_severity es = error_severity[et];
     bool showloc = et != et_file_size;
@@ -229,9 +236,10 @@ int add_field(char *name,char *type)
     return 1;
 }
 
-void select_fields(char *flds)
+void select_fields(const char *fields)
 {
     noutfields = 0;
+    char *flds = copy_string(fields);
     for( char *name = strtok(flds,":"); name; name = strtok(NULL,":"))
     {
         if( noutfields > maxfields ) 
@@ -260,11 +268,13 @@ void select_fields(char *flds)
         }
         noutfields++;
     }
+    delete [] flds;
 }
 
 
-void parse_whereclause(char *whereclause)
+void parse_whereclause(const char *wherecls)
 {
+    char *whereclause = copy_string(wherecls);
     for( char *name = strtok(whereclause,":"); name; name = strtok(NULL,":"))
     {
         char save;
@@ -313,6 +323,7 @@ void parse_whereclause(char *whereclause)
             }
         }
     }
+    delete [] whereclause;
 }
 
 
@@ -350,10 +361,11 @@ void init_checkfuncs()
     }
 }
 
-void set_fields( char *flds )
+void set_fields( const char *fields )
 {
     nfields = 0;
     noutfields = 0;
+    char *flds = copy_string(fields);
     for( char *name = strtok(flds,": "); name; name=strtok(NULL,": "))
     {
         char *type = name + strlen(name);
@@ -365,6 +377,7 @@ void set_fields( char *flds )
         }
         add_field(name,type);
     }
+    delete [] flds;
 }
 
 bool apply_field_overrides( bool addfields )
@@ -656,11 +669,11 @@ void check_bde_size()
     }
 }
 
-bool valid_dataset( char *dirname )
+bool valid_dataset( const char *dirname )
 {
     if( strlen(dirname) != 14 ) return false;
     if( strncmp(dirname,"20",2) != 0 ) return false;
-    for( char *c = dirname+2; *c; c++) { if( ! isdigit(*c) ) return false; }
+    for( const char *c = dirname+2; *c; c++) { if( ! isdigit(*c) ) return false; }
     return true;
 }
 
@@ -681,7 +694,7 @@ char *get_input_file( char *name)
 
     // If a dataset is supplied, check it is valid
 
-    char *fdataset = 0;
+    const char *fdataset = 0;
     if( dataset)
     {
         strcat(filename,"/");
@@ -866,15 +879,14 @@ char *parse_char( char *source, unsigned char *value )
     return source+1;
 }
 
-char *get_data_path( char *exefile, char *ext )
+char *get_data_path( const char *exefile, const char *ext )
 {
     char *path = 0;
     int path_count = 3;
     char **search_path = new char*[path_count];
-    search_path[0] = new char[strlen(exefile)+1];
-    strcpy(search_path[0],exefile);
+    search_path[0] = copy_string(exefile);
 
-    char *base_name = basename(exefile);
+    const char *base_name = basename(exefile);
     char *env_path = getenv("BDECOPY_DATADIR");
     if (env_path != 0)
     {
@@ -1033,6 +1045,25 @@ bool read_configuration_file( char *configfile, bool isdefault )
                 error_severity[et] = es;
             }
         }
+        else if( strcmp(cmd,"utf8_encoding") == 0 )
+        {
+            cmdok=true;
+            char *s1 = strtok(value," ");
+            if( s1 && _stricmp(s1,"enforced") == 0 ) { text_field::detect_utf8 = true; text_field::expect_utf8 = true; }
+            else if( s1 && _stricmp(s1,"invalid") == 0 ) { text_field::detect_utf8 = true; text_field::expect_utf8 = false; }
+            else if( s1 && _stricmp(s1,"ignored") == 0 ) { text_field::detect_utf8 = false; text_field::expect_utf8 = false; }
+            else cmdok = false;
+        }
+        else if( strcmp(cmd, "utf8_replace_invalid") == 0 )
+        {
+            char *repstr = strtok(value," ");
+            if( repstr )
+            {
+                char *message = strtok(NULL,"");
+                text_field::replace_utf8_invalid.set_replace(0, repstr, message );
+                cmdok = true;
+            }
+        }
         else if( strcmp(cmd,"replace") == 0 )
         {
             char *chrstr = strtok(value," ");
@@ -1183,8 +1214,7 @@ bool read_configuration_part( char *exefile, char *cfgext )
 
     if( cfgext && (strchr(cfgext,'.') || strchr(cfgext,'/') || strchr(cfgext,'\\')) )
     {
-        configfile = new char[strlen(cfgext) + 1];
-        strcpy(configfile,cfgext);
+        configfile = copy_string(cfgext);
     }
     else
     {
@@ -1210,9 +1240,10 @@ bool read_configuration( char *exefile )
     if (base_config_path)
     {
         read_configuration_part(base_config_path, 0);
-        char *c = cfgfile;
-        if( c && *c )
+        if( cfgfile && *cfgfile )
         {
+            char *cfgf = copy_string(cfgfile);
+            char *c = cfgf;
             while( *c )
             {
                 char *e = c;
@@ -1224,6 +1255,7 @@ bool read_configuration( char *exefile )
                 c = e;
                 if( *c ) c++;
             }
+            delete [] cfgf;
         }
         delete[] base_config_path;
     }
@@ -1283,10 +1315,11 @@ void print_metadata()
 
 void help( char *exefile );
 
-int split_file_names( char *names, char **list, int *count )
+int split_file_names( const char *names, char **list, int *count )
 {
     *count = 0;
-    for( char *n = strtok(names,"+"); n; n = strtok(NULL,"+"))
+    char *nms = copy_string(names);
+    for( char *n = strtok(nms,"+"); n; n = strtok(NULL,"+"))
     {
         if( *count >= MAXFILES )
         {
@@ -1294,19 +1327,19 @@ int split_file_names( char *names, char **list, int *count )
                 MAXFILES);
             return 0;
         }
-        list[*count] = n;
+        list[*count] = copy_string(n);
         (*count)++;
     }
+    delete [] nms;
     return 1;
 }
 
 bool read_args( char *image, int argc, char *argv[] )
 {
-    char **nxtarg = 0;
-    char *nxtopt;
-    char *maxerrstr = 0;
+    const char **nxtarg = 0;
+    const char *maxerrstr = 0;
     char *infiles = 0;
-    char *addfiles = 0;
+    const char *addfiles = 0;
     bool argsok = true;
 
     if( argc < 2 ) return false;
@@ -1318,7 +1351,6 @@ bool read_args( char *image, int argc, char *argv[] )
         
         if( arg[0] == '-' )
         {
-            nxtopt = arg;
             switch( arg[1] )
             {
             case 'a':
@@ -1466,7 +1498,7 @@ void syntax()
 
 void help( char *exefile )
 {
-    char *help_ext = ".help";
+    const char *help_ext = ".help";
     char *help_path = get_data_path (exefile, help_ext);
     if( help_path )
     {

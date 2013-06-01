@@ -1,0 +1,23 @@
+InputFile: ../mixutf.crs
+ConfigFile: bde_copy.cfg
+ConfigFile: ../testutf2.cfg
+OutputFile: mixutf2.out
+TableName: crs_mark
+InputFields: id|nod_id|status|type|category|country|beacon_type|protection_type|maintenance_level|mrk_id_dist|disturbed|disturbed_date|mrk_id_repl|replaced|replaced_date|mark_annotation|wrk_id_created|audit_id|desc
+OutputFields: id|nod_id|status|type|category|country|beacon_type|protection_type|maintenance_level|mrk_id_dist|disturbed|disturbed_date|mrk_id_repl|replaced|replaced_date|mark_annotation|wrk_id_created|audit_id|desc
+BdeStartTime: 2010-04-03 21:25:43
+BdeEndTime: 2010-05-01 21:14:42
+BdeSize: 1724
+
+Warning: Oops, not utf8! in field desc
+At record 2 of ../mixutf.crs
+36758677|36758676|COMM|OTHR||NEWZ|NB||||N|||N||||957606|Test string with ® high byte set|
+
+Warning: Oops, not utf8! in field desc
+At record 3 of ../mixutf.crs
+36758678|36758676|COMM|OTHR||NEWZ|NB||||N|||N||||957607|Mixed test string with 2byte Â©, 3byte âˆ‘, and 4 byte ðŸ˜‰ utf8 and ® high byte set|
+
+InputCount: 3
+OutputCount: 3
+ErrorCount: 0
+ResultStatus: success

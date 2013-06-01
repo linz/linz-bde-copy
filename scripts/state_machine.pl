@@ -144,7 +144,7 @@ while ( <> ) {
                 print $p, "   {", join( ",", @{ $states[$i]->{trans} } ), "}";
                 print $i == $nstate - 1 ? "};\n\n" : ",\n";
             }
-            print $p,"unsigned short $prefix\_result = $prefix\_trans[$state_variable][$prefix\_class[$input_variable]];\n";
+            print $p,"unsigned short $prefix\_result = $prefix\_trans[$state_variable][$prefix\_class[(int)($input_variable)]];\n";
             print $p,
               "$state_variable = (unsigned char)($prefix\_result & 0xFF);\n";
             print $p,

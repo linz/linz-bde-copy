@@ -1,0 +1,15 @@
+InputFile: ../mixutf.crs
+ConfigFile: bde_copy.cfg
+ConfigFile: ../testutf3.cfg
+OutputFile: mixutf3.out
+TableName: crs_mark
+InputFields: id|nod_id|status|type|category|country|beacon_type|protection_type|maintenance_level|mrk_id_dist|disturbed|disturbed_date|mrk_id_repl|replaced|replaced_date|mark_annotation|wrk_id_created|audit_id|desc
+OutputFields: id|nod_id|status|type|category|country|beacon_type|protection_type|maintenance_level|mrk_id_dist|disturbed|disturbed_date|mrk_id_repl|replaced|replaced_date|mark_annotation|wrk_id_created|audit_id|desc
+BdeStartTime: 2010-04-03 21:25:43
+BdeEndTime: 2010-05-01 21:14:42
+BdeSize: 1724
+
+InputCount: 3
+OutputCount: 3
+ErrorCount: 0
+ResultStatus: success

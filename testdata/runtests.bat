@@ -31,6 +31,11 @@ del /q *.*
 %exe% -c ../test1.cfg -w user_modify_flag=N ../scg.crs scgw1.out scgw1.log
 %exe% -c ../test1.cfg -w user_modify_flag=N:data_type!=T ../scg.crs scgw2.out scgw2.log
 
+%exe% -c ../testutf1.cfg ../mixutf.crs mixutf1.out testutf1.log
+%exe% -c ../testutf2.cfg ../mixutf.crs mixutf2.out testutf2.log
+%exe% -c ../testutf3.cfg ../mixutf.crs mixutf3.out testutf3.log
+%exe% -c ../testutf4.cfg ../mixutf.crs mixutf4.out testutf4.log
+
 for %%f in (*.log) do perl -pi.bak -e "s/^(ConfigFile\:\s)\w.*\\(.+\.cfg)$/$1$2/g" %%f
 del /q *.bak
 
