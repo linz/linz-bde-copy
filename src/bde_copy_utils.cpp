@@ -265,50 +265,79 @@ void buffer::setstring(const char *str )
     }
 }
 
-char *buffer::parse_char( char *source, unsigned char *value )
+bool buffer::setencodedchars(const char *source)
 {
-    while( isspace(*source)) source++;
-    if( ! *source ) return 0;
-
-    if( source[0] == '\\' && source[1] == 'x' && isxdigit(source[2]) && isxdigit(source[3]))
-    {
-        char hex[3];
-        int chrval;
-        hex[0] = source[2];
-        hex[1] = source[3];
-        hex[2] = 0;
-        sscanf(hex,"%x",&chrval);
-        (*value) = (unsigned char) chrval;
-        return source+4;
-    }
-
-    if( source[0] == '\\' && source[1] )
-    {
-        unsigned char c = source[1];
-        switch( c )
-        {
-        case 'r': c = '\r'; break;
-        case 'n': c = '\n'; break;
-        case 't': c = '\t'; break;
-        case 's': c = ' '; break;
-        }
-        (*value) = c;
-        return source + 2;
-    }
-
-    (*value) = *source;
-    return source+1;
-}
-
-void buffer ::setchars( char *source )
-{
-    unsigned char ch;
     reset();
-    source = clean_string(source);
-    if( _stricmp(source,"none") != 0 )
+    bool valid=true;
+    if( ! source ) return valid;
+    while( *source && valid )
     {
-        while( (source = parse_char(source,&ch)) != NULL ){ add(ch); }
+        if( *source != '\\' )
+        {
+            add(*source);
+            source++;
+            continue;
+        }
+        source++;
+        char chr = *source++;
+        if( ! chr ) { valid=false; break; }
+        int decode = 0;
+        switch( chr)
+        {
+        case 'r': chr='\r'; break;
+        case 'n': chr='\n'; break;
+        case 't': chr='\t'; break;
+        case 's': chr=' '; break;
+        case 'x': decode=1; break;
+        case 'u': decode=2; break;
+        case 'U': decode=4; break;
+        }
+        if( ! decode )
+        {
+            add(chr);
+            continue;
+        }
+        unsigned long chval=0;
+        for( int i=0; i<decode; i++ )
+        {
+            chval <<=8;
+            if( ! isxdigit(source[0]) || ! isxdigit(source[1]) )
+            {
+                valid = false;
+                break;
+            }
+            char hex[3];
+            unsigned int byteval;
+            hex[0] = *source++;
+            hex[1] = *source++;
+            hex[2] = 0;
+            sscanf(hex,"%x",&byteval);
+            chval += byteval;
+        }
+        if( ! valid ) break;
+        // x encoding, or low value utf8, 1 byte value..
+        if( decode == 1 || chval < 0x80u )
+        {
+            add((unsigned char) chval );
+            continue;
+        }
+        // u or U encoding, utf8 encoding
+        unsigned char utf8[4];
+        int mblen = 2;
+        if( chval > 0x7FFul ) mblen=3;
+        if( chval > 0xFFFFul) mblen=4;
+        if( chval > 0x71FFFFFul) { valid = false; break; }
+        for( int i=mblen; i-- > 0; )
+        {
+            utf8[i] = ((unsigned char) (chval & 0x3Ful)) | 0x80u;
+            chval >>= 6;
+        }
+        if( mblen == 2 ) utf8[0] |= 0xC0u;
+        if( mblen == 3 ) utf8[0] |= 0xE0u;
+        if( mblen == 4 ) utf8[0] |= 0xF0u;
+        for( int i = 0; i < mblen; i++ ) add(utf8[i]);
     }
+    return valid;
 }
 
 buffer::~buffer()
@@ -384,8 +413,8 @@ void bde_field::set_default_delim( char *start, char *end )
 {
     if( ! default_start_delim ) default_start_delim = new buffer(10);
     if( ! default_end_delim ) default_end_delim = new buffer(10);
-    default_start_delim->setchars(start);
-    default_end_delim->setchars(end);
+    default_start_delim->setencodedchars(start);
+    default_end_delim->setencodedchars(end);
 }
 
 bool bde_field::write_field(data_writer *out)
@@ -422,10 +451,10 @@ void number_field::set_delim(char *start, char *end)
 {
     if( ! fld_start_delim ) fld_start_delim = new buffer(10);
     fld_start_delim->reset();
-    if( start ) fld_start_delim->setchars( start );
+    if( start ) fld_start_delim->setencodedchars( start );
     if( ! fld_end_delim ) fld_end_delim = new buffer(10);
     fld_end_delim->reset();
-    if( end ) fld_end_delim->setchars( end );
+    if( end ) fld_end_delim->setencodedchars( end );
 }
 
 buffer *number_field::fld_start_delim = 0;
@@ -449,19 +478,15 @@ replace_def::~replace_def()
     if( nextchar ) delete [] nextchar;
 }
 
-void replace_def::set_replace( char *input_str, char *output_str, char *error_message )
+void replace_def::set_replace( unsigned char *input_str, char *output_str, char *error_message )
 {
     replace = true;
-    if( input_str )
+    // Is this the beginning of a multicharacter replacement (ie are there more characters)
+    if( input_str  && *input_str )
     {
-        unsigned char ch;
-        input_str = buffer::parse_char(input_str,&ch);
-        if( input_str )
-        {
-            if( ! nextchar ) nextchar = new replace_def[256];
-            nextchar[ch].set_replace( input_str, output_str, error_message );
-            return;
-        }
+        if( ! nextchar ) nextchar = new replace_def[256];
+        nextchar[(*input_str)].set_replace( input_str+1, output_str, error_message );
+        return;
     }
     if( chars ) { delete chars; chars = 0; }
     chars = new buffer(10);
@@ -471,7 +496,7 @@ void replace_def::set_replace( char *input_str, char *output_str, char *error_me
     }
     else if( _stricmp(output_str,"delete") != 0 )
     {
-        chars->setchars(output_str);
+        chars->setencodedchars(output_str);
     }
     if( message ) { delete [] message; message = 0; }
     if( error_message )
@@ -524,10 +549,10 @@ void text_field::set_delim(char *start, char *end)
 {
     if( ! fld_start_delim ) fld_start_delim = new buffer(10);
     fld_start_delim->reset();
-    if( start ) fld_start_delim->setchars( start );
+    if( start ) fld_start_delim->setencodedchars( start );
     if( ! fld_end_delim ) fld_end_delim = new buffer(10);
     fld_end_delim->reset();
-    if( end ) fld_end_delim->setchars( end );
+    if( end ) fld_end_delim->setencodedchars( end );
 }
 
 buffer *text_field::fld_start_delim = 0;
@@ -539,10 +564,12 @@ replace_def text_field::replace_utf8_invalid;
 
 int text_field::set_output_char( char *input_chr, char *output_str, char *message )
 {
-    unsigned char ch;
-    input_chr = parse_char(input_chr,&ch);
-    if( ! input_chr ) return 0;
-    replace[ch].set_replace(input_chr,output_str,message);
+    buffer b;
+    b.setencodedchars( input_chr );
+    unsigned char *data = b.data();
+    unsigned char ch = data[0];
+    if( ! ch ) return 0;
+    replace[ch].set_replace(data+1,output_str,message);
     return 1;
 }
 
@@ -632,10 +659,10 @@ void date_field::set_delim(char *start, char *end)
 {
     if( ! fld_start_delim ) fld_start_delim = new buffer(10);
     fld_start_delim->reset();
-    if( start ) fld_start_delim->setchars( start );
+    if( start ) fld_start_delim->setencodedchars( start );
     if( ! fld_end_delim ) fld_end_delim = new buffer(10);
     fld_end_delim->reset();
-    if( end ) fld_end_delim->setchars( end );
+    if( end ) fld_end_delim->setencodedchars( end );
 }
 
 buffer *date_field::fld_start_delim = 0;
@@ -678,10 +705,10 @@ void datetime_field::set_delim(char *start, char *end)
 {
     if( ! fld_start_delim ) fld_start_delim = new buffer(10);
     fld_start_delim->reset();
-    if( start ) fld_start_delim->setchars( start );
+    if( start ) fld_start_delim->setencodedchars( start );
     if( ! fld_end_delim ) fld_end_delim = new buffer(10);
     fld_end_delim->reset();
-    if( end ) fld_end_delim->setchars( end );
+    if( end ) fld_end_delim->setencodedchars( end );
 }
 
 buffer *datetime_field::fld_start_delim = 0;
@@ -708,10 +735,10 @@ void geometry_field::set_delim(char *start, char *end)
 {
     if( ! fld_start_delim ) fld_start_delim = new buffer(10);
     fld_start_delim->reset();
-    if( start ) fld_start_delim->setchars( start );
+    if( start ) fld_start_delim->setencodedchars( start );
     if( ! fld_end_delim ) fld_end_delim = new buffer(10);
     fld_end_delim->reset();
-    if( end ) fld_end_delim->setchars( end );
+    if( end ) fld_end_delim->setencodedchars( end );
 }
 
 

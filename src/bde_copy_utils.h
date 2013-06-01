@@ -138,15 +138,14 @@ public:
 	int add( unsigned char c ){ if( cp >= ep ) expand(); *cp++ = c; return 1;}
     int add( const char *c ){ while(*c){ add(*c); c++; }; return 1; }
 	int len(){ return cp - sp; }
-	unsigned char *data(){ return sp; }
+    unsigned char *data(){ *cp=0; return sp; }
     void setstring( const char *str );
-	void setchars( char *source );
+    bool setencodedchars(const char *str);
 	void reset(){ cp = sp; }
 	char *str(){ *cp=0; return (char *) sp; }
 	int load( readbuff *buff, unsigned char terminator='|', unsigned char escape='\\' ); 
 	bool write( data_writer *out );
 	static bool keep_escape;
-	static char *parse_char( char *source, unsigned char *value );
 protected:
 private:
 	void init(int size );
@@ -203,7 +202,7 @@ public:
 	replace_def();
 	~replace_def();
     bool replacing(){ return replace; }
-	void set_replace( char *input_str, char *output_str, char *error_message );
+    void set_replace(unsigned char *input_str, char *output_str, char *error_message );
     int apply( unsigned char *cp, char **error_message, data_writer *out )
 	{
 		bool applied = false;
