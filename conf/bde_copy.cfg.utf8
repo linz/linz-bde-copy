@@ -20,6 +20,9 @@
 #     print "replace $xsrc $xutf\n";
 # }
 
+utf8_encoding invalid
+utf8_replace_invalid passthru Possible UTF8 character detected
+
 replace \x80 \xC2\x80
 replace \x81 \xC2\x81
 replace \x82 \xC2\x82
