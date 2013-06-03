@@ -1,3 +1,17 @@
+linz-bde-copy (1.1.0-1) precise; urgency=low
+
+  * Removing compiler warnings
+  * Linux test script
+  * Fixing remaining compiler warnings and introduced bug
+  * UTF8 detection and handling working
+  * Added unicode escapes to string definitions, multi character replacement, test cases, and updated configuration file
+  * Added tests to msdos test script
+  * Committing with different line endings to allow merge
+  * Change config to check to UTF-8 characters and pass them through as valid UTF-8
+  * More stuff for strange data in Landonline
+
+ -- Jeremy Palmer <jpalmer@linz.govt.nz>  Mon, 03 Jun 2013 10:00:19 +1200
+
 linz-bde-copy (1.0.0-1) UNRELEASED; urgency=low
 
   * Initial release.

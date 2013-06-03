@@ -135,6 +135,8 @@ SET(BDE_COPY_DATA
   conf/bde_copy.cfg.mssql
   conf/bde_copy.cfg.pgis
   conf/bde_copy.cfg.utf8
+  conf/bde_copy.cfg.detect_utf8
+  conf/bde_copy.cfg.control
 )
 
 INCLUDE_DIRECTORIES(
