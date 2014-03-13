@@ -1,0 +1,31 @@
+replace \x01 delete Removing unexpected 01 control character
+replace \x02 delete Removing unexpected 02 control character
+replace \x03 \u0101 Replacing unexpected 03 control character with macron a
+replace \x04 delete Removing unexpected 04 control character
+replace \x05 delete Removing unexpected 05 control character
+replace \x06 delete Removing unexpected 06 control character
+replace \x07 delete Removing unexpected 07 control character
+replace \x08 delete Removing unexpected 08 control character
+# replace \x09 delete Tab is valid
+# replace \x0A delete New line is valid
+replace \x0B delete Removing unexpected 0B control character
+replace \x0C delete Removing unexpected 0C control character
+# replace \x0D delete Carriage return is valid
+replace \x0E delete Removing unexpected 0E control character
+replace \x0F delete Removing unexpected 0F control character
+replace \x10 delete Removing unexpected 10 control character
+replace \x11 delete Removing unexpected 11 control character
+replace \x12 delete Removing unexpected 12 control character
+replace \x13 delete Removing unexpected 13 control character
+replace \x14 delete Removing unexpected 14 control character
+replace \x15 delete Removing unexpected 15 control character
+replace \x16 delete Removing unexpected 16 control character
+replace \x17 delete Removing unexpected 17 control character
+replace \x18 delete Removing unexpected 18 control character
+replace \x19 delete Removing unexpected 19 control character
+replace \x1A delete Removing unexpected 1A control character
+replace \x1B delete Removing unexpected 1B control character
+replace \x1C delete Removing unexpected 1C control character
+replace \x1D delete Removing unexpected 1D control character
+replace \x1E delete Removing unexpected 1E control character
+replace \x1F delete Removing unexpected 1F control character
