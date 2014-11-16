@@ -22,7 +22,7 @@ gzipbuff::gzipbuff( char *name, int zipbuffsize ) : readbuff( name, filebuffsize
         setstatus(OK);
 #if ZLIB_VERNUM >= 0x1235
         if( zipbuffsize == 0 ) zipbuffsize = filebuffsize;
-        gzbuffer(gz,zipbuffsize);
+        gzbuffer(p,zipbuffsize);
 #endif
     }
     else 
@@ -33,13 +33,13 @@ gzipbuff::gzipbuff( char *name, int zipbuffsize ) : readbuff( name, filebuffsize
 
 gzipbuff::~gzipbuff()
 {
-    if( gz ) gzclose(gz);
+    if( gz ) gzclose(static_cast<gzFile>(gz));
 }
 
 int gzipbuff::fill()
 {
     if( ! gz ) return 0;
-    int nch = gzread(gz, buffer,bufsize);
+    int nch = gzread(static_cast<gzFile>(gz), buffer,bufsize);
     return nch < 0 ? 0 : nch;
 }
 
@@ -51,14 +51,14 @@ data_writer *gzip_data_writer::open( char *fname, bool append, int zipbuffsize )
     if( ! gz ) return 0;
 #if ZLIB_VERNUM >= 0x1235
     if( zipbuffsize == 0 ) zipbuffsize = readbuff::filebuffsize;
-    gzbuffer(gz,zipbuffsize);
+    gzbuffer(static_cast<gzFile>(gz),zipbuffsize);
 #endif
     return new gzip_data_writer(gz);
 }
 
 gzip_data_writer::~gzip_data_writer()
 {
-    gzclose(gz);
+    gzclose(static_cast<gzFile>(gz));
 }
 
 bool gzip_data_writer::write( const void *buffer, int length )
@@ -66,7 +66,7 @@ bool gzip_data_writer::write( const void *buffer, int length )
     if( length )
     {
         empty = false;
-        return gzwrite(gz,buffer,length) == length;
+        return gzwrite(static_cast<gzFile>(gz),buffer,length) == length;
     }
     return true;
 }
