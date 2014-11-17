@@ -626,6 +626,7 @@ bool text_field::write_field( data_writer *out )
         if( replace[*cp].replacing() )
         {
             if( cp > sp && ! out->write(sp,(int)(cp-sp)) ) return false;
+            sp = cp;
             nreplaced = replace[*cp].apply( cp, &message, out );
         }
         if( nreplaced )
@@ -635,6 +636,8 @@ bool text_field::write_field( data_writer *out )
         else if( mblen > 1 && replace_utf8_unmapped.replacing())
         {
             if( ! replace_utf8_unmapped.write( out, &message )) return false;
+            // The following line works because mblen>1 implies we've already copied
+            // the buffer so cp=cp
             if( ! replace_utf8_unmapped.passthru ) sp = cp+mblen;
             nreplaced=mblen;
         }
