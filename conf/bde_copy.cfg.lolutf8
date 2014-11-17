@@ -1,5 +1,8 @@
-# Configuration for converting the Landonline unicode subset to ASCII.
-# UTF8 handling
+
+# bde_copy configuration for Landonline UTF8 characters
+#
+# Maps allowed UTF8 characters in Landonline text strings.
+# Unmapped UTF8 characters are replaced with ? and generate a warning
 
 utf8_encoding enforced
 utf8_replace_invalid delete "Invalid UTF8 character"
