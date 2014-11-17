@@ -269,7 +269,7 @@ bool buffer::setencodedchars(const char *source)
 {
     reset();
     bool valid=true;
-    if( ! source ) return valid;
+    if( ! source || _stricmp(source,"none") == 0 || _stricmp(source,"delete") == 0) return valid;
     while( *source && valid )
     {
         if( *source != '\\' )
@@ -494,7 +494,8 @@ void replace_def::set_replace( unsigned char *input_str, char *output_str, char 
     {
         passthru = true;
     }
-    else if( _stricmp(output_str,"delete") != 0 )
+    else if( _stricmp(output_str,"delete") != 0 &&
+             _stricmp(output_str,"none") != 0 )
     {
         chars->setencodedchars(output_str);
     }
@@ -561,6 +562,7 @@ replace_def text_field::replace[256];
 bool text_field::expect_utf8=true;
 bool text_field::detect_utf8=false;
 replace_def text_field::replace_utf8_invalid;
+replace_def text_field::replace_utf8_unmapped;
 
 int text_field::set_output_char( char *input_chr, char *output_str, char *message )
 {
@@ -619,25 +621,32 @@ bool text_field::write_field( data_writer *out )
             }
         }
         // If characters are valid, do replacement
+        char *message = 0;
+        int nreplaced=0;
         if( replace[*cp].replacing() )
         {
-            char *message = 0;
             if( cp > sp && ! out->write(sp,(int)(cp-sp)) ) return false;
-            int nreplaced = replace[*cp].apply( cp, &message, out );
+            nreplaced = replace[*cp].apply( cp, &message, out );
+        }
+        if( nreplaced )
+        {
             sp = cp + nreplaced;
-            if( ! nreplaced ) nreplaced = mblen;
-            cp += nreplaced;
-            len -= nreplaced;
-            if( message )
-            {
-                write_error(et_invalid_char, message);
-            }
-
+        }
+        else if( mblen > 1 && replace_utf8_unmapped.replacing())
+        {
+            if( ! replace_utf8_unmapped.write( out, &message )) return false;
+            if( ! replace_utf8_unmapped.passthru ) sp = cp+mblen;
+            nreplaced=mblen;
         }
         else
         {
-            len -= mblen;
-            cp += mblen;
+            nreplaced=mblen;
+        }
+        cp += nreplaced;
+        len -= nreplaced;
+        if( message )
+        {
+            write_error(et_invalid_char, message);
         }
     }
     if( cp > sp && ! out->write(sp,(int)(cp-sp)) ) return false;

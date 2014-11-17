@@ -1064,6 +1064,16 @@ bool read_configuration_file( char *configfile, bool isdefault )
                 cmdok = true;
             }
         }
+        else if( strcmp(cmd, "utf8_replace_unmapped") == 0 )
+        {
+            char *repstr = strtok(value," ");
+            if( repstr )
+            {
+                char *message = strtok(NULL,"");
+                text_field::replace_utf8_unmapped.set_replace(0, repstr, message );
+                cmdok = true;
+            }
+        }
         else if( strcmp(cmd,"replace") == 0 )
         {
             char *chrstr = strtok(value," ");

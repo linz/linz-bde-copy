@@ -1,0 +1,33 @@
+HEDR	 1.0.0
+SOFTWARE cbe_b30 V1.0.0
+SCHEMA	 V1.0                
+USER	 crs_bde
+START	 2010-04-03 21:25:43
+END	 2010-05-01 21:14:42
+SQL	 SELECT * FROM viw_cbe_mrk2
+TABLE	 crs_mark                                                                                                                        
+COLUMN	 id                            integer NOT NULL
+COLUMN	 nod_id                        integer NOT NULL
+COLUMN	 status                        varchar NOT NULL
+COLUMN	 type                          varchar NOT NULL
+COLUMN	 category                      varchar NULL
+COLUMN	 country                       varchar NULL
+COLUMN	 beacon_type                   varchar NULL
+COLUMN	 protection_type               varchar NULL
+COLUMN	 maintenance_level             varchar NULL
+COLUMN	 mrk_id_dist                   integer NULL
+COLUMN	 disturbed                     char NOT NULL
+COLUMN	 disturbed_date                datetime NULL
+COLUMN	 mrk_id_repl                   integer NULL
+COLUMN	 replaced                      char NOT NULL
+COLUMN	 replaced_date                 datetime NULL
+COLUMN	 mark_annotation               varchar NULL
+COLUMN	 wrk_id_created                integer NULL
+COLUMN	 audit_id                      serial NOT NULL
+COLUMN	 desc                          lvarchar           NULL
+DESC	 
+SIZE            2249
+{CRS-DATA}
+36758676|36758676|COMM|OTHR||NEWZ|NB||||N|||N||||957605|Test all LOL chars !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{}~¡¢£¤¥¦§¨©ª«¬®¯°±²³µ¶·¸¹º»¿ÞßþŊŋſ¼½¾ÆæĲĳŒœ´×÷ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝàáâãäåçèéêëìíîïðñòóôõöøùúûüýÿĀāĂăĄąĆćĈĉĊċČčĎďĐđĒēĔĕĖėĘęĚěĜĝĞğĠġĢģĤĥĦħĨĩĪīĬĭĮįİıĴĵĶķĸĹĺĻļĽľĿŀŁłŃńŅņŇňŉŌōŎŏŐőŔŕŖŗŘřŚśŜŝŞşŠšŢţŤťŦŧŨũŪūŬŭŮůŰűŲųŴŵŶŷŸŹźŻżŽž|
+36758677|36758676|COMM|OTHR||NEWZ|NB||||N|||N||||957606|Test string with non LOL utf8 char Љ high byte set|
+36758678|36758676|COMM|OTHR||NEWZ|NB||||N|||N||||957607|Mixed test string with 2byte Â©, 3byte â, and 4 byte ð utf8 and ® high byte set|

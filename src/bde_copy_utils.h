@@ -227,6 +227,7 @@ public:
 	static void set_delim( char *start, char *end );
 	static int set_output_char( char *input_chr, char *output_str, char *error_message );
     static replace_def replace_utf8_invalid;
+    static replace_def replace_utf8_unmapped;
     static bool detect_utf8;
     static bool expect_utf8;
 private:
