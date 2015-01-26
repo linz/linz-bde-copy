@@ -77,6 +77,8 @@ Installed with bde_copy are the following configurations:
    pgis -  Fixes spatial objects by adding 160 to longitudes and prefixing with
            the NZGD2000 SRID.
    utf8 -  Replaces non-ASCII characters with the utf-8 equivalent
+   lolutf8 - Replaces the Landonline UTF8 subset with equivalent 
+           ASCII characters
 
 bde_copy will first try to find these configuration files in the folder in
 which the program is installed. If this fails it then tries BDECOPY_DATADIR

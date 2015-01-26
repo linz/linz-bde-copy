@@ -35,6 +35,7 @@ del /q *.*
 %exe% -c ../testutf2.cfg ../mixutf.crs mixutf2.out testutf2.log
 %exe% -c ../testutf3.cfg ../mixutf.crs mixutf3.out testutf3.log
 %exe% -c ../testutf4.cfg ../mixutf.crs mixutf4.out testutf4.log
+%exe% -c ../testutf5.cfg ../lolutf.crs lolutf.out lolutf.log
 
 for %%f in (*.log) do perl -pi.bak -e "s/^(ConfigFile\:\s)\w.*\\(.+\.cfg)$/$1$2/g" %%f
 del /q *.bak
