@@ -781,3 +781,27 @@ replace \u017D Z
 
 # Code point U+017E LATIN SMALL LETTER Z WITH CARON
 replace \u017E z
+
+# Additional characters detected in Landonline data (MS Word autocorrect!)
+
+# Code point U+2013 -
+replace \u2013 -
+
+# Code point U+2014 -
+replace \u2014 -
+
+# Code point U+2018 '
+replace \u2018 '
+
+# Code point U+2019 '
+replace \u2019 '
+
+# Code point U+201C "
+replace \u201C "
+
+# Code point U+201D "
+replace \u201D "
+
+# Code point U+2022 *
+replace \u2022 *
+
