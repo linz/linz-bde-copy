@@ -1,33 +1,6 @@
-linz-bde-copy (1.2.0-1) lucid; urgency=medium
-
-  [ Chris Crook ]
-  * Updating Win32 binaries
-  * Adding static casts to allow compilation of gzip code
-  * WIP
-  * Fixing for Landonline UTF8 character set
-  * Updating config documentation
-  * Adding script to build bde_copy.cfg.lolutf8
-  * Building windows version
-  * Adding additional Landonline UTF8 chars
-
- -- Joseph Ramsay <jramsay@linz.govt.nz>  Thu, 09 Apr 2015 12:55:54 +1200
-
-linz-bde-copy (1.1.0-1) precise; urgency=low
-
-  * Removing compiler warnings
-  * Linux test script
-  * Fixing remaining compiler warnings and introduced bug
-  * UTF8 detection and handling working
-  * Added unicode escapes to string definitions, multi character replacement, test cases, and updated configuration file
-  * Added tests to msdos test script
-  * Committing with different line endings to allow merge
-  * Change config to check to UTF-8 characters and pass them through as valid UTF-8
-  * More stuff for strange data in Landonline
-
- -- Jeremy Palmer <jpalmer@linz.govt.nz>  Mon, 03 Jun 2013 10:00:19 +1200
-
-linz-bde-copy (1.0.0-1) UNRELEASED; urgency=low
+linz-bde-copy (1.2.0-1linz~trusty1) UNRELEASED; urgency=medium
 
   * Initial release.
 
- -- Jeremy Palmer <jpalmer@linz.govt.nz>  Fri, 6 May 2011 11:58:00 +1200
+ -- Jeremy Palmer <jpalmer@linz.govt.nz>  Sun, 1 May 2016 10:44:00 +1200
+
