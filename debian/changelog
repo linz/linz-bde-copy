@@ -1,6 +1,5 @@
-linz-bde-copy (1.2.0-1linz~trusty1) UNRELEASED; urgency=medium
+linz-bde-copy (1.2.1-1linz~trusty1) trusty; urgency=medium
 
-  * Initial release.
+  * Packaging for LINZ's Software Repository
 
- -- Jeremy Palmer <jpalmer@linz.govt.nz>  Sun, 1 May 2016 10:44:00 +1200
-
+ -- Ivan Mincik <imincik@linz.govt.nz>  Wed, 04 May 2016 08:07:02 +1200
