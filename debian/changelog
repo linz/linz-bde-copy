@@ -1,4 +1,4 @@
-linz-bde-copy (1.2.1-1linz~trusty1) UNRELEASED; urgency=medium
+linz-bde-copy (1.2.1-1linz~trusty1) trusty; urgency=medium
 
   * Packaging for LINZ's Software Repository
 
