@@ -1639,7 +1639,7 @@ int main( int argc, char *argv[] )
 
     for( int i = 0; i < ninfile; i++ )
     {
-        if( i ) open_bde_file(infile[i],false);
+        if( i ) open_bde_file(infile[i],true);
         if( ! copy_data(out) ) return 1;
         check_bde_size();
         close_file();
