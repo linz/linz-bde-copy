@@ -59,6 +59,11 @@ bde_copy also requires zlib for gzip compression support. www.zlib.net
     make
     make install
 ```
+
+To create a debug build use 
+```
+    cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Debug ..
+```
 ## Testing
 
 Make sure you have Perl installed on your system. Change into testdata directory

@@ -236,6 +236,28 @@ int add_field(char *name,char *type)
     return 1;
 }
 
+int check_field(char *name,char *type, int nfield)
+{
+    if( nfields >= maxfields ) 
+    {
+        message(es_fatal,"Too many columns in CRS file\n");
+    }
+    bde_field *f = 0;
+    if( _stricmp(type,"st_geometry") == 0 ){ f = new geometry_field(name); }
+    else if (_stricmp(type,"date") == 0 ){ f = new date_field(name); }
+    else if (_stricmp(type,"datetime") == 0 ){ f = new datetime_field(name); }
+    else if (_stricmp(type,"decimal") == 0 ){ f = new number_field(name); }
+    else if (_stricmp(type,"serial") == 0 ){ f = new number_field(name); }
+    else if (_stricmp(type,"integer") == 0 ){ f = new number_field(name); }
+    else { f = new text_field(name); }
+    bde_field *check=field[nfield];
+    int match=1;
+    if( _stricmp(check->name(),f->name()) != 0 ) match=0;
+    if( check->type() != f->type() ) match=0;
+    delete f;
+    return match;
+}
+
 void select_fields(const char *fields)
 {
     noutfields = 0;
@@ -460,7 +482,7 @@ void skip_header()
 
     char inrec[1024];
     char *line;
-    int ncol = 0;
+    int nfield = 0;
     while( input->getline(inrec,1024) == readbuff::OK )
     {
         line = clean_string(inrec);
@@ -471,19 +493,24 @@ void skip_header()
         if( _strnicmp(line,"COLUMN ",7) == 0 && readcols )
         {
             char *name = strtok(line+7," ");
-            if( ncol < nfields && _stricmp(field[ncol]->name(),name) != 0 )
+            char *type = strtok(NULL," ");
+            if( name && type && nfield < nfields && ! check_field(name,type,nfield) )
             {
-                message(es_fatal,"Inconsistent column names %s and %s in %s\n",
-                    name,field[ncol]->name(),input->name());
+                message(es_fatal,"Inconsistent column names %s and %s or types in %s\n",
+                    name,field[nfield]->name(),input->name());
                 
             }
-            ncol++;
+            nfield++;
+        }
+        else if(_strnicmp(line,"SIZE ",5) == 0 )
+        {
+            sscanf(line+5,"%ld",&size);
         }
     }
-    if( readcols && ncol != nfields )
+    if( readcols && nfield != nfields )
     {
         message(es_fatal,"Inconsistent number of columns %d and %d in %s\n",
-            nfields, ncol, input->name());
+            nfields, nfield, input->name());
 
     }
 }

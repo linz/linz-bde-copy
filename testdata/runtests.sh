@@ -5,7 +5,17 @@ rm -rf output
 mkdir output
 cd output
 
-EXE=../../build/bde_copy
+EXEDIR=../../build
+if [ "$1" ]; then
+    EXEDIR=$1
+fi
+
+EXE=${EXEDIR}/bde_copy
+
+if [ ! -x $EXE ]; then
+    echo "$EXE not found"
+    exit
+fi
 
 $EXE -c ../test1.cfg ../scg.crs scg.out scg.log
 $EXE -c ../test1.cfg ../par1.crs par1.out par1.log
