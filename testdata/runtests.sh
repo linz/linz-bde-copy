@@ -49,3 +49,7 @@ $EXE -c ../testutf5.cfg ../lolutf.crs lolutf.out lolutf.log
 perl -pi.bak -e 's/^(ConfigFile\:\s)[^\.].*[\\|\/](.+\.cfg)$/$1$2/g' *log
 rm -f *.bak
 
+for f in *.gz; do gzip -d -c $f > $f.txt; rm $f; done
+
+diff -q -x .gitattributes . ../validate
+
