@@ -16,6 +16,11 @@
 
 #include "bde_copy_utils.h"
 
+#if defined (__MACH__)
+#include <errno.h>
+#include <libproc.h>
+#endif
+
 #if !defined(_WIN32) && !defined(_MSC_VER)
 #include <sys/types.h>
 #include <unistd.h>
@@ -23,9 +28,20 @@
 char* get_image_path()
 {
     char* path;
+    pid_t pid = getpid();
+#if defined (__MACH__)
+    int ret;
+    path = new char[PROC_PIDPATHINFO_MAXSIZE];
+    ret = proc_pidpath(pid, path, PROC_PIDPATHINFO_MAXSIZE);
+    if( ret <= 0 )
+    {
+        fprintf(stderr,"Couldn't get image path for PID %d: %s\n", 
+            pid, strerror(errno));
+        exit(2);
+    }
+#else
     char _link[20];
     char buf[10];
-    pid_t pid = getpid();
     sprintf( buf,"%d", pid );
     strcpy( _link, "/proc/" );
     strcat( _link, buf );
@@ -46,6 +62,7 @@ char* get_image_path()
       path = new char[strlen( proc ) + 1];
       path = strcpy( path, proc );
     }
+#endif
     return path;
 }
 
@@ -64,7 +81,7 @@ char* _strlwr ( char* string)
 
 #endif
 
-#if defined(_WIN32)
+#if defined(_WIN32)  || defined(__MACH__)
 char *basename (const char *name)
 {
     const char *base;

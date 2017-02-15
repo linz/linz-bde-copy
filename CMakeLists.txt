@@ -1,5 +1,7 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 
+include(CMakeToolsHelpers OPTIONAL)
+
 # allow more human readable "if then else" etc
 SET(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS TRUE)
 
