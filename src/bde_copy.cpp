@@ -15,8 +15,9 @@
 #include <ctype.h>
 #include <stdarg.h>
 #include <new>
+#if !defined(__MACH__)
 #include <malloc.h>
-
+#endif
 #include "bde_copy_revision.h"
 #include "bde_copy_config.h"
 #include "bde_copy_utils.h"
