@@ -10,7 +10,7 @@ EXEDIR=../../build
 if [ "$1" ]; then
     EXEDIR=$1
 fi
-#export BDECOPY_DATADIR=../../conf
+export BDECOPY_DATADIR=$PWD/../../conf
 
 EXE=${EXEDIR}/bde_copy
 
