@@ -1299,6 +1299,12 @@ bool read_configuration( char *exefile )
     }
     else
     {
+        message(es_warning, "Could not find base configuration, "
+                      "try setting the BDECOPY_DATADIR env variable "
+                      "to a directory containing a file with "
+                      "the same base name as the executable and "
+                      "the %s extension",
+                      exefile, default_cfg_ext);
         ok = false;
     }
     return ok;
@@ -1587,7 +1593,10 @@ int main( int argc, char *argv[] )
 
     if( ! read_args(image,argc,argv) ) syntax();
 
-    if( ! read_configuration(image)) return 2;
+    if( ! read_configuration(image)) {
+      message(es_fatal, "Failed reading configuration");
+      return 2;
+    }
 
     if( cmd_maxerrors >= 0 ) max_errors = cmd_maxerrors;
 
