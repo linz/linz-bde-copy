@@ -66,8 +66,13 @@ To create a debug build use
 ```
 ## Testing
 
-Make sure you have Perl installed on your system. Change into testdata directory
-and run tests using "runtests" script. Use a programme like kdiff3 or
-BeyondCompare and do a directory comparison between the output and validate
-directories. At a future point this will be automated so file comparisons are
-not required.
+Make sure you have Perl installed on your system.
+
+On GNU systems you can run tests using `make check`, or change into
+testdata directory and run `./runtests.sh`.
+
+For windows, change into testdata directory and run `runtests.bat`,
+then use a programme like kdiff3 or BeyondCompare and do a directory
+comparison between the output and validate directories.
+At a future point this will be automated so file comparisons are not
+required.
