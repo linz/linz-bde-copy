@@ -53,5 +53,5 @@ rm -f *.bak
 
 gunzip *.gz
 
-diff -q -x .gitattributes . ../validate
+diff -x .gitattributes . ../validate
 
