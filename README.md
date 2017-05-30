@@ -53,9 +53,10 @@ bde_copy also requires zlib for gzip compression support. www.zlib.net
 ```
     cmake -DCMAKE_INSTALL_PREFIX=/usr ..
 ```
-- Make and (optionally install):
+- Make and (optionally) run tests and install:
 ``` 
     make
+    make check
     make install
 ```
 
