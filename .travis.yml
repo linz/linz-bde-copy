@@ -1,0 +1,7 @@
+sudo: false
+language: C++
+script:
+  - mkdir build && cd build
+  - cmake ..
+  - make
+  - make check
