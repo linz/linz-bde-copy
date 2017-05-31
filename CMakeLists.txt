@@ -170,5 +170,5 @@ ENDIF(WIN32)
 ENABLE_TESTING()
 ADD_TEST(NAME bde_copy
   WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/testdata
-  COMMAND ${CMAKE_SOURCE_DIR}/testdata/runtests.sh)
+  COMMAND ${CMAKE_SOURCE_DIR}/testdata/runtests.sh ${CMAKE_BINARY_DIR})
 ADD_CUSTOM_TARGET(check COMMAND ctest --output-on-failure)
