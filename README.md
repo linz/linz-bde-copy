@@ -68,8 +68,8 @@ To create a debug build use
 
 Make sure you have Perl installed on your system.
 
-On GNU systems you can run tests using `make check`, or change into
-testdata directory and run `./runtests.sh`.
+On GNU systems you can run tests using `make check`, or
+run `testdata/runtests.sh <abs_path_to_build_dir>`.
 
 For windows, change into testdata directory and run `runtests.bat`,
 then use a programme like kdiff3 or BeyondCompare and do a directory
