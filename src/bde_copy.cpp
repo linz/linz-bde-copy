@@ -14,6 +14,9 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <stdarg.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
 #include <new>
 #if !defined(__MACH__)
 #include <malloc.h>
@@ -701,6 +704,54 @@ void check_bde_size()
     }
 }
 
+/// Return true if the given directory entry is a directory
+//
+/// Follows symlinks
+///
+/// @param dirpath path of the directory whose entry belongs
+/// @param ent dirent structure pointer (used to speedup lookups,
+///            when stat is known, depending on filesystem type )
+///
+/// @return true if the dir entry is a directory, false otherwise
+///
+static bool is_directory(struct dirent *ent, const char *dirpath)
+{
+  if( ent->d_type == DT_DIR ) return true;
+  if( ent->d_type != DT_UNKNOWN ) return false;
+  char path[PATH_MAX];
+  sprintf(path, "%s/%s", dirpath, ent->d_name);
+  struct stat buf;
+  if ( -1 == lstat(path, &buf) ) {
+    message(es_warning,"Cannot stat file %s\n", path);
+    return false;
+  }
+  return S_ISDIR(buf.st_mode);
+}
+
+/// Return true if the given directory entry is a regular file
+//
+/// Follows symlinks
+///
+/// @param dirpath path of the directory whose entry belongs
+/// @param ent dirent structure pointer (used to speedup lookups,
+///            when stat is known, depending on filesystem type )
+///
+/// @return true if the dir entry is a file, false otherwise
+///
+static bool is_file(struct dirent *ent, const char *dirpath)
+{
+  if( ent->d_type == DT_REG ) return true;
+  if( ent->d_type != DT_UNKNOWN ) return false;
+  struct stat buf;
+  char path[PATH_MAX];
+  sprintf(path, "%s/%s", dirpath, ent->d_name);
+  if ( -1 == lstat(path, &buf) ) {
+    message(es_warning,"Cannot stat file %s\n", path);
+    return false;
+  }
+  return S_ISREG(buf.st_mode);
+}
+
 bool valid_dataset( const char *dirname )
 {
     if( strlen(dirname) != 14 ) return false;
@@ -736,11 +787,13 @@ char *get_input_file( char *name)
     else
     {
         // Find the last dataset
+        char *dirname = strdup(filename);
         DIR *dir = opendir(filename);
         
         if( dir == NULL ) 
         {
             message(es_fatal,"Invalid bde repository %s\n",filename);
+            free(dirname);
             return 0;
         }
         strcat(filename,"/");
@@ -750,7 +803,7 @@ char *get_input_file( char *name)
         while ( ( ent = readdir( dir ) ) != NULL )
         {
             message(es_debug,"Checking entry %s", ent->d_name);
-            if( ent->d_type != DT_DIR ) {
+            if( ! is_directory(ent, dirname) ) {
               message(es_debug,"Entry %s is not a directory (%d instead of %d)", ent->d_name, ent->d_type, DT_DIR);
               continue;
             }
@@ -772,6 +825,7 @@ char *get_input_file( char *name)
             fdataset = end;
             free(d);
         }
+        free(dirname);
         closedir(dir);
         if( ! *end )
         {
@@ -796,7 +850,7 @@ char *get_input_file( char *name)
                 struct dirent *ent;
             while ( ( ent = readdir( dir ) ) != NULL )
             {
-                if( ent->d_type != DT_REG ) continue;
+                if( ! is_file(ent, archive) ) continue;
                 // Check that the file name matches the file being copied
                 char *f1 = strdup(ent->d_name);
                 char *fname = strtok(f1,".");
