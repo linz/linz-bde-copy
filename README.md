@@ -1,5 +1,7 @@
 # LINZ bde_copy
 
+[![Build Status](https://secure.travis-ci.org/linz/linz_bde_copy.svg)](http://travis-ci.org/linz/linz_bde_copy)
+
 Programme that extracts LINZ Bulk Data Extracts (BDE) files and optionally
 creates normalised files that are more suitable for loading into external
 systems. BDE files were once available as a public  format for accessing Landonline data, but has now been discontinued. However the BDE file format is still used internally for transfering data from the Landonline system to the [LDS](https://data.linz.govt.nz). For more information see [here](http://www.linz.govt.nz/data/linz-data/property-ownership-and-boundary-data/historic-property-databases)
