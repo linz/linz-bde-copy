@@ -35,7 +35,7 @@
 //////////////////////////////////////////////////////////////////
 
 
-err_severity error_severity[et_count] = { es_warning, es_error, es_fatal };
+err_severity error_severity[et_count] = { es_debug, es_warning, es_error, es_fatal };
 
 typedef void check_func_type( bde_field &field );
 
@@ -139,10 +139,14 @@ char *copy_string( const char *s )
 void message_base( err_severity severity, bool showloc, const char *fmt, va_list fmtargs )
 {
     if( severity == es_ignore ) return;
+#ifndef DEBUG
+    if( severity == es_debug ) return;
+#endif
 
     fprintf(meta,"\n");
     if( severity == es_fatal || severity==es_error ) fprintf(meta,"Error: ");
     if( severity == es_warning ) fprintf(meta,"Warning: ");
+    if( severity == es_debug ) fprintf(meta,"Debug: ");
 
     vfprintf(meta,fmt,fmtargs);
 
@@ -742,13 +746,28 @@ char *get_input_file( char *name)
         strcat(filename,"/");
         char *end = filename + strlen(filename);
         struct dirent *ent;
+        message(es_debug,"Reading dir %s", filename);
         while ( ( ent = readdir( dir ) ) != NULL )
         {
-            if( ent->d_type != DT_DIR ) continue;
-            if( strcmp(ent->d_name,".") == 0 || strcmp(ent->d_name,"..") == 0 ) continue;
+            message(es_debug,"Checking entry %s", ent->d_name);
+            if( ent->d_type != DT_DIR ) {
+              message(es_debug,"Entry %s is not a directory (%d instead of %d)", ent->d_name, ent->d_type, DT_DIR);
+              continue;
+            }
+            if( strcmp(ent->d_name,".") == 0 || strcmp(ent->d_name,"..") == 0 )
+            {
+              message(es_debug,"Entry %s is virtual directory", ent->d_name);
+              continue;
+            }
             char *d = strdup(ent->d_name);
-            if( ! valid_dataset(d) ) continue;
-            if( *end && strcmp(d,end) < 0 ) continue;
+            if( ! valid_dataset(d) ) {
+              message(es_debug,"%s is not a valid dataset", d);
+              continue;
+            }
+            if( *end && strcmp(d,end) < 0 ) {
+              message(es_debug,"Something weird happened");
+              continue;
+            }
             strcpy(end,d);
             fdataset = end;
             free(d);

@@ -46,7 +46,7 @@ char* _strlwr ( char* __s);
 #endif
 
 enum err_type { et_date_range=0, et_invalid_char, et_column_count, et_file_size, et_count };
-enum err_severity { es_ignore, es_warning, es_error, es_fatal };
+enum err_severity { es_ignore, es_warning, es_error, es_fatal, es_debug };
 
 typedef void (*field_error_func)(err_type type, char *name, char *message);
 
