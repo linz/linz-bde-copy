@@ -6,5 +6,7 @@ CMakeFiles/
 cmake_install.cmake
 CTestTestfile.cmake
 Makefile
+testdata/output/
+Testing/
 /zlib124_masm_obj.zip
 /zlib125.zip
