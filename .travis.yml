@@ -5,3 +5,6 @@ script:
   - cmake ..
   - make
   - make check
+  - cd ..
+  # Test debian package building
+  - dpkg-buildpackage -b -us -uc
