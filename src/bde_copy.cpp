@@ -1377,7 +1377,7 @@ bool read_configuration( char *exefile )
                       "to a directory containing a file with "
                       "the same base name as the executable and "
                       "the %s extension",
-                      exefile, default_cfg_ext);
+                      default_cfg_ext);
         ok = false;
     }
     return ok;
