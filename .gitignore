@@ -1,4 +1,6 @@
+bde_copy
 bde_copy_config.h
+bde_copy_revision.h
 CMakeCache.txt
 CMakeFiles/
 cmake_install.cmake
