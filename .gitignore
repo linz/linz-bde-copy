@@ -10,6 +10,7 @@ debian/files
 debian/linz-bde-copy/
 debian/linz-bde-copy.debhelper.log
 debian/linz-bde-copy.substvars
+install_manifest.txt
 Makefile
 obj-x86_64-linux-gnu/
 testdata/output/
