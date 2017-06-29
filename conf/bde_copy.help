@@ -18,7 +18,8 @@ log_file    records information about the conversion.  If it is not specified
 
 Options:
 
-  -c xxx   Use xxx as the configuration file - see Configuration below
+  -c xxx   Use xxx as additional configuration file(s) - see Configuration
+           below
   -f xxx   Overrides the field defined in the BDE header.  xxx is formatted
            as name1=type1:name2=type2: ... Generally the BDE header is
            correct and this can be ignored.
