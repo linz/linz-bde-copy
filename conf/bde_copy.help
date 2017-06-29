@@ -1,4 +1,4 @@
-bde_copy: Extracts data from BDE files and copies them to the uncompressed 
+bde_copy: Extracts data from BDE files and copies them to the uncompressed
           data files.
 
 Syntax: bde_copy [options] input_file output_file [log_file]
@@ -6,12 +6,12 @@ Syntax: bde_copy [options] input_file output_file [log_file]
 input_file  is a BDE crs download file.  This can either be a specific file
             name, or the code for a bde extract (eg par1, sco).  In the latter
             case the file will be extracted from the BDE repository
-            (see below).  More than one input file may be entered by separating 
+            (see below).  More than one input file may be entered by separating
             the names with '+' (eg par1+par9).  Where multiple input files are
             used they must have identical fields.  The data will be concatenated
             into the output file.
 
-output_file is the name of the generated data file.  
+output_file is the name of the generated data file.
 
 log_file    records information about the conversion.  If it is not specified
             then the log information will be displayed directly
@@ -22,13 +22,13 @@ Options:
   -f xxx   Overrides the field defined in the BDE header.  xxx is formatted
            as name1=type1:name2=type2: ... Generally the BDE header is
            correct and this can be ignored.
-  -w xxx   Where condition to filter fields. xxx is formatted as 
+  -w xxx   Where condition to filter fields. xxx is formatted as
            name1=value1:name2=value2.  The operator can be = or !=.  This is
            interpreted as "where name1 = value1 and name2 = value2 ...."
   -o xxx   Specifies which field are copied to the output file.  Field names
            are specified as name1:name2:name3...  The default is to output
            all fields
-  -e ##    Specifies the maximum number of errors permitted before the 
+  -e ##    Specifies the maximum number of errors permitted before the
            translation is aborted (0 = unlimited number of errors)
   -l #     Defines the BDE level (0 or 5, default 0)
   -d ###   Defines the BDE dataset (YYYYMMDDhhmmss - default most recent)
@@ -44,22 +44,22 @@ Options:
 BDE repository
 
 If the input file is specified as a BDE file code (eg par1, sco) with no
-filename or extension, then bde_copy will extract the file from the BDE 
-repository.  The repository is \\bde_server\bde_data, though this can be 
-overridden by the configuration file.  The level 0 and 5 extract folders 
+filename or extension, then bde_copy will extract the file from the BDE
+repository.  The repository is \\bde_server\bde_data, though this can be
+overridden by the configuration file.  The level 0 and 5 extract folders
 are in the level_0 and level_5 subfolders of the repository.
 
 The -l and -d options specify the BDE level (0=full, 5=incremental)
 and BDE dataset (formatted as YYYYMMDDhhmmss, default being the most
-recent dataset for chosen level).  
+recent dataset for chosen level).
 
-The -x option will additionally search  archive folders for files to 
-add to the extract. The archive files are in the level_0_archive and 
+The -x option will additionally search  archive folders for files to
+add to the extract. The archive files are in the level_0_archive and
 level_5_archive subfolders of the repository.
-Any file matching in the archive the bde file code (eg par1.xxx) will be used.  
-The files will be processed in alphabetic order of names.  If the file name 
-includes a string ".YYYYMMDDhhmmss." then it will only be included with 
-BDE datasets after that date. 
+Any file matching in the archive the bde file code (eg par1.xxx) will be used.
+The files will be processed in alphabetic order of names.  If the file name
+includes a string ".YYYYMMDDhhmmss." then it will only be included with
+BDE datasets after that date.
 
 Configuration
 
@@ -77,7 +77,7 @@ Installed with bde_copy are the following configurations:
    pgis -  Fixes spatial objects by adding 160 to longitudes and prefixing with
            the NZGD2000 SRID.
    utf8 -  Replaces non-ASCII characters with the utf-8 equivalent
-   lolutf8 - Replaces the Landonline UTF8 subset with equivalent 
+   lolutf8 - Replaces the Landonline UTF8 subset with equivalent
            ASCII characters
 
 bde_copy will first try to find these configuration files in the folder in
