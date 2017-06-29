@@ -74,8 +74,9 @@ Installed with bde_copy are the following configurations:
    clean - Replaces pipe characters, backslash characters, and new lines
            with a space, and removes carriage return characters
    mssql - Fixes dates before 1800, to comply with MS SQL server
-   pgis -  Fixes spatial objects by adding 160 to longitudes and prefixing with
-           the NZGD2000 SRID.
+   pgis -  Fixes spatial objects by adding 160 to longitudes and prefixing
+           with the NZGD2000 SRID. Output correct line ending for use
+           with PostgreSQL COPY command.
    utf8 -  Replaces non-ASCII characters with the utf-8 equivalent
    lolutf8 - Replaces the Landonline UTF8 subset with equivalent
            ASCII characters
