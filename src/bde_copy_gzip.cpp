@@ -5,7 +5,7 @@
  Land Information New Zealand and the New Zealand Government.
  All rights reserved
 
- This program is released under the terms of the new BSD license. See 
+ This program is released under the terms of the new BSD license. See
  the LICENSE file for more information.
 ****************************************************************************/
 
@@ -17,7 +17,7 @@ gzipbuff::gzipbuff( char *name, int zipbuffsize ) : readbuff( name, filebuffsize
 {
     gzFile p = gzopen(name,"rb");
     gz = (void *)p;
-    if( gz ) 
+    if( gz )
     {
         setstatus(OK);
 #if ZLIB_VERNUM >= 0x1235
@@ -25,7 +25,7 @@ gzipbuff::gzipbuff( char *name, int zipbuffsize ) : readbuff( name, filebuffsize
         gzbuffer(p,zipbuffsize);
 #endif
     }
-    else 
+    else
     {
         setstatus(OPEN_ERROR);
     }
