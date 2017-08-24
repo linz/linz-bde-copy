@@ -991,7 +991,13 @@ int geometry_field::write_offset_geom( char *sp, data_writer *out )
 data_writer *file_data_writer::open( char *fname, bool append )
 {
     FILE *f = fopen(fname,append ? "ab" : "wb" );
-    if( ! f ) return 0;
+    if( ! f )
+    {
+      // TODO: find a better way to signal errors to upper levels (throw?)
+      fprintf(stderr,"Could not open %s for writing: %s\n",
+        fname, strerror(errno));
+      return 0;
+    }
     file_data_writer *fdw = new file_data_writer(f);
     if( append && ftell(f) > 0 ) fdw->empty = false;
     return fdw;
