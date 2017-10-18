@@ -5,7 +5,7 @@
  Land Information New Zealand and the New Zealand Government.
  All rights reserved
 
- This program is released under the terms of the new BSD license. See 
+ This program is released under the terms of the new BSD license. See
  the LICENSE file for more information.
 ****************************************************************************/
 
@@ -224,7 +224,7 @@ void finish()
 
 int add_field(char *name,char *type)
 {
-    if( nfields >= maxfields ) 
+    if( nfields >= maxfields )
     {
         message(es_fatal,"Too many columns in CRS file\n");
     }
@@ -246,7 +246,7 @@ int add_field(char *name,char *type)
 
 int check_field(char *name,char *type, int nfield)
 {
-    if( nfields >= maxfields ) 
+    if( nfields >= maxfields )
     {
         message(es_fatal,"Too many columns in CRS file\n");
     }
@@ -272,7 +272,7 @@ void select_fields(const char *fields)
     char *flds = copy_string(fields);
     for( char *name = strtok(flds,":"); name; name = strtok(NULL,":"))
     {
-        if( noutfields > maxfields ) 
+        if( noutfields > maxfields )
         {
             message(es_fatal,"Too many output field specified\n");
         }
@@ -312,7 +312,7 @@ void parse_whereclause(const char *wherecls)
         char *value;
         for( value = name; *value && *value != '=' && *value != '!'; value++ ){}
         saveptr = value;
-        save = *value; 
+        save = *value;
         if( save == '!' ) value++;
         if( *value != '=' || value == name )
         {
@@ -341,9 +341,9 @@ void parse_whereclause(const char *wherecls)
         filter->value = _strdup(value);
         filter->negate = save == '!';
         filter->next = 0;
-        if( ! filters ) 
-        { 
-            filters = filter; 
+        if( ! filters )
+        {
+            filters = filter;
         }
         else
         {
@@ -436,12 +436,12 @@ bool apply_field_overrides( bool addfields )
 int read_header( bool external_header )
 {
     bool readcols = true;
-    if( specfields ) 
-    { 
-        set_fields(specfields); 
+    if( specfields )
+    {
+        set_fields(specfields);
         readcols = false;
     }
-    else if( apply_field_overrides(true) ) 
+    else if( apply_field_overrides(true) )
     {
         readcols = false;
     }
@@ -479,7 +479,7 @@ int read_header( bool external_header )
         }
     }
 
-    return (external_header || input->status() == readbuff::OK) 
+    return (external_header || input->status() == readbuff::OK)
            && tablename && start && end && size != 0;
 }
 
@@ -506,7 +506,7 @@ void skip_header()
             {
                 message(es_fatal,"Inconsistent column names %s and %s or types in %s\n",
                     name,field[nfield]->name(),input->name());
-                
+
             }
             nfield++;
         }
@@ -535,7 +535,7 @@ int read_data()
     {
       bde_field &f = *(field[i]);
       f.reset();
-      if( ! f.load(input)) 
+      if( ! f.load(input))
       {
         n_rec--;
         if( i == 0 && f.len() == 0 )
@@ -567,8 +567,8 @@ int write_column_headers( data_writer *out )
     for( int i = 0; i < noutfields; i++ )
     {
         bde_field &f = (*outfield[i]);
-        if( first ) 
-        { 
+        if( first )
+        {
             first = 0;
         }
         else
@@ -593,8 +593,8 @@ int write_data( data_writer *out )
     for( int i = 0; i < noutfields; i++ )
     {
         bde_field &f = (*outfield[i]);
-        if( first ) 
-        { 
+        if( first )
+        {
             first = 0;
         }
         else
@@ -654,7 +654,7 @@ void close_file()
 
 bool file_is_gzip( char *file )
 {
-    return strlen(file) > (size_t)gzip_ext.len() && 
+    return strlen(file) > (size_t)gzip_ext.len() &&
           _stricmp(file+strlen(file)-gzip_ext.len(),gzip_ext.str()) == 0;
 }
 
@@ -789,8 +789,8 @@ char *get_input_file( char *name)
         // Find the last dataset
         char *dirname = strdup(filename);
         DIR *dir = opendir(filename);
-        
-        if( dir == NULL ) 
+
+        if( dir == NULL )
         {
             message(es_fatal,"Invalid bde repository %s\n",filename);
             free(dirname);
@@ -1039,7 +1039,7 @@ bool read_configuration_file( char *configfile, bool isdefault )
 {
 
     FILE *cfg = fopen(configfile,"r");
-    if( ! cfg ) 
+    if( ! cfg )
     {
         if( ! isdefault ) message(es_fatal,"Cannot open configuration file %s",configfile);
         return false;
@@ -1220,7 +1220,7 @@ bool read_configuration_file( char *configfile, bool isdefault )
         else if( strcmp(cmd,"file_buffer_size") == 0 && value )
         {
             int bufsize = 0;
-            if( sscanf(value,"%d",&bufsize) == 1 && bufsize >= 4096) 
+            if( sscanf(value,"%d",&bufsize) == 1 && bufsize >= 4096)
             {
                 cmdok = true;
                 readbuff::filebuffsize = bufsize;
@@ -1229,7 +1229,7 @@ bool read_configuration_file( char *configfile, bool isdefault )
         else if( strcmp(cmd,"gzip_buffer_size") == 0 && value )
         {
             int bufsize = 0;
-            if( sscanf(value,"%d",&bufsize) == 1 && bufsize >= 4096) 
+            if( sscanf(value,"%d",&bufsize) == 1 && bufsize >= 4096)
             {
                 cmdok = true;
                 gzipbuffsize = bufsize;
@@ -1237,7 +1237,7 @@ bool read_configuration_file( char *configfile, bool isdefault )
         }
         else if( strcmp(cmd,"max_fields") == 0 && value )
         {
-            if( sscanf(value,"%d",&maxfields) == 1 && maxfields > 0) 
+            if( sscanf(value,"%d",&maxfields) == 1 && maxfields > 0)
             {
                 cmdok = true;
             }
@@ -1410,7 +1410,7 @@ void print_metadata()
         if( i ) { fprintf(meta,"|"); }
         fprintf(meta,"%s",outfield[i]->name());
     }
-    fprintf(meta,"\n");    
+    fprintf(meta,"\n");
     if( filters )
     {
         fprintf(meta,"Filters:");
@@ -1465,7 +1465,7 @@ bool read_args( char *image, int argc, char *argv[] )
     {
         char *arg = argv[iarg];
         if( nxtarg ){ *nxtarg = arg; nxtarg = 0; continue; }
-        
+
         if( arg[0] == '-' )
         {
             switch( arg[1] )
@@ -1521,7 +1521,7 @@ bool read_args( char *image, int argc, char *argv[] )
             {
                 char *value = arg+2;
                 if( *value == ':' ) value++;
-                (*nxtarg) = value; 
+                (*nxtarg) = value;
                 nxtarg = 0;
             }
         }
@@ -1535,7 +1535,7 @@ bool read_args( char *image, int argc, char *argv[] )
         }
         else if( ! metafile )
         {
-            metafile = arg; 
+            metafile = arg;
         }
         else
         {
@@ -1731,7 +1731,7 @@ int main( int argc, char *argv[] )
     if( out->isempty() )
     {
         fileheader.write(out);
-        if( col_headers ) 
+        if( col_headers )
         {
             if( write_column_headers(out) != 1 )
             {
