@@ -1373,13 +1373,15 @@ bool read_configuration( char *exefile )
     }
     else
     {
-        message(es_warning, "Could not find base configuration, "
-                      "try setting the BDECOPY_DATADIR env variable "
-                      "to a directory containing a file with "
-                      "the same base name as the executable and "
-                      "the %s extension",
-                      default_cfg_ext);
-        ok = false;
+        if ( ! bare ) {
+          message(es_warning, "Could not find base configuration, "
+                        "try setting the BDECOPY_DATADIR env variable "
+                        "to a directory containing a file with "
+                        "the same base name as the executable and "
+                        "the %s extension",
+                        default_cfg_ext);
+          ok = false;
+        }
     }
     return ok;
 }
