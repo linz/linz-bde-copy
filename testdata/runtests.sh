@@ -48,6 +48,9 @@ $EXE -c ../testutf3.cfg ../mixutf.crs mixutf3.out testutf3.log
 $EXE -c ../testutf4.cfg ../mixutf.crs mixutf4.out testutf4.log
 $EXE -c ../testutf5.cfg ../lolutf.crs lolutf.out lolutf.log
 
+# Bogus calls
+$EXE -c nonexistent.cfg ../lolutf.crs bogus1.out bogus1.log 2> bogus1.stderr > bogus1.stdout
+
 perl -pi.bak -e 's/^(ConfigFile\:\s)[^\.].*[\\|\/](.+\.cfg)$/$1$2/g' *log || exit 1
 rm -f *.bak
 

@@ -9,6 +9,7 @@
  the LICENSE file for more information.
 ****************************************************************************/
 
+#include <errno.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -1041,7 +1042,11 @@ bool read_configuration_file( char *configfile, bool isdefault )
     FILE *cfg = fopen(configfile,"r");
     if( ! cfg )
     {
-        if( ! isdefault ) message(es_fatal,"Cannot open configuration file %s",configfile);
+        if( ! isdefault )
+        {
+            message(es_fatal,"Cannot open configuration file %s: %s",
+                    configfile, strerror(errno));
+        }
         return false;
     }
 
@@ -1662,7 +1667,7 @@ int main( int argc, char *argv[] )
         }
     }
 
-    meta = stdout;
+    meta = stderr;
     std::set_new_handler(allocation_error);
 
     if( ! read_args(image,argc,argv) ) syntax();
@@ -1681,11 +1686,18 @@ int main( int argc, char *argv[] )
         meta = fopen(metafile,"wb");
         if( ! meta )
         {
-            meta = stdout;
+            meta = stderr;
             char *mf = metafile;
             metafile = 0;
-            message(es_fatal,"Cannot open metadata file %s\n",mf);
+            message(es_fatal,"Cannot open metadata file %s: %s\n",
+                    mf, strerror(errno));
+            return 2;
         }
+    }
+    else
+    {
+        /* for backward compatibility we default to stdout */
+        meta = stdout;
     }
 
     for( int i = 0; i < ninfile; i++ )
