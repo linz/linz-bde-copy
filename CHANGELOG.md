@@ -2,6 +2,10 @@
 
 All notable changes for the LINZ BDE Copy are documented in this file.
 
+## [1.3.0] - YYYY-MM-DD
+### Changed
+- Print startup errors to stderr (#33)
+
 ## [1.2.0] - 2016-04-13
 ### Added
 - Added static casts to allow compilation of gzip code
