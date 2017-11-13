@@ -15,6 +15,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <stdarg.h>
+#include <limits.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
@@ -401,7 +402,7 @@ void set_fields( const char *fields )
     {
         char *type = name + strlen(name);
         char *p = strchr(name,'=');
-        if( p > 0 )
+        if( p > (void *)0 )
         {
             *p = 0;
             type = p+1;
