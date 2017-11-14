@@ -95,6 +95,7 @@ int n_recskip = 0;
 int max_errors = 0;
 int cmd_maxerrors = -1;
 bool append = false;
+bool bare = false;
 bool header_only = false;
 bool col_headers = false;
 bool nometa = false;
@@ -1356,7 +1357,7 @@ bool read_configuration( char *exefile )
 
     if (base_config_path)
     {
-        read_configuration_part(base_config_path, 0);
+        if ( ! bare ) read_configuration_part(base_config_path, 0);
         if( cfgfile && *cfgfile )
         {
             char *cfgf = copy_string(cfgfile);
@@ -1378,13 +1379,15 @@ bool read_configuration( char *exefile )
     }
     else
     {
-        message(es_warning, "Could not find base configuration, "
-                      "try setting the BDECOPY_DATADIR env variable "
-                      "to a directory containing a file with "
-                      "the same base name as the executable and "
-                      "the %s extension",
-                      default_cfg_ext);
-        ok = false;
+        if ( ! bare ) {
+          message(es_warning, "Could not find base configuration, "
+                        "try setting the BDECOPY_DATADIR env variable "
+                        "to a directory containing a file with "
+                        "the same base name as the executable and "
+                        "the %s extension",
+                        default_cfg_ext);
+          ok = false;
+        }
     }
     return ok;
 }
@@ -1478,6 +1481,9 @@ bool read_args( char *image, int argc, char *argv[] )
             {
             case 'a':
             case 'A':  append= true; break;
+
+            case 'b':
+            case 'B':  bare= true; break;
 
             case 'n':
             case 'N':  nometa = true; break;
