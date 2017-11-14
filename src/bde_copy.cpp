@@ -402,7 +402,7 @@ void set_fields( const char *fields )
     {
         char *type = name + strlen(name);
         char *p = strchr(name,'=');
-        if( p > (void *)0 )
+        if( p != NULL )
         {
             *p = 0;
             type = p+1;
