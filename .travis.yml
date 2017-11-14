@@ -3,7 +3,7 @@ language: C++
 
 before_install:
   # These are needed to test debian package build
-  - sudo apt-get install debhelper fakeroot
+  - sudo apt-get install debhelper fakeroot cmake
 
 script:
   - mkdir build && cd build
