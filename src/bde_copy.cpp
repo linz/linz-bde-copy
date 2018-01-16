@@ -100,6 +100,7 @@ bool col_headers = false;
 bool nometa = false;
 bool use_archive = false;
 bool use_gzip = false;
+bool output = false;
 
 int min_year=0;
 buffer err_date("01/01/1800");
@@ -1400,7 +1401,14 @@ void print_metadata()
         fprintf(meta,"AdditionalDataFile: %s\n",addfile[i]);
     }
     fputs(configuration.str(), meta );
-    fprintf(meta,"OutputFile: %s\n",outfile);
+    if(! output )
+    {
+        fprintf(meta,"OutputFile: %s\n",outfile);
+    }
+    else
+    {
+        fprintf(meta,"OutputFile: %s\n","stdout");
+    }
 
     fprintf(meta,"TableName: %s\n",tablename);
     fprintf(meta,"InputFields: ");
@@ -1519,8 +1527,16 @@ bool read_args( char *image, int argc, char *argv[] )
                       help(image); break;
 
             default:
-                printf("Invalid option %s\n",arg);
-                argsok = false;
+            if ( infiles && ! arg[1] && ! outfile && ! metafile) 
+            {
+                  output = true;
+                  meta = stderr;
+            }
+            else
+            {
+                  printf("Invalid option %s\n",arg);
+                  argsok = false;
+            }
             }
 
             if( nxtarg && arg[2] )
@@ -1535,7 +1551,7 @@ bool read_args( char *image, int argc, char *argv[] )
         {
             infiles = arg;
         }
-        else if( ! outfile )
+        else if( ! outfile && ! output)
         {
             outfile = arg;
         }
@@ -1556,7 +1572,7 @@ bool read_args( char *image, int argc, char *argv[] )
         argsok = false;
     }
 
-    if( nxtarg || ! outfile )
+    if( nxtarg || (! outfile && ! output))
     {
         printf("Required arguments not supplied\n");
         argsok = false;
@@ -1596,6 +1612,9 @@ void syntax()
         "input_file is a BDE crs download file, typically gzip compressed\n"
         "output_file is the generated data file\n"
         "log_file holds information about the conversion - default is standard output\n"
+        "\n"
+        "To output the data to standard output use '-' as a substitute for output_file\n"
+        "If output is going to standard output, log_file defaults to standard error\n"
         "\n"
         "Options:\n"
         "  -c xxx   Use xxx as an additional configuration file - this is read\n"
@@ -1695,7 +1714,7 @@ int main( int argc, char *argv[] )
             return 2;
         }
     }
-    else
+    else if( ! output )
     {
         /* for backward compatibility we default to stdout */
         meta = stdout;
@@ -1724,17 +1743,26 @@ int main( int argc, char *argv[] )
         return 0;
     }
 
-    if( use_gzip )
+    if( ! output )
     {
+      if( use_gzip )
+      {
         out = gzip_data_writer::open(outfile,append,gzipbuffsize);
-    }
-    else
-    {
+      }
+      else
+      {
         out = file_data_writer::open(outfile,append);
-    }
-    if( ! out )
-    {
+      }
+      if( ! out )
+      {
         message(es_fatal,"Cannot open output file %s\n",outfile);
+      }
+
+    }
+    else 
+    {
+      char outf[] = "stdout";
+      out = file_data_writer::open(outf, append);
     }
 
     init_checkfuncs();
