@@ -991,7 +991,7 @@ int geometry_field::write_offset_geom( char *sp, data_writer *out )
 data_writer *file_data_writer::open( char *fname, bool append )
 {
     FILE *f;
-    if( strcmp(fname, "stdout") == 0)
+    if( strcmp(fname, "-") == 0)
     {
 	f = stdout;
     }

@@ -100,7 +100,8 @@ bool col_headers = false;
 bool nometa = false;
 bool use_archive = false;
 bool use_gzip = false;
-bool output = false;
+// output_stdout is true if the option '-' is used as output_file
+bool output_stdout = false;
 
 int min_year=0;
 buffer err_date("01/01/1800");
@@ -1401,13 +1402,13 @@ void print_metadata()
         fprintf(meta,"AdditionalDataFile: %s\n",addfile[i]);
     }
     fputs(configuration.str(), meta );
-    if(! output )
+    if(! output_stdout )
     {
         fprintf(meta,"OutputFile: %s\n",outfile);
     }
     else
     {
-        fprintf(meta,"OutputFile: %s\n","stdout");
+        fprintf(meta,"OutputFile: %s\n","-");
     }
 
     fprintf(meta,"TableName: %s\n",tablename);
@@ -1479,8 +1480,16 @@ bool read_args( char *image, int argc, char *argv[] )
     {
         char *arg = argv[iarg];
         if( nxtarg ){ *nxtarg = arg; nxtarg = 0; continue; }
-
-        if( arg[0] == '-' )
+	
+	// if the argument only has the character '-' and the next
+	// expected input is the outfile, will set output to stdout.
+        if( arg[0] == '-' && ! arg[1] && infiles && ! outfile )
+        {
+	    // set output to stdout and metadata to stderr
+            output_stdout = true;
+            meta = stderr; 
+        }
+        else if( arg[0] == '-' )
         {
             switch( arg[1] )
             {
@@ -1527,16 +1536,8 @@ bool read_args( char *image, int argc, char *argv[] )
                       help(image); break;
 
             default:
-            if ( infiles && ! arg[1] && ! outfile && ! metafile) 
-            {
-                  output = true;
-                  meta = stderr;
-            }
-            else
-            {
-                  printf("Invalid option %s\n",arg);
-                  argsok = false;
-            }
+                    printf("Invalid option %s\n",arg);
+                    argsok = false;
             }
 
             if( nxtarg && arg[2] )
@@ -1551,7 +1552,7 @@ bool read_args( char *image, int argc, char *argv[] )
         {
             infiles = arg;
         }
-        else if( ! outfile && ! output)
+        else if( ! outfile && ! output_stdout)
         {
             outfile = arg;
         }
@@ -1572,7 +1573,7 @@ bool read_args( char *image, int argc, char *argv[] )
         argsok = false;
     }
 
-    if( nxtarg || (! outfile && ! output))
+    if( nxtarg || (! outfile && ! output_stdout))
     {
         printf("Required arguments not supplied\n");
         argsok = false;
@@ -1596,6 +1597,12 @@ bool read_args( char *image, int argc, char *argv[] )
     if( dataset && ! valid_dataset(dataset) )
     {
         printf("Invalid dataset argument \"%s\" - must by YYYYMMDDHHMMSS\n",dataset);
+        argsok = false;
+    }
+    
+    if( use_gzip && output_stdout )
+    {
+        printf("Cannot use -z option with output to standard output\n");
         argsok = false;
     }
 
@@ -1714,7 +1721,7 @@ int main( int argc, char *argv[] )
             return 2;
         }
     }
-    else if( ! output )
+    else if( ! output_stdout )
     {
         /* for backward compatibility we default to stdout */
         meta = stdout;
@@ -1743,26 +1750,22 @@ int main( int argc, char *argv[] )
         return 0;
     }
 
-    if( ! output )
+    if( use_gzip )
     {
-      if( use_gzip )
-      {
-        out = gzip_data_writer::open(outfile,append,gzipbuffsize);
-      }
-      else
-      {
-        out = file_data_writer::open(outfile,append);
-      }
-      if( ! out )
-      {
-        message(es_fatal,"Cannot open output file %s\n",outfile);
-      }
-
+      out = gzip_data_writer::open(outfile,append,gzipbuffsize);
     }
-    else 
+    else if ( output_stdout )
     {
-      char outf[] = "stdout";
+      char outf[] = "-";
       out = file_data_writer::open(outf, append);
+    }
+    else
+    {
+      out = file_data_writer::open(outfile,append);
+    }
+    if( ! out )
+    {
+      message(es_fatal,"Cannot open output file %s\n",outfile);
     }
 
     init_checkfuncs();
