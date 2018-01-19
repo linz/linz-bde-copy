@@ -1,0 +1,15 @@
+InputFile: ../repo/level_0/20100501030201/scg.crs.gz
+ConfigFile: bde_copy.cfg
+ConfigFile: ../test1.cfg
+OutputFile: -
+TableName: crs_sys_code_group
+InputFields: desc|user_create_flag|user_modify_flag|user_delete_flag|user_view_flag|data_type|group_type|code|audit_id
+OutputFields: desc|user_create_flag|user_modify_flag|user_delete_flag|user_view_flag|data_type|group_type|code|audit_id
+BdeStartTime: 2010-01-03 02:51:33
+BdeEndTime: 2010-02-07 02:54:33
+BdeSize: 22172
+
+InputCount: 433
+OutputCount: 433
+ErrorCount: 0
+ResultStatus: success

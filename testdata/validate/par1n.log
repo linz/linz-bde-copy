@@ -1,0 +1,11 @@
+
+Warning:  Invalid pipe character in field in field nonsurvey_def
+At record 3 of ../par1.crs
+3007668|01/05/1010|||PRIM|||DCDB 
+Document 
+Id: \CT |247/5||DCDB|CURR|1202928.0||3007668|1917||
+
+InputCount: 10
+OutputCount: 10
+ErrorCount: 0
+ResultStatus: success
