@@ -59,8 +59,8 @@ $EXE -c ../test1.cfg ../escape.crs - escapestdout.log > escape.out
 $EXE -c ../test1.cfg ../escape.crs - > escape.out 2> escapestdout.log
 $EXE -c ../test4.cfg ../par1.crs - par4stdout.log > par4.out
 $EXE -c ../test4.cfg ../par1.crs - > par4.out 2> par4stdout.log
-$EXE -c ../test5.cfg ../par1.crs - par5a.log > par5a.out
-$EXE -c ../test5.cfg ../par1.crs - > par5a.out 2> par5a.log
+$EXE -c ../test5.cfg ../par1.crs - par5a.log 
+$EXE -c ../test5.cfg ../par1.crs - 2> par5a.log
 $EXE -c ../test5.cfg ../parh.crs - par5bstdout.log > par5b.out
 $EXE -c ../test5.cfg ../parh.crs - > par5b.out 2> par5bstdout.log
 $EXE -c ../test5.cfg ../parhz.crs.gz - par5cstdout.log > par5c.out
