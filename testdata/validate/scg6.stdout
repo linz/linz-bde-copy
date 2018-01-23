@@ -1,0 +1,443 @@
+Execution stage of action checklist items|N|N|N|Y|T|S|ACCE|275
+Adjustment Coefficient Code|Y|Y|N|Y|T|S|ADCC|276
+Status of Adjustment Run|N|N|N|Y|T|S|ADJS|277
+Status of Adjustment Method|N|N|N|Y|T|S|ADMS|278
+Adjustment Method Type|Y|Y|N|Y|T|S|ADMT|279
+Adjustment Method software used|Y|Y|N|Y|T|S|ADMU|280
+Approved Form Type|Y|Y|Y|Y|T|S|AFMT|281
+Type of affected parcel|Y|Y|Y|Y|T|S|AFPT|282
+Appellation General Sub type position|N|N|N|Y|T|S|AGNP|283
+Lock Statuses|N|N|N|Y|T|S|ALTS|284
+Lock Types|N|N|N|Y|T|S|ALTT|285
+Instrument Action Memorial Template Historical Flag|N|N|N|Y|T|S|AMTH|286
+Observation Reliability|N|N|N|Y|T|S|AOCR|287
+Appellation Format|N|N|N|Y|T|S|APPF|288
+Parcel Part Indicator|N|N|N|Y|T|S|APPI|289
+Appellation Status|N|N|N|Y|T|S|APPS|290
+Appellation Type|N|N|N|Y|T|S|APPT|291
+Appellation Parcel Type|Y|Y|N|Y|T|S|ASAP|292
+Appellation Sub Type. Deposited Plan, Town etc.|Y|Y|N|Y|T|S|ASAU|293
+Batch Control|N|N|N|Y|D|S|BCNT|294
+Database Build Environment|N|Y|N|Y|T|S|BENV|295
+Batch Process Configuration File|N|Y|N|Y|T|S|BPCF|296
+Batch Process repeat flags|N|Y|N|Y|T|S|BPRP|297
+Batch Queue Item Frequency|N|N|N|Y|T|S|BQIF|298
+Batch Queue Item Status|N|N|N|Y|T|S|BQIS|299
+Batch Trace Level|N|N|N|Y|T|S|BTLV|300
+Batch Queue Status|N|N|N|Y|T|S|BTQS|301
+Business Parameter Type|N|N|N|Y|T|S|BUPT|302
+Business Type Group|N|N|N|Y|T|S|BUTG|303
+Business Type Status|N|N|N|Y|T|S|BUTS|304
+Arcinfo Spatial Tolerance for CEL|N|N|N|Y|T|S|CELD|305
+Electoral Paper Sizes|N|N|N|Y|T|S|CELP|306
+Electoral Report Types|N|N|N|Y|T|S|CELR|307
+Cell Status|N|N|N|Y|T|S|CELS|308
+Electoral Maintain ASP Interface Parameters|N|N|N|Y|T|S|CEMR|309
+Automatic or manual validation|N|N|N|Y|T|S|CHIE|310
+Check List Type|N|N|N|Y|T|S|CHIT|311
+Check List Result|N|N|N|Y|T|S|CHLR|312
+Common Instrument Types for Reporting|Y|Y|Y|Y|T|S|CITR|313
+Comprised in types|N|N|N|Y|T|S|CMPT|314
+Consent Type|Y|Y|N|Y|T|S|CNTT|315
+Coordinate Accuracy Type|N|N|N|Y|T|S|COAT|316
+Coordinate Adjustment Status|N|N|N|Y|T|S|COJS|317
+Contract Status|N|N|N|Y|T|S|CONS|318
+Contract Type|Y|Y|N|Y|T|S|CONT|319
+Coordinate Status|N|N|N|Y|T|S|COOS|320
+Coordinate Source|N|N|N|Y|T|S|COOU|321
+Coordinate Order Group|N|N|N|Y|T|S|CORG|322
+Coordinate Type Data|Y|Y|N|Y|T|S|COTA|323
+Coordinate Type Category|Y|Y|N|Y|T|S|COTC|324
+Coordinate Type Dimension|Y|Y|N|Y|T|S|COTD|325
+Coordinate Type Status|Y|Y|N|Y|T|S|COTS|326
+Arcinfo Spatial Tolerance|N|Y|N|Y|N|S|CPCD|327
+CPCO|Y|N|N|N|T|S|CPCO|328
+Coordiante System Area Status|N|N|N|Y|T|S|CSAS|329
+Common Security & Authentication Parameters (text)|N|Y|N|Y|T|S|CSEC|330
+Common Security & Authentication Parameters (numeric)|N|Y|N|Y|N|S|CSEG|331
+Country|Y|Y|N|Y|T|S|CTRY|332
+Converted Title Type|N|N|N|N|T|S|CVTT|333
+System event logging level|N|Y|N|Y|T|S|DBGL|334
+Distribution Method|N|N|N|Y|T|S|DIBM|335
+Dealing Duplicate Status|N|N|N|Y|T|S|DLGD|336
+Departmental Dealing Reason|Y|Y|Y|Y|T|S|DLGR|337
+Dealing Status|N|N|N|Y|T|S|DLGS|338
+Dealing Type|N|N|N|Y|T|S|DLGT|339
+Dealing Duplicate Action|N|N|N|Y|T|S|DPPA|340
+Type of Dealing Survey|N|N|N|Y|T|S|DSUT|341
+Datum Dimension|Y|Y|N|Y|T|S|DTMD|342
+Datum Reference Code|Y|Y|N|Y|T|S|DTMR|343
+Datum Status|Y|Y|N|Y|T|S|DTMS|344
+Datum Type|Y|Y|N|Y|T|S|DTMT|345
+Easement Category|N|N|N|Y|T|S|EASC|346
+Easement Type|Y|Y|Y|Y|T|S|EAST|347
+Electoral Edits Actions|N|N|N|Y|T|S|EEDA|348
+Electoral Edits Vadation Status|N|N|N|Y|T|S|EEDS|349
+Electoral Edits Validation Status|N|N|N|Y|T|S|EEDV|350
+Electoral Edit Layers|N|N|N|Y|T|S|EELL|351
+Electoral Edits Action |N|N|N|Y|T|S|EERA|352
+Encumbrance Quick Code|Y|Y|Y|N|T|S|ENQC|353
+Electorate Place Attribute Status|N|N|N|Y|T|S|EPAS|354
+Electorate Place Status|N|N|N|Y|T|S|EPLS|355
+Electorate Road Attribute Status|N|N|N|Y|T|S|ERAS|356
+Estate Share Executorship|Y|Y|Y|Y|T|S|ETSE|357
+Title Estate Type|Y|Y|Y|Y|T|S|ETTT|358
+Fee Administration|N|N|N|Y|T|S|FADM|359
+Feature Name Status|N|N|N|Y|T|S|FENS|360
+Feature Name Type|N|N|N|Y|T|S|FENT|361
+Fee Header Group|N|N|N|Y|T|S|FHRG|362
+Invoice Status|N|N|N|Y|T|S|FHRS|363
+Fee Item Status|N|N|N|Y|T|S|FITS|364
+Feature Lines Status|N|N|N|Y|T|S|FLSS|365
+Fee Schedule Group.|N|N|N|Y|T|S|FSCG|366
+Fee Schedule Status|N|N|N|Y|T|S|FSCS|367
+Guaranteed Search Restricted Estate Types|Y|Y|Y|Y|T|S|GSET|368
+Guaranteed Search Restricted Title Types|Y|Y|Y|Y|T|S|GSTT|369
+Hold Reason Type|N|N|N|Y|T|S|HRNT|370
+Holidays - Public Holiday Group List|Y|Y|N|Y|T|S|HPUB|371
+Holidays - National Holidays|Y|Y|Y|Y|D|S|HNAT|372
+Holidays - Auckland Regional Holidays|Y|Y|Y|Y|D|S|HAUK|373
+Holidays - Hamilton Regional Holidays|Y|Y|Y|Y|D|S|HHAM|374
+Holidays - Wellington Regional Holidays|Y|Y|Y|Y|D|S|HWEL|375
+Holidays - Christchurch Regional Holidays|Y|Y|Y|Y|D|S|HCHC|376
+Holidays - Dunedin Regional Holidays|Y|Y|Y|Y|D|S|HDUN|377
+Instrument Detail Variation Instruments|Y|Y|Y|Y|T|S|IDVI|378
+Execution stage of instrument checklist items|N|N|N|Y|T|S|INCE|379
+Image upload conversion process|N|N|N|Y|T|S|IUCP|380
+Job Status|N|N|N|Y|T|S|JOBS|381
+Land District Prefixes|N|N|N|Y|T|S|LDT|382
+Legal Description Type|N|N|N|Y|T|S|LGDT|383
+List of Possible Leasehold Estates|N|N|N|Y|T|S|LHLT|384
+Line Arc Direction|N|N|N|Y|T|S|LIND|385
+Line Type|N|N|N|Y|T|S|LINT|386
+Locality Type|Y|Y|N|Y|T|S|LOCT|387
+Meshblock Boundary Types |N|N|N|Y|T|S|MBBT|388
+Meshblock Status|N|N|N|Y|T|S|MBKS|389
+Manual Count Item Code|Y|Y|N|Y|T|S|MCIC|390
+Mark Name Type|N|N|N|Y|T|S|MKNT|391
+Supporting Document - Memorandum Type|Y|Y|Y|Y|T|S|MMOT|392
+Memorial Variable Types|N|N|N|Y|T|S|MMVT|393
+Maintenance Status|N|N|N|Y|T|S|MNTS|394
+Maintenance Type|N|N|N|Y|T|S|MNTT|395
+Mark Physical Condition|N|N|N|Y|T|S|MPSC|396
+Status of mark physical state|N|N|N|Y|T|S|MPSS|397
+Mark Physical State Type(Mark, Beacon, Protection)|N|N|N|Y|T|S|MPST|398
+The status of the meshblock road relationship and any related text.|N|N|N|Y|T|S|MRDS|399
+Mark Category|N|N|N|Y|T|S|MRKC|400
+Mark Beacon Type|Y|Y|N|Y|T|S|MRKE|401
+The level of mark maintainance required|N|N|N|Y|T|S|MRKM|402
+Mark Protection Type|Y|Y|N|Y|T|S|MRKR|403
+Mark Status|N|N|N|Y|T|S|MRKS|404
+Mark Type|Y|Y|N|Y|T|S|MRKT|405
+Mark Work Type|Y|Y|N|Y|T|S|MWKT|406
+Nominal Index Name Type|N|N|N|Y|T|S|NMIT|407
+Node Status|N|N|N|Y|T|S|NODS|408
+Node Type|N|N|N|Y|T|S|NODT|409
+Notice Entity Type|N|N|N|Y|T|S|NOTE|410
+Notice Status|Y|Y|N|Y|T|S|NOTS|411
+Survey Node Purpose|N|N|N|Y|T|S|NOWP|412
+Network Area Status|N|N|N|Y|T|S|NWAS|413
+Network Area Type|Y|Y|N|Y|T|S|NWAT|414
+Network Plan Datum Order|N|N|N|Y|T|S|NWPD|415
+Network Plan Status|N|N|N|Y|T|S|NWPS|416
+Observation Element Surveyed Class|N|N|N|Y|T|S|OBEC|417
+Observation Arc Direction|N|N|N|Y|T|S|OBNA|418
+Observation Type|N|N|N|Y|T|S|OBNT|419
+Raw Observation File Format|N|N|N|Y|T|S|OBRF|420
+Raw Observation Status|N|N|N|Y|T|S|OBRS|421
+Observation Set Type|Y|Y|N|Y|T|S|OBST|422
+Observation Vector Type|N|N|N|N|T|S|OBTV|423
+Observation Data File Data Type|N|N|N|Y|T|S|ODFD|424
+Ordinate Transformation Status|N|N|N|Y|T|S|ODTS|425
+Observation Element Type Format|Y|N|N|Y|T|S|OETF|426
+Ordinate Adjustment Constraint Type|N|N|N|N|T|S|ORJC|427
+Ordinate Type Format|Y|N|N|Y|T|S|ORTF|428
+Parcel Intent|Y|Y|N|Y|T|S|PARI|429
+Parcel Status|N|N|N|Y|T|S|PARS|430
+Vesting on Deposit Intents|N|N|N|Y|T|S|PARV|431
+Programme Status|N|N|N|Y|T|S|PGMS|432
+Programme Type|Y|Y|N|Y|T|S|PGMT|433
+Parcel Network Transaction Status|N|N|N|Y|T|S|PNXS|434
+Parcel Network Transaction Type|N|N|N|Y|T|S|PNXT|435
+Proficiency / Complexity values|Y|Y|N|Y|T|S|PRCO|436
+Parcel Restriction all or part|N|N|N|Y|T|S|PREA|437
+Probation Status|Y|Y|N|Y|T|S|PROB|438
+Performance Reporting Category Type|N|N|N|Y|T|S|PRCT|439
+Proprietor Type|N|N|N|Y|T|S|PRPT|440
+Parcel Street Address Record Status|N|N|N|Y|T|S|PSAS|441
+Process task List Status|N|N|N|Y|T|S|PTLS|442
+QC Detail Status|N|N|N|Y|T|S|QCDS|443
+QC Detail Severity|Y|Y|Y|Y|T|S|QCDV|444
+QC Header Status|N|N|N|Y|T|S|QCHS|445
+QC Inspection Type|N|N|N|Y|T|S|QCHT|446
+QC Matrix Action Type|N|Y|N|Y|T|S|QCMS|447
+QC Matrix Dealing Transaction Type|N|N|N|Y|T|S|QCMT|448
+QC Job Complexity|N|N|N|Y|T|S|QCHJ|449
+QC Result Status|N|N|N|Y|T|S|QCRS|450
+Road Centreline Status|N|N|N|Y|T|S|RCLS|451
+Reduction Method Status|N|N|N|Y|T|S|RDMS|452
+Reduction Run Trajectory Type|N|N|N|Y|T|S|RDNR|453
+Record Status|Y|N|N|N|T|S|RECS|454
+Request History Type|Y|Y|N|Y|T|S|REHT|455
+Document types for the Request Copy window|Y|Y|Y|Y|T|S|REQD|456
+Request Information Type|Y|Y|N|Y|T|S|REQI|457
+Request Method|Y|Y|N|Y|T|S|REQM|458
+Request Status|N|N|N|Y|T|S|REQS|459
+Report Footer Correctness of Data Statements|N|N|N|Y|T|S|RFCD|460
+Road Name Status|N|N|N|Y|T|S|RNAS|461
+Road Name Type|Y|Y|N|Y|T|S|RNAT|462
+Reduced Observation Cadastral Class|N|N|N|Y|T|S|ROBC|463
+Reduced Observation Geodetic Class|Y|Y|N|Y|T|S|ROBG|464
+Reduced Observation Status|N|N|N|Y|T|S|ROBS|465
+Requisition Header Action|N|N|N|Y|T|S|RQHA|466
+Requisition Header Status|N|N|N|Y|T|S|RQHS|467
+Requisition Header Type|N|N|N|Y|T|S|RQHT|468
+Requisition Item Exec Type|N|N|N|Y|T|S|RQIE|469
+Requisition Item Type|N|N|N|Y|T|S|RQIT|470
+Requisition Item Severity|N|N|N|Y|T|S|RQIV|471
+Street Address Record Status|N|N|N|Y|T|S|SADS|472
+How the statory action affects the parcel|N|N|N|Y|T|S|SAPA|473
+Status pertaining to the purpose described by the statutory action|N|N|N|Y|T|S|SAPS|474
+Statistical Area Version Area Class|N|N|N|Y|T|S|SAVA|475
+System code group data type|N|N|N|N|T|S|SCGD|476
+System code group type(code or Business Rule)|N|N|N|N|T|S|SCGG|477
+Simple DTM Discharge Instrument Types|N|N|N|Y|T|S|SDTD|478
+Simple DTM Exisiting Encumbrance Instrument Types|N|N|N|Y|T|S|SDTE|479
+Survey Image Type|N|N|N|Y|T|S|SIMT|480
+Site Type|N|N|N|Y|T|S|SITT|481
+Spatial Layer Type|N|N|N|Y|T|S|SLYT|482
+System Object Type|N|N|N|Y|T|S|SOBT|483
+Spatial Search Electoral|N|N|N|Y|T|S|SPSE|484
+Spatial Search General|N|N|N|Y|T|S|SPSG|485
+Spatial Search Survey|N|N|N|Y|T|S|SPSS|486
+Layers that can be added to the CDE tree|Y|Y|Y|Y|T|S|SPTL|487
+Search Type, Remote (& Internal)|Y|Y|N|Y|T|S|SRCT|488
+Types of Gazettes that have been published|N|N|N|Y|T|S|STAG|489
+Statutory Action Status|N|N|N|Y|T|S|STAS|490
+Statutory Action Type|N|N|N|Y|T|S|STAT|491
+Statute Type|N|N|N|Y|T|S|STET|492
+Setup equipment type|N|N|N|Y|T|S|STPE|493
+Setup Type|Y|Y|N|Y|T|S|STPT|494
+Statistical Area Status|N|N|N|Y|T|S|STTS|495
+Supporting Document Support Type|N|N|N|Y|T|S|SUDP|496
+Supporting Document Status|N|N|N|Y|T|S|SUDS|497
+Static Unique Entity|N|N|N|Y|T|S|SUET|498
+Survey Appellation Type|Y|Y|N|Y|T|S|SURA|499
+Class of a survey|N|N|N|Y|T|S|SURC|500
+Survey Dataset Series|Y|Y|N|Y|T|S|SURD|501
+Cadastral Surveyor Accredited|N|N|N|Y|T|S|SURR|502
+Type of Dataset|N|N|N|Y|T|S|SURT|503
+Survey Data Source Code Group|N|N|N|Y|T|S|SURW|504
+Survey Authorised|Y|Y|Y|Y|T|S|SUVA|505
+Survey Registered|Y|Y|Y|Y|T|S|SUVR|506
+System Parameters (Dates)|N|Y|N|Y|D|S|SYSD|507
+System Parameters (Numbers)|N|Y|N|Y|N|S|SYSN|508
+System Code Status|N|N|N|N|T|S|SYSS|509
+System Parameters (Text)|N|Y|N|Y|T|S|SYST|510
+Title Document reference Type|N|N|N|Y|T|S|TDRT|511
+Transformation Function Status|N|N|N|Y|T|S|TFFS|512
+Transformation Generation Method|N|N|N|Y|T|S|TFGS|513
+Transformation Method Status|N|N|N|Y|T|S|TFMS|514
+Transformation Method Type|N|N|N|Y|T|S|TFMT|515
+Transformation Parameter Type|N|N|N|Y|T|S|TFPT|516
+Title image type|N|N|N|Y|T|S|TIMT|517
+Title Instrument Status|N|N|N|Y|T|S|TINS|518
+Topology Class Type|N|N|N|Y|T|S|TOCT|519
+Transaction Type Group|N|N|N|Y|T|S|TRTG|520
+Transformation Run Status|N|N|N|Y|T|S|TRUS|521
+Titles Structured Data Status|N|N|N|Y|T|S|TSDS|522
+Title Non-conversion Reason|N|N|N|Y|T|S|TTLC|523
+Title Duplicate Status|N|N|N|Y|T|S|TTLD|524
+Title Guarantee Status|N|N|N|Y|T|S|TTLG|525
+Title Register Type|N|N|N|Y|T|S|TTLR|526
+Title Status|N|N|N|Y|T|S|TTLS|527
+Title Type|Y|Y|Y|Y|T|S|TTLT|528
+Title Memorial Current Historical Flag|N|N|N|Y|T|S|TTMC|529
+Title Memorial Text Type|N|N|N|Y|T|S|TTMT|530
+Transaction Throughput Calculation (Status to be excluded)|N|Y|N|Y|T|S|TXTH|531
+Geodetic Accredited Status.|N|N|N|Y|T|S|USRA|532
+Customer Credit Status|N|N|N|Y|T|S|USRC|533
+Survey Accreditation Status (Cadastral)|N|N|N|Y|T|S|USRE|534
+User login type|N|N|N|Y|T|S|USRL|535
+User Probation Status|N|N|N|Y|T|S|USRP|536
+User Status|N|N|N|Y|T|S|USRS|537
+User Type|N|N|N|Y|T|S|USRT|538
+Geodetic Agency Type|Y|Y|N|Y|T|S|USRU|539
+User Workflow Defaults|N|Y|N|Y|N|S|USRW|540
+Type of User|Y|Y|N|Y|T|S|USTT|541
+Work Flow Wait Reason|Y|Y|N|Y|T|S|WDWR|542
+Workflow TreeView Status (Used to provide Leaf items for the Job level of the workflow In-tray)|N|N|N|Y|T|S|WKFL|543
+Work Type Catergory|N|N|N|Y|T|S|WKTC|544
+Work Type Plan Type|N|N|N|Y|T|S|WKTP|545
+Execution stage of work checklist items|N|N|N|Y|T|S|WRCE|546
+Work Cadastral Survey Status|N|N|N|Y|T|S|WRKC|547
+Work Geodetic Survey Status|N|N|N|Y|T|S|WRKG|548
+Transaction final statuses - Dealing|N|N|N|Y|T|S|TFSD|549
+Transaction final statuses - Work|N|N|N|Y|T|S|TFSW|550
+Transaction final statuses - Request|N|N|N|Y|T|S|TFSR|551
+Transaction final statuses - Supporting Document|N|N|N|Y|T|S|TFSS|552
+Transformation Return Status|N|N|N|Y|T|S|TFRS|553
+CAS debug parameters|Y|Y|Y|Y|T|S|CASD|554
+CAS debug work ids|Y|Y|Y|Y|T|S|CASW|555
+Title Search Types|N|N|N|Y|T|S|TTST|556
+Crown Property Keywords|Y|Y|Y|Y|T|S|CRWN|557
+Valid Application Version Groups|N|N|N|Y|T|S|APVG|558
+Valid Application Versions for n_cst_app_crs|Y|Y|Y|Y|T|S|ACRS|559
+Valid Application Versions for n_cst_app_cde|Y|Y|Y|Y|T|S|ACDE|560
+Valid Application Versions for n_cst_app_itf_cci_b01|Y|Y|Y|Y|T|S|BCI1|561
+Valid Application Versions for n_cst_app_itf_cci_b02|Y|Y|Y|Y|T|S|BCI2|562
+Valid Application Versions for n_cst_app_itf_ccl_b07|Y|Y|Y|Y|T|S|BCL7|563
+Valid Application Versions for n_cst_app_itf_cmw_b06|Y|Y|Y|Y|T|S|BMW6|564
+Valid Application Versions for n_cst_app_itf_cno_b02|Y|Y|Y|Y|T|S|BNO2|565
+Valid Application Versions for n_cst_app_itf_cno_b04|Y|Y|Y|Y|T|S|BNO4|566
+Distribution Method for Image Package|N|N|N|Y|T|S|DMIP|567
+Reserved Road Names for Electoral Use|Y|Y|Y|Y|T|S|RRNA|568
+Postponed Notice Types|Y|Y|Y|Y|T|S|PPNO|569
+Live Land Districts|Y|Y|Y|Y|N|S|LLDT|570
+Execution stage of electoral business rules|N|N|N|Y|T|S|ECHS|571
+Electoral check item feature|N|N|N|Y|T|S|ECIF|572
+Electoral road name endings|Y|Y|Y|Y|T|S|ERNE|573
+Merge Parcels Execution Status|N|N|N|Y|T|S|MXPX|574
+Spatial Read Parameters|N|Y|N|Y|T|S|SRPM|575
+e-dealing Audit Categories|N|Y|Y|Y|T|S|ACAT|576
+Valid application versions for n_cst_app_clw|Y|Y|Y|Y|T|S|ACLW|577
+Automatic Fee Tag|N|N|N|Y|T|S|AFTG|578
+Amalgamation Instrument Types|N|N|N|Y|T|S|AMAL|579
+CRS2 CSC Observation Type|N|N|N|Y|T|S|CSCO|580
+Survey Declaration|N|N|N|Y|T|S|DECL|581
+e-dealing Queue Status|N|N|N|Y|T|S|DGQS|582
+Dealing queue status|N|N|N|Y|T|S|DLGQ|583
+e-dealing Prepare Screens|Y|Y|Y|Y|T|S|EPRP|584
+Estimate Base Constant|N|Y|N|Y|N|S|ESBC|585
+Estate types with paper duplicates|Y|Y|Y|Y|T|S|ETPD|586
+Geometry Regeneration State|N|N|N|Y|T|S|GEOS|587
+Standard default memorandums|Y|N|N|Y|T|S|GMMN|588
+Certifications|Y|Y|N|Y|T|S|ICCC|589
+Situation codes for CRS2 certification configuration|N|N|N|Y|T|S|ICCS|590
+Instrument parameter configuration datatype|N|N|N|Y|T|S|IDPD|591
+Number of parties involved in an instrument|N|N|N|Y|T|S|INRP|592
+Role Names|N|N|N|Y|T|S|INRR|593
+List of proprietors it is not valid to transfer a title to using CRS2|Y|Y|Y|Y|T|S|IPRP|594
+Log on/ log off|N|N|N|Y|T|S|LGOF|595
+Date range interval size for CRS2 Licensing reports|Y|Y|N|Y|N|S|LRPP|596
+CRS2 CSC Mark State|N|N|N|Y|T|S|MKS2|597
+Notice Destination|N|N|N|Y|T|S|NOTD|598
+Plan Capture Observation Layer|N|Y|N|Y|T|S|OBNL|599
+Online Message Templates|Y|Y|Y|Y|T|S|OMTE|600
+Performance Monitoring|Y|Y|Y|Y|T|S|PERF|601
+Performance Monitoring Status|N|N|N|N|T|S|PERM|602
+Prevalidation Results|N|N|N|Y|T|S|PRVR|603
+Queue control parameters|N|Y|N|Y|T|S|QUEC|604
+Date range interval size for CRS2 reports|Y|Y|N|Y|N|S|RDRI|605
+Reclassify Encumbrancees|N|Y|N|Y|N|S|RECE|606
+CRS2 Registration Failure parameters|N|Y|N|Y|N|S|REGF|607
+System codes not shown in CPR_R302 System Code Changes report|Y|Y|Y|Y|T|S|SCCE|608
+Simple Plan Transaction Types|Y|Y|Y|Y|T|S|SIMP|609
+TAN Configuration|N|Y|N|Y|N|S|TANC|610
+TAN Medium sent|N|N|N|Y|T|S|TANM|611
+CTW Dealing statuses|N|N|N|Y|T|S|TDLS|612
+Title Instruments for Memorial Only Encumbrances in CTN_R02 report|Y|Y|Y|Y|T|S|TMOI|613
+Title Templates for Memorial Only Encumbrances in CTN_R02 report|Y|Y|Y|Y|T|S|TMOT|614
+Titles Report Parameters|Y|Y|Y|Y|N|S|TRPM|615
+The holder of an instument|N|N|N|Y|T|S|TRTH|616
+CTW Title instrument statuses|N|N|N|Y|T|S|TTIS|617
+User Activity Monitoring|N|N|N|Y|T|S|USAM|618
+Workspace Node Type|N|N|N|Y|T|S|WSNT|619
+Workspace Related Person Type|N|N|N|Y|T|S|WSRP|620
+Workspace Transaction Type|N|N|N|Y|T|S|WSTT|621
+Dormant Survey Notification|N|Y|N|Y|N|S|ZDSN|622
+Plan Reference Points|N|Y|N|Y|T|S|ZPRP|623
+Populate Topology Tolerance|N|Y|N|Y|N|S|ZPTT|624
+CRS2 Survey Staging Area Statuses|N|N|N|N|T|S|ZSUS|625
+Survey Transaction Status|N|N|N|Y|T|S|ZTRN|626
+Title Reporting Threshold for CPR reports|Y|Y|Y|Y|N|S|TRTS|627
+CSB_B04 - Plan Generation Batch Parameters|N|Y|N|Y|T|S|CSB4|628
+Title types not for edealing|Y|Y|Y|Y|T|S|TTED|629
+Titles Result Search Limit|N|Y|N|Y|N|S|TTSL|630
+User Activity Log parameters|N|Y|N|Y|N|S|UALP|631
+CPG Page Type|N|N|N|Y|T|S|PPGT|632
+CPG Diagram Type|N|N|N|Y|T|S|PDIT|633
+CPG Landonline Source|N|N|N|Y|T|S|PLOL|634
+CPG Coordinate Type|N|N|N|Y|T|S|PCOT|635
+CPG Line Type|N|N|N|Y|T|S|PLIT|636
+CPG Line Style|N|N|N|Y|T|S|PLIS|637
+CPG Label Type|N|N|N|Y|T|S|PLBT|638
+CPG Label Font|N|N|N|Y|T|S|PLBF|639
+CPG Label Font Style|N|N|N|Y|T|S|PLBS|640
+CPG Label Effect|N|N|N|Y|T|S|PLBE|641
+CPG Label Text Alignment|N|N|N|Y|T|S|PLBA|642
+CPG Display State|N|N|N|Y|T|S|PDIS|643
+CPG Sheet Type|N|N|N|Y|T|S|PSHT|644
+CPG XML Config Type|N|N|N|Y|T|S|PXCT|645
+CPG Label Symbol Type|N|N|N|Y|T|S|PLBB|646
+CPG Layer Definition Code|N|N|N|Y|T|S|PLDC|647
+TA Certificate Status|N|N|N|N|T|S|TACC|648
+TA Certificate Package Status|N|N|N|N|T|S|TACP|649
+TA Certificate Template Status|N|N|N|N|T|S|TACT|650
+TA Certification Status|N|N|N|N|T|S|TACS|651
+Search Type, Public|Y|Y|N|Y|T|S|PSCH|652
+Electronic Transactions|Y|Y|Y|Y|T|S|ETXN|653
+Batch image completion wait time|Y|Y|N|Y|N|S|BCHW|654
+Batch image printer name|Y|Y|N|Y|T|S|BCHP|655
+Parcel Topology Changes Report Types|N|N|N|Y|T|S|CELA|656
+Territorial Authority Groups|N|N|N|Y|T|S|CELT|657
+CPG Layout Debug|N|Y|N|Y|T|S|PDBG|658
+Title Instrument Final Status|N|N|N|Y|T|S|TISF|659
+Title Instrument Successful Final Status|N|N|N|Y|T|S|TISS|660
+Name Suffix|Y|Y|Y|Y|T|S|NMSF|661
+Batch Administration|N|Y|N|Y|N|S|BADM|662
+Memorandum of Priority affected instruments|Y|Y|Y|Y|T|S|MPRT|663
+Lodgement type|N|N|N|Y|T|S|REGS|664
+Encumbrance Instrument type|Y|Y|N|Y|T|S|ENCT|665
+Lease Instrument types|Y|Y|N|Y|T|S|LEAS|666
+Instrument Final Status|N|N|N|Y|T|S|TIFS|667
+Dealing Final Status|N|N|N|Y|T|S|DLFS|668
+Plan Prefix for Workspace|Y|Y|N|N|T|S|PLPX|669
+Transfer additional wording|Y|Y|N|Y|T|S|ADDW|670
+Transfer third party justification|Y|Y|N|Y|T|S|JUST|671
+Companies containing the text "trust" or "trustee"|Y|Y|N|Y|T|S|TRCO|672
+Trust Companies for Prepare TSM Dropdown|Y|Y|N|Y|T|S|TSMC|673
+RPL Configurations|N|Y|N|Y|N|S|RPLC|674
+Instruments prevented from Registration by S243(c) Memorial|Y|Y|Y|Y|T|S|C243|675
+Instruments affected by Memorandum of Priority|Y|Y|Y|N|T|S|IAMP|676
+Business Rule Failure which steps down a dealing|N|N|N|N|T||SDBF|677
+LOL System Administration email addressees|Y|Y|N|Y|T|S|SYSE|678
+Link Notice Message with Filter Code|Y|Y|Y|Y|T|S|XLAT|679
+External Executorship|Y|Y|Y|Y|T||EXEX|680
+Plan Prefix for Workspace|Y|N|Y|Y|T|S|WSDP|681
+Instruments for relaxing the title limit restrictions for edealings|Y|N|Y|Y|T|S|EXTL|682
+Estate types for Life Estates|Y|Y|Y|Y|T|S|ETLE|683
+Response Type|Y|Y|Y|N|T|S|RESP|684
+Notice New Version Start Date|N|Y|N|Y|D|S|NOTV|685
+Notice Parameters - Master Template|N|N|N|Y|T|S|NOTP|686
+Notice Attachment Size|N|Y|N|Y|N|S|NOTA|687
+Application Email Addresses|Y|Y|N|Y|T|S|EMIL|692
+Notice LINZ staff firm name|N|Y|N|Y|T|S|NOTL|689
+Notice Master Template Size|N|Y|N|Y|N|S|NOTT|690
+Status Codes for Societies|Y|Y|Y|Y|T|S|SSOC|691
+Notice Restrict Delivery Preferences|Y|Y|Y|Y|T|S|NOTR|693
+Certifications to be extended|Y|Y|Y|Y|T|S|CTXT|694
+Certification C018|Y|Y|Y|Y|T|S|C018|695
+Certification C019|Y|Y|Y|Y|T|S|C019|696
+Certification C021|Y|Y|Y|Y|T|S|C021|697
+Certification C022|Y|Y|Y|Y|T|S|C022|698
+Certification C023|Y|Y|Y|Y|T|S|C023|699
+Certifications causing a Step Down to Lodge|Y|Y|Y|Y|T|S|CTSD|700
+Instruments not affected when discharge of interest lodged|Y|Y|Y|Y|T|S|T036|701
+Instruments which should be ignored for determining prior/following dealings|Y|Y|Y|Y|T|S|IPFD|709
+Offline PlanGen Default AOI Buffer|Y|Y|N|Y|N|S|ODAB|703
+Offline PlanGen File Transfer Service|Y|Y|N|Y|T|S|OFTS|704
+Offline PlanGen Message Types|Y|Y|N|Y|T|S|OPMT|705
+Offline PlanGen Event Types|Y|Y|N|Y|T|S|OPET|706
+Offline PlanGen Linked Mark Movement Tolerance|Y|Y|N|Y|N|S|OPLT|707
+Offline PlanGen Import/Export|Y|Y|Y|Y|T|S|OPIE|708
+++Execution stage of action checklist items|N|N|N|Y|T|S|ACCE|275
+++Adjustment Coefficient Code|Y|Y|N|Y|T|S|ADCC|276
+++Status of Adjustment Run|N|N|N|Y|T|S|ADJS|277
+++Status of Adjustment Method|N|N|N|Y|T|S|ADMS|278
+++Adjustment Method Type|Y|Y|N|Y|T|S|ADMT|279
+++Adjustment Method software used|Y|Y|N|Y|T|S|ADMU|280
+++Approved Form Type|Y|Y|Y|Y|T|S|AFMT|281
+++Type of affected parcel|Y|Y|Y|Y|T|S|AFPT|282
+++Appellation General Sub type position|N|N|N|Y|T|S|AGNP|283
+++Lock Statuses|N|N|N|Y|T|S|ALTS|284
