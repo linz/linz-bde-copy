@@ -990,15 +990,7 @@ int geometry_field::write_offset_geom( char *sp, data_writer *out )
 
 data_writer *file_data_writer::open( char *fname, bool append )
 {
-    FILE *f;
-    if( strcmp(fname, "-") == 0)
-    {
-	f = stdout;
-    }
-    else
-    {
-	f = fopen(fname,append ? "ab" : "wb" );
-    }
+    FILE *f = fopen(fname,append ? "ab" : "wb" );
     if( ! f )
     {
       // TODO: find a better way to signal errors to upper levels (throw?)
@@ -1010,6 +1002,13 @@ data_writer *file_data_writer::open( char *fname, bool append )
     if( append && ftell(f) > 0 ) fdw->empty = false;
     return fdw;
 }
+
+data_writer *file_data_writer::open_stdout()
+{
+  file_data_writer *fdw = new file_data_writer(stdout);
+  return fdw;
+}
+
 
 file_data_writer::~file_data_writer()
 {
