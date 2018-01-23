@@ -1005,8 +1005,8 @@ data_writer *file_data_writer::open( char *fname, bool append )
 
 data_writer *file_data_writer::open_stdout()
 {
-  file_data_writer *fdw = new file_data_writer(stdout);
-  return fdw;
+    file_data_writer *fdw = new file_data_writer(stdout);
+    return fdw;
 }
 
 

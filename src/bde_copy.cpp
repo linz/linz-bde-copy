@@ -1473,14 +1473,14 @@ bool read_args( char *image, int argc, char *argv[] )
     {
         char *arg = argv[iarg];
         if( nxtarg ){ *nxtarg = arg; nxtarg = 0; continue; }
-	
-	// if the argument only has the character '-' and the next
-	// expected input is the outfile, will set output to stdout.
+
+        // if the argument only has the character '-' and the next
+        // expected input is the outfile, will set output to stdout.
         if( arg[0] == '-' && ! arg[1] && infiles && ! outfile )
         {
-	    // set output to stdout
+            // set output to stdout
             output_stdout = true;
-	    outfile = arg;
+            outfile = arg;
         }
         else if( arg[0] == '-' )
         {
@@ -1529,8 +1529,8 @@ bool read_args( char *image, int argc, char *argv[] )
                       help(image); break;
 
             default:
-                    fprintf(stderr,"Invalid option %s\n",arg);
-                    argsok = false;
+                fprintf(stderr,"Invalid option %s\n",arg);
+                argsok = false;
             }
 
             if( nxtarg && arg[2] )
@@ -1601,8 +1601,8 @@ bool read_args( char *image, int argc, char *argv[] )
 
     if( output_stdout && ! metafile )
     {
-	fprintf(stderr,"Must specfiy log_file when output to standard output\n");
-	argsok = false;
+        fprintf(stderr,"Must specfiy log_file when output to standard output\n");
+        argsok = false;
     }
     return argsok;
 }
@@ -1750,19 +1750,19 @@ int main( int argc, char *argv[] )
 
     if( use_gzip )
     {
-      out = gzip_data_writer::open(outfile,append,gzipbuffsize); 
+        out = gzip_data_writer::open(outfile,append,gzipbuffsize); 
     }
     else if ( output_stdout )
     {
-      out = file_data_writer::open_stdout();
+        out = file_data_writer::open_stdout();
     }
     else
     {
-      out = file_data_writer::open(outfile,append); 
+        out = file_data_writer::open(outfile,append); 
     }
     if( ! out )
     {
-      message(es_fatal,"Cannot open output file %s\n",outfile);
+        message(es_fatal,"Cannot open output file %s\n",outfile);
     }
 
     init_checkfuncs();
