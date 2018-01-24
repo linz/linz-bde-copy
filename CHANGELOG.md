@@ -5,6 +5,7 @@ All notable changes for the LINZ BDE Copy are documented in this file.
 ## [1.3.0] - YYYY-MM-DD
 ### Changed
 - Print startup errors to stderr (#33)
+- Add ability to output to stdout (#31)
 
 ## [1.2.0] - 2016-04-13
 ### Added
