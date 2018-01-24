@@ -100,6 +100,8 @@ bool col_headers = false;
 bool nometa = false;
 bool use_archive = false;
 bool use_gzip = false;
+// output_stdout is true if the option '-' is used as output_file
+bool output_stdout = false;
 
 int min_year=0;
 buffer err_date("01/01/1800");
@@ -1472,7 +1474,15 @@ bool read_args( char *image, int argc, char *argv[] )
         char *arg = argv[iarg];
         if( nxtarg ){ *nxtarg = arg; nxtarg = 0; continue; }
 
-        if( arg[0] == '-' )
+        // if the argument only has the character '-' and the next
+        // expected input is the outfile, will set output to stdout.
+        if( arg[0] == '-' && ! arg[1] && infiles && ! outfile )
+        {
+            // set output to stdout
+            output_stdout = true;
+            outfile = arg;
+        }
+        else if( arg[0] == '-' )
         {
             switch( arg[1] )
             {
@@ -1519,7 +1529,7 @@ bool read_args( char *image, int argc, char *argv[] )
                       help(image); break;
 
             default:
-                printf("Invalid option %s\n",arg);
+                fprintf(stderr,"Invalid option %s\n",arg);
                 argsok = false;
             }
 
@@ -1535,7 +1545,7 @@ bool read_args( char *image, int argc, char *argv[] )
         {
             infiles = arg;
         }
-        else if( ! outfile )
+        else if( ! outfile && ! output_stdout)
         {
             outfile = arg;
         }
@@ -1545,27 +1555,27 @@ bool read_args( char *image, int argc, char *argv[] )
         }
         else
         {
-            printf("Invalid extra argument: %s\n",arg);
+            fprintf(stderr,"Invalid extra argument: %s\n",arg);
             argsok = false;
         }
     }
 
     if( maxerrstr && sscanf(maxerrstr,"%d",&cmd_maxerrors) != 1 )
     {
-        printf("Invalid -e (maximum error count) option %s\n",maxerrstr);
+        fprintf(stderr,"Invalid -e (maximum error count) option %s\n",maxerrstr);
         argsok = false;
     }
 
-    if( nxtarg || ! outfile )
+    if( nxtarg || (! outfile && ! output_stdout))
     {
-        printf("Required arguments not supplied\n");
+        fprintf(stderr,"Required arguments not supplied\n");
         argsok = false;
     }
 
     if( infiles && !split_file_names(infiles,infile,&ninfile)) argsok = 0;
     if( ninfile == 0 )
     {
-        printf("No input files specified\n");
+        fprintf(stderr,"No input files specified\n");
         argsok = false;
     }
 
@@ -1573,29 +1583,43 @@ bool read_args( char *image, int argc, char *argv[] )
 
     if( strcmp(level,"0") != 0 && strcmp(level,"5") != 0 )
     {
-        printf("Invalid level argument \"%s\"- must be 0 or 5\n",level);
+        fprintf(stderr,"Invalid level argument \"%s\"- must be 0 or 5\n",level);
         argsok = false;
     }
 
     if( dataset && ! valid_dataset(dataset) )
     {
-        printf("Invalid dataset argument \"%s\" - must by YYYYMMDDHHMMSS\n",dataset);
+        fprintf(stderr,"Invalid dataset argument \"%s\" - must by YYYYMMDDHHMMSS\n",dataset);
+        argsok = false;
+    }
+    
+    if( use_gzip && output_stdout )
+    {
+        fprintf(stderr,"Cannot use -z option with output to standard output\n");
         argsok = false;
     }
 
+    if( output_stdout && ! metafile )
+    {
+        fprintf(stderr,"Must specfiy log_file when output to standard output\n");
+        argsok = false;
+    }
     return argsok;
 }
 
 
 void syntax()
 {
-    printf("bde_copy: Extracts data from BDE files\n");
-    printf("Version: %s (%s)\n\n",VERSION,__DATE__);
-    printf(
+    fprintf(stderr,"bde_copy: Extracts data from BDE files\n");
+    fprintf(stderr,"Version: %s (%s)\n\n",VERSION,__DATE__);
+    fprintf(stderr,
         "Syntax: [options] input_file output_file [log_file]\n\n"
         "input_file is a BDE crs download file, typically gzip compressed\n"
         "output_file is the generated data file\n"
         "log_file holds information about the conversion - default is standard output\n"
+        "\n"
+        "To output the data to standard output use '-' as a substitute for output_file\n"
+        "If output is going to standard output, a log_file must be provided\n"
         "\n"
         "Options:\n"
         "  -c xxx   Use xxx as an additional configuration file - this is read\n"
@@ -1695,7 +1719,7 @@ int main( int argc, char *argv[] )
             return 2;
         }
     }
-    else
+    else if( ! output_stdout )
     {
         /* for backward compatibility we default to stdout */
         meta = stdout;
@@ -1726,11 +1750,15 @@ int main( int argc, char *argv[] )
 
     if( use_gzip )
     {
-        out = gzip_data_writer::open(outfile,append,gzipbuffsize);
+        out = gzip_data_writer::open(outfile,append,gzipbuffsize); 
+    }
+    else if ( output_stdout )
+    {
+        out = file_data_writer::open_stdout();
     }
     else
     {
-        out = file_data_writer::open(outfile,append);
+        out = file_data_writer::open(outfile,append); 
     }
     if( ! out )
     {

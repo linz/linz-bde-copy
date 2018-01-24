@@ -78,6 +78,7 @@ class file_data_writer : public data_writer
 {
 public:
 	static data_writer *open( char *fname, bool append = false );
+	static data_writer *open_stdout();
 	virtual ~file_data_writer();
 	virtual bool write( const void *buffer, int length );
 private:
