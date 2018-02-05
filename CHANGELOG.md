@@ -4,9 +4,12 @@ All notable changes for the LINZ BDE Copy are documented in this file.
 
 ## [1.3.0] - YYYY-MM-DD
 ### Changed
-- Win32 build fixed
 - Print startup errors to stderr (#33)
+### Added
 - Add ability to output to stdout (#31)
+- Version flag (-V)
+### Fixed
+- Win32 build
 
 ## [1.2.0] - 2016-04-13
 ### Added

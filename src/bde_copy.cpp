@@ -136,6 +136,13 @@ struct filter_def
 
 filter_def *filters = 0;
 
+static void version()
+{
+    fprintf(stderr,"bde_copy %s %s\n", VERSION, REVISION);
+    exit(0);
+}
+
+
 void close_files()
 {
     if( input ) { delete input; input = 0; }
@@ -1502,6 +1509,8 @@ bool read_args( char *image, int argc, char *argv[] )
             case 'c':
             case 'C':  nxtarg = &cfgfile; break;
 
+            case 'V':  version(); break;
+
             case 'f':
             case 'F': nxtarg = &specfields; break;
 
@@ -1599,7 +1608,7 @@ bool read_args( char *image, int argc, char *argv[] )
         fprintf(stderr,"Invalid dataset argument \"%s\" - must by YYYYMMDDHHMMSS\n",dataset);
         argsok = false;
     }
-    
+
     if( use_gzip && output_stdout )
     {
         fprintf(stderr,"Cannot use -z option with output to standard output\n");
@@ -1614,11 +1623,11 @@ bool read_args( char *image, int argc, char *argv[] )
     return argsok;
 }
 
-
 void syntax()
 {
     fprintf(stderr,"bde_copy: Extracts data from BDE files\n");
-    fprintf(stderr,"Version: %s (%s)\n\n",VERSION,__DATE__);
+    fprintf(stderr,"Version: %s (%s)\n",VERSION,__DATE__);
+    fprintf(stderr,"Source version: %s\n\n",REVISION);
     fprintf(stderr,
         "Syntax: [options] input_file output_file [log_file]\n\n"
         "input_file is a BDE crs download file, typically gzip compressed\n"
@@ -1629,6 +1638,7 @@ void syntax()
         "If output is going to standard output, a log_file must be provided\n"
         "\n"
         "Options:\n"
+        "  -V       Print version and exit\n"
         "  -c xxx   Use xxx as an additional configuration file - this is read\n"
         "           *in addition* to the bde_copy.cfg file found in the package\n"
         "           data directory (or BDECOPY_DATADIR env variable if given)\n"
@@ -1757,7 +1767,7 @@ int main( int argc, char *argv[] )
 
     if( use_gzip )
     {
-        out = gzip_data_writer::open(outfile,append,gzipbuffsize); 
+        out = gzip_data_writer::open(outfile,append,gzipbuffsize);
     }
     else if ( output_stdout )
     {
@@ -1765,7 +1775,7 @@ int main( int argc, char *argv[] )
     }
     else
     {
-        out = file_data_writer::open(outfile,append); 
+        out = file_data_writer::open(outfile,append);
     }
     if( ! out )
     {
