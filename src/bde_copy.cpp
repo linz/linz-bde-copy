@@ -18,7 +18,9 @@
 #include <limits.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#if !defined(_WIN32) && !defined(_MSC_VER)
 #include <unistd.h>
+#endif
 #include <new>
 #if !defined(__MACH__)
 #include <malloc.h>
@@ -31,6 +33,11 @@
 
 #if defined(_WIN32) && defined(_MSC_VER)
 #include "support/win32/dirent.h"
+#include <windows.h>
+#define PATH_MAX MAX_PATH
+#define lstat _stat
+#define stat _stat
+#define S_ISDIR(m) (((m) & S_IFMT) == S_IFDIR)
 #else
 #include <dirent.h>
 #endif
