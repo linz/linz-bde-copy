@@ -5,6 +5,7 @@ All notable changes for the LINZ BDE Copy are documented in this file.
 ## [1.3.0] - YYYY-MM-DD
 ### Changed
 - Print startup errors to stderr (#33)
+- Make base configuration file optional
 ### Added
 - Add ability to output to stdout (#31)
 - Version flag (-V)
@@ -14,7 +15,7 @@ All notable changes for the LINZ BDE Copy are documented in this file.
 ## [1.2.0] - 2016-04-13
 ### Added
 - Added static casts to allow compilation of gzip code
-- Added script to build bde_copy.cfg.lolutf8
+- Added script to build `bde_copy.cfg.lolutf8`
 - Added additional Landonline UTF8 chars
 
 ### Changed

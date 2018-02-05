@@ -1400,7 +1400,8 @@ bool read_configuration( char *exefile )
                       "the same base name as the executable and "
                       "the %s extension",
                       default_cfg_ext);
-        ok = false;
+        // Let's still tolerate this
+        //ok = false;
     }
     return ok;
 }
