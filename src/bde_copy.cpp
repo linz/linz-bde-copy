@@ -1386,7 +1386,8 @@ bool read_configuration( char *exefile )
                       "the same base name as the executable and "
                       "the %s extension",
                       default_cfg_ext);
-        ok = false;
+        // Let's still tolerate this
+        //ok = false;
     }
     return ok;
 }
@@ -1592,7 +1593,7 @@ bool read_args( char *image, int argc, char *argv[] )
         fprintf(stderr,"Invalid dataset argument \"%s\" - must by YYYYMMDDHHMMSS\n",dataset);
         argsok = false;
     }
-    
+
     if( use_gzip && output_stdout )
     {
         fprintf(stderr,"Cannot use -z option with output to standard output\n");
@@ -1750,7 +1751,7 @@ int main( int argc, char *argv[] )
 
     if( use_gzip )
     {
-        out = gzip_data_writer::open(outfile,append,gzipbuffsize); 
+        out = gzip_data_writer::open(outfile,append,gzipbuffsize);
     }
     else if ( output_stdout )
     {
@@ -1758,7 +1759,7 @@ int main( int argc, char *argv[] )
     }
     else
     {
-        out = file_data_writer::open(outfile,append); 
+        out = file_data_writer::open(outfile,append);
     }
     if( ! out )
     {
