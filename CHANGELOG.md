@@ -2,7 +2,7 @@
 
 All notable changes for the LINZ BDE Copy are documented in this file.
 
-## [1.3.0] - YYYY-MM-DD
+## [1.3.0] - 2018-02-05
 ### Changed
 - Print startup errors to stderr (#33)
 - Make base configuration file optional
