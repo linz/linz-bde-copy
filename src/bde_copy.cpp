@@ -1630,7 +1630,7 @@ void syntax()
     fprintf(stderr,"Version: %s (%s)\n",VERSION,__DATE__);
     fprintf(stderr,"Source version: %s\n\n",REVISION);
     fprintf(stderr,
-        "Syntax: [options] input_file output_file [log_file]\n\n"
+        "Syntax: bde_copy [options] input_file output_file [log_file]\n\n"
         "input_file is a BDE crs download file, typically gzip compressed\n"
         "output_file is the generated data file\n"
         "log_file holds information about the conversion - default is standard output\n"
