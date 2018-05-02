@@ -11,10 +11,12 @@ input_file  is a BDE crs download file.  This can either be a specific file
             used they must have identical fields.  The data will be concatenated
             into the output file.
 
-output_file is the name of the generated data file.
+output_file is the name of the generated data file. To output the data to standard
+            output use '-' as a substitute for output_file.
 
 log_file    records information about the conversion.  If it is not specified
-            then the log information will be displayed directly
+            then the log information will be displayed directly. If output is
+            going to standard output, a log_file must be provided.
 
 Options:
 
