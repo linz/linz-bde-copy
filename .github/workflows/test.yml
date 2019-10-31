@@ -1,0 +1,41 @@
+name: test
+
+on: [push, pull_request]
+
+jobs:
+
+  test:
+
+    name: Test build
+    runs-on: ${{ matrix.os }}
+    strategy:
+        matrix:
+            os: [ ubuntu-18.04 ]
+    env:
+      APT: "apt-get -o Dpkg::Progress=0 -o Dpkg::Use-Pty=0"
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install dependencies
+      run: |
+        sudo ${APT} -qq install \
+            cmake \
+            debhelper \
+            fakeroot
+    - name: Build
+      run: |
+        mkdir build
+        cd build
+        cmake ..
+        make
+    - name: Test build
+      run: |
+        cd build
+        make check
+    - name: Install
+      run: |
+        cd build
+        sudo -E make install
+    - name: Test debian packaging
+      run: |
+        dpkg-buildpackage -b -us -uc
+        sudo dpkg -i ../linz-bde-copy*.deb

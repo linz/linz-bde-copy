@@ -1,6 +1,7 @@
 # LINZ bde_copy
 
 [![Build Status](https://secure.travis-ci.org/linz/linz-bde-copy.svg)](http://travis-ci.org/linz/linz-bde-copy)
+[![Actions Status](https://github.com/linz/linz-bde-copy/workflows/test/badge.svg?branch=master)](https://github.com/linz/linz-bde-copy/actions)
 
 Programme that extracts LINZ Bulk Data Extracts (BDE) files and optionally
 creates normalised files that are more suitable for loading into external
@@ -37,9 +38,9 @@ must be downloaded and installed. See www.cmake.org for more information
     cd build
 ```
 - Run cmake for a visual studio release project
-``` 
+```
     cmake -G "Visual Studio 9 2008" -DCMAKE_BUILD_TYPE=Release ..
-```    
+```
 - Open up the Visual Studio solution file `bde_copy.sln` and then build the solution
 - You should now have new build `bde_copy` in MSWin32/Release directory.
 
@@ -56,13 +57,13 @@ must be downloaded and installed. See www.cmake.org for more information
     cmake -DCMAKE_INSTALL_PREFIX=/usr ..
 ```
 - Make and (optionally) run tests and install:
-``` 
+```
     make
     make check
     make install
 ```
 
-To create a debug build use 
+To create a debug build use
 ```
     cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Debug ..
 ```
