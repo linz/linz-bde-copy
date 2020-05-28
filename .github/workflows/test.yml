@@ -5,6 +5,7 @@ on:
     branches:
       - master
       - packagecloud
+      - 'release-*'
     tags:
       - '*'
   pull_request:
