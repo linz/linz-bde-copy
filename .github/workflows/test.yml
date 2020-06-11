@@ -70,6 +70,7 @@ jobs:
         if test "${{ github.event_name }}" = 'push'; then
           if expr "${{ github.ref }}" : "refs/tags/" > /dev/null; then
             REPO=test
+            git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
           else
             REPO=dev
           fi
@@ -77,7 +78,7 @@ jobs:
         echo "REPO: $REPO"
         echo ::set-env name=REPO::"$REPO"
 
-    - uses: linz/linz-software-repository@v3
+    - uses: linz/linz-software-repository@v4
       with:
         packagecloud_token: ${{ secrets.LINZCI_PACKAGECLOUD_TOKEN }}
-        publish_to_repository: ${{ env.REPO }}
+        packagecloud_repository: ${{ env.REPO }}
