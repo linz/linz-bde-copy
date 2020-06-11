@@ -77,7 +77,7 @@ jobs:
         echo "REPO: $REPO"
         echo ::set-env name=REPO::"$REPO"
 
-    - uses: linz/linz-software-repository@master
+    - uses: linz/linz-software-repository@v3
       with:
         packagecloud_token: ${{ secrets.LINZCI_PACKAGECLOUD_TOKEN }}
         publish_to_repository: ${{ env.REPO }}
