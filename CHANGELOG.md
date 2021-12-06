@@ -2,6 +2,16 @@
 
 All notable changes for the LINZ BDE Copy are documented in this file.
 
+## [1.4.0] - 2021-12-07
+### Added
+- Stalebot configuration
+- Github action test workflow and badge
+- Package building and publishing steps
+### Fixed
+- Fix Syntax string to include binary name
+### Improved
+- Documentation improvements
+
 ## [1.3.0] - 2018-02-05
 ### Changed
 - Print startup errors to stderr (#33)
