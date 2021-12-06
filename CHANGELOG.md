@@ -16,7 +16,11 @@ All notable changes for the LINZ BDE Copy are documented in this file.
 ### Improved
 - Documentation improvements
 
-## [1.2.0] - 2016-04-13
+## [1.2.1] - 2016-05-01
+### Changed
+- Minor documentation changes
+
+## [1.2.0] - 2015-04-09
 ### Added
 - Added static casts to allow compilation of gzip code
 - Added script to build `bde_copy.cfg.lolutf8`
@@ -41,4 +45,3 @@ All notable changes for the LINZ BDE Copy are documented in this file.
 
 ### Fixed
 - Fixing remaining compiler warnings and introduced bug
-
