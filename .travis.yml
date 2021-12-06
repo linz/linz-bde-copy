@@ -1,0 +1,15 @@
+sudo: false
+language: C++
+
+before_install:
+  # These are needed to test debian package build
+  - sudo apt-get install debhelper fakeroot cmake
+
+script:
+  - mkdir build && cd build
+  - cmake ..
+  - make
+  - make check
+  - cd ..
+  # Test debian package building
+  - dpkg-buildpackage -b -us -uc

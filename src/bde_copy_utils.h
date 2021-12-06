@@ -1,5 +1,5 @@
 /***************************************************************************
- $Id$
+
 
  Copyright 2011 Crown copyright (c)
  Land Information New Zealand and the New Zealand Government.
@@ -46,11 +46,11 @@ char* _strlwr ( char* __s);
 #endif
 
 enum err_type { et_date_range=0, et_invalid_char, et_column_count, et_file_size, et_count };
-enum err_severity { es_ignore, es_warning, es_error, es_fatal };
+enum err_severity { es_ignore, es_warning, es_error, es_fatal, es_debug };
 
 typedef void (*field_error_func)(err_type type, char *name, char *message);
 
-#if defined(_WIN32)
+#if defined(_WIN32) || defined(__MACH__)
 char *basename (const char *name);
 #endif
 char *catdir (const char *dir1, const char *dir2);
@@ -78,6 +78,7 @@ class file_data_writer : public data_writer
 {
 public:
 	static data_writer *open( char *fname, bool append = false );
+	static data_writer *open_stdout();
 	virtual ~file_data_writer();
 	virtual bool write( const void *buffer, int length );
 private:

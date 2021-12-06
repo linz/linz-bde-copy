@@ -1,5 +1,5 @@
 # Configuration file to fix up characters to for simple clean loading
-# $Id$
+#
 
 keep_escapes no
 

@@ -1,0 +1,10 @@
+InputFile: ../par1.crs
+ConfigFile: bde_copy.cfg
+ConfigFile: ../test1.cfg
+OutputFile: -
+TableName: crs_parcel
+InputFields: id|test_date|img_id|fen_id|toc_code|alt_id|area|nonsurvey_def|appellation_date|parcel_intent|status|total_area|calculated_area|se_row_id|audit_id|shape
+OutputFields: id|test_date|img_id|fen_id|toc_code|alt_id|area|nonsurvey_def|appellation_date|parcel_intent|status|total_area|calculated_area|se_row_id|audit_id|shape
+BdeStartTime: 2009-10-14 23:26:56
+BdeEndTime: 2009-10-15 23:47:45
+BdeSize: 12710

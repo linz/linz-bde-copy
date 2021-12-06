@@ -1,11 +1,11 @@
 /***************************************************************************
- $Id$
+
 
  Copyright 2011 Crown copyright (c)
  Land Information New Zealand and the New Zealand Government.
  All rights reserved
 
- This program is released under the terms of the new BSD license. See 
+ This program is released under the terms of the new BSD license. See
  the LICENSE file for more information.
 ****************************************************************************/
 
@@ -13,8 +13,14 @@
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <errno.h>
 
 #include "bde_copy_utils.h"
+
+#if defined (__MACH__)
+#include <errno.h>
+#include <libproc.h>
+#endif
 
 #if !defined(_WIN32) && !defined(_MSC_VER)
 #include <sys/types.h>
@@ -23,9 +29,20 @@
 char* get_image_path()
 {
     char* path;
+    pid_t pid = getpid();
+#if defined (__MACH__)
+    int ret;
+    path = new char[PROC_PIDPATHINFO_MAXSIZE];
+    ret = proc_pidpath(pid, path, PROC_PIDPATHINFO_MAXSIZE);
+    if( ret <= 0 )
+    {
+        fprintf(stderr,"Couldn't get image path for PID %d: %s\n",
+            pid, strerror(errno));
+        exit(2);
+    }
+#else
     char _link[20];
     char buf[10];
-    pid_t pid = getpid();
     sprintf( buf,"%d", pid );
     strcpy( _link, "/proc/" );
     strcat( _link, buf );
@@ -46,6 +63,7 @@ char* get_image_path()
       path = new char[strlen( proc ) + 1];
       path = strcpy( path, proc );
     }
+#endif
     return path;
 }
 
@@ -64,13 +82,13 @@ char* _strlwr ( char* string)
 
 #endif
 
-#if defined(_WIN32)
+#if defined(_WIN32)  || defined(__MACH__)
 char *basename (const char *name)
 {
     const char *base;
-    
+
     #if defined (_WIN32) || defined (_MSC_VER)
-    if (isalpha(name[0]) && name[1] == ':') 
+    if (isalpha(name[0]) && name[1] == ':')
         name += 2;
     #endif
     for (base = name; *name; name++)
@@ -111,9 +129,9 @@ char *clean_string(char *cp)
     char *sp=0;
     char *ep=0;
     for( ; *cp; cp++ )
-    { 
-        if( isspace(*cp)) *cp=' '; 
-        else 
+    {
+        if( isspace(*cp)) *cp=' ';
+        else
         {
             if( ! sp ) { sp = cp; }
             ep = cp+1;
@@ -365,7 +383,7 @@ int buffer::load( readbuff *buff, unsigned char terminator, unsigned char escape
     {
         int c = buff->getc();
         if( c == terminator ) break;
-        if( escape && c == escape ) 
+        if( escape && c == escape )
             {
                  if( keep_escape) add((char) c);
                  c = buff->getc();
@@ -765,7 +783,7 @@ bool geometry_field::keep_prefix = true;
 
 void geometry_field::set_lon_offset(double offset)
 {
-    lon_offset = offset; 
+    lon_offset = offset;
     ilon_offset = (int) offset;
     int_offset = ilon_offset >= 0 && ilon_offset == offset;
 }
@@ -825,7 +843,7 @@ int geometry_field::write_offset_geom( char *sp, data_writer *out )
 
     char *cp = sp;  // Current pointer
     char *np = 0;   // Start of number pointer
-    int ndp = 0; 
+    int ndp = 0;
     unsigned int state = 0;
     unsigned int action = 0;
     char lonbuf[32];
@@ -834,28 +852,28 @@ int geometry_field::write_offset_geom( char *sp, data_writer *out )
     for( cp = sp; *cp; cp++ )
     {
         /* start_state_machine
-        
+
             # Example of state machine code
-            
+
             state_variable state
             input_variable *cp
             action_variable action
-            
+
             class digit '0123456789'
             class point '.'
             class sign '-'
             class space ' '
             class start '(,'
-            
+
             state none start=>ready
             state ready space start sign=>sign+startfp digit=>number+start
             state sign digit=>number_fp
             state number digit point=>none+endint space=>none+endint
             state number_fp digit point=>number_dp space=>none+endfp
             state number_dp digit=>number_dp+addndp space=>none+endfp
-            
+
             default_state none
-            
+
         start_state_machine_implementation */
 
         static unsigned char sm_class[256] = {
@@ -900,7 +918,7 @@ int geometry_field::write_offset_geom( char *sp, data_writer *out )
         #define sm_action_endint 3
         #define sm_action_endfp 4
         #define sm_action_addndp 5
-        
+
         /* end_state_machine_implementation
            end_state_machine */
 
@@ -908,14 +926,14 @@ int geometry_field::write_offset_geom( char *sp, data_writer *out )
         {
             switch(action)
             {
-                case sm_action_start: 
-                    np = cp; 
+                case sm_action_start:
+                    np = cp;
                     if( int_offset ) break;
                     ndp = 0;
                     state = sm_state_number_fp;
                     break;
 
-                case sm_action_endint: 
+                case sm_action_endint:
                     // Print text up to start of number
                     {
                     int len = np - sp;
@@ -933,14 +951,14 @@ int geometry_field::write_offset_geom( char *sp, data_writer *out )
                     sp = cp;
                     break;
 
-                case sm_action_startfp: 
-                    np = cp; 
+                case sm_action_startfp:
+                    np = cp;
                     ndp = 0;
                     break;
 
                 case sm_action_addndp: ndp++; break;
 
-                case sm_action_endfp: 
+                case sm_action_endfp:
                     // Print text up to start of number
                     {
                     int len = np - sp;
@@ -973,11 +991,24 @@ int geometry_field::write_offset_geom( char *sp, data_writer *out )
 data_writer *file_data_writer::open( char *fname, bool append )
 {
     FILE *f = fopen(fname,append ? "ab" : "wb" );
-    if( ! f ) return 0;
+    if( ! f )
+    {
+      // TODO: find a better way to signal errors to upper levels (throw?)
+      fprintf(stderr,"Could not open %s for writing: %s\n",
+        fname, strerror(errno));
+      return 0;
+    }
     file_data_writer *fdw = new file_data_writer(f);
     if( append && ftell(f) > 0 ) fdw->empty = false;
     return fdw;
 }
+
+data_writer *file_data_writer::open_stdout()
+{
+    file_data_writer *fdw = new file_data_writer(stdout);
+    return fdw;
+}
+
 
 file_data_writer::~file_data_writer()
 {

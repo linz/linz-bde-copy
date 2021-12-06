@@ -1,22 +1,30 @@
 /***************************************************************************
- $Id$
+
 
  Copyright 2011 Crown copyright (c)
  Land Information New Zealand and the New Zealand Government.
  All rights reserved
 
- This program is released under the terms of the new BSD license. See 
+ This program is released under the terms of the new BSD license. See
  the LICENSE file for more information.
 ****************************************************************************/
 
+#include <errno.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
 #include <stdarg.h>
+#include <limits.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#if !defined(_WIN32) && !defined(_MSC_VER)
+#include <unistd.h>
+#endif
 #include <new>
+#if !defined(__MACH__)
 #include <malloc.h>
-
+#endif
 #include "bde_copy_revision.h"
 #include "bde_copy_config.h"
 #include "bde_copy_utils.h"
@@ -25,6 +33,11 @@
 
 #if defined(_WIN32) && defined(_MSC_VER)
 #include "support/win32/dirent.h"
+#include <windows.h>
+#define PATH_MAX MAX_PATH
+#define lstat _stat
+#define stat _stat
+#define S_ISDIR(m) (((m) & S_IFMT) == S_IFDIR)
 #else
 #include <dirent.h>
 #endif
@@ -34,7 +47,7 @@
 //////////////////////////////////////////////////////////////////
 
 
-err_severity error_severity[et_count] = { es_warning, es_error, es_fatal };
+err_severity error_severity[et_count] = { es_debug, es_warning, es_error, es_fatal };
 
 typedef void check_func_type( bde_field &field );
 
@@ -94,6 +107,8 @@ bool col_headers = false;
 bool nometa = false;
 bool use_archive = false;
 bool use_gzip = false;
+// output_stdout is true if the option '-' is used as output_file
+bool output_stdout = false;
 
 int min_year=0;
 buffer err_date("01/01/1800");
@@ -121,6 +136,13 @@ struct filter_def
 
 filter_def *filters = 0;
 
+static void version()
+{
+    fprintf(stderr,"bde_copy %s %s\n", VERSION, REVISION);
+    exit(0);
+}
+
+
 void close_files()
 {
     if( input ) { delete input; input = 0; }
@@ -138,10 +160,14 @@ char *copy_string( const char *s )
 void message_base( err_severity severity, bool showloc, const char *fmt, va_list fmtargs )
 {
     if( severity == es_ignore ) return;
+#ifndef DEBUG
+    if( severity == es_debug ) return;
+#endif
 
     fprintf(meta,"\n");
     if( severity == es_fatal || severity==es_error ) fprintf(meta,"Error: ");
     if( severity == es_warning ) fprintf(meta,"Warning: ");
+    if( severity == es_debug ) fprintf(meta,"Debug: ");
 
     vfprintf(meta,fmt,fmtargs);
 
@@ -216,7 +242,7 @@ void finish()
 
 int add_field(char *name,char *type)
 {
-    if( nfields >= maxfields ) 
+    if( nfields >= maxfields )
     {
         message(es_fatal,"Too many columns in CRS file\n");
     }
@@ -236,13 +262,35 @@ int add_field(char *name,char *type)
     return 1;
 }
 
+int check_field(char *name,char *type, int nfield)
+{
+    if( nfields >= maxfields )
+    {
+        message(es_fatal,"Too many columns in CRS file\n");
+    }
+    bde_field *f = 0;
+    if( _stricmp(type,"st_geometry") == 0 ){ f = new geometry_field(name); }
+    else if (_stricmp(type,"date") == 0 ){ f = new date_field(name); }
+    else if (_stricmp(type,"datetime") == 0 ){ f = new datetime_field(name); }
+    else if (_stricmp(type,"decimal") == 0 ){ f = new number_field(name); }
+    else if (_stricmp(type,"serial") == 0 ){ f = new number_field(name); }
+    else if (_stricmp(type,"integer") == 0 ){ f = new number_field(name); }
+    else { f = new text_field(name); }
+    bde_field *check=field[nfield];
+    int match=1;
+    if( _stricmp(check->name(),f->name()) != 0 ) match=0;
+    if( check->type() != f->type() ) match=0;
+    delete f;
+    return match;
+}
+
 void select_fields(const char *fields)
 {
     noutfields = 0;
     char *flds = copy_string(fields);
     for( char *name = strtok(flds,":"); name; name = strtok(NULL,":"))
     {
-        if( noutfields > maxfields ) 
+        if( noutfields > maxfields )
         {
             message(es_fatal,"Too many output field specified\n");
         }
@@ -282,7 +330,7 @@ void parse_whereclause(const char *wherecls)
         char *value;
         for( value = name; *value && *value != '=' && *value != '!'; value++ ){}
         saveptr = value;
-        save = *value; 
+        save = *value;
         if( save == '!' ) value++;
         if( *value != '=' || value == name )
         {
@@ -311,9 +359,9 @@ void parse_whereclause(const char *wherecls)
         filter->value = _strdup(value);
         filter->negate = save == '!';
         filter->next = 0;
-        if( ! filters ) 
-        { 
-            filters = filter; 
+        if( ! filters )
+        {
+            filters = filter;
         }
         else
         {
@@ -370,7 +418,7 @@ void set_fields( const char *fields )
     {
         char *type = name + strlen(name);
         char *p = strchr(name,'=');
-        if( p > 0 )
+        if( p != NULL )
         {
             *p = 0;
             type = p+1;
@@ -406,12 +454,12 @@ bool apply_field_overrides( bool addfields )
 int read_header( bool external_header )
 {
     bool readcols = true;
-    if( specfields ) 
-    { 
-        set_fields(specfields); 
+    if( specfields )
+    {
+        set_fields(specfields);
         readcols = false;
     }
-    else if( apply_field_overrides(true) ) 
+    else if( apply_field_overrides(true) )
     {
         readcols = false;
     }
@@ -449,7 +497,7 @@ int read_header( bool external_header )
         }
     }
 
-    return (external_header || input->status() == readbuff::OK) 
+    return (external_header || input->status() == readbuff::OK)
            && tablename && start && end && size != 0;
 }
 
@@ -460,7 +508,7 @@ void skip_header()
 
     char inrec[1024];
     char *line;
-    int ncol = 0;
+    int nfield = 0;
     while( input->getline(inrec,1024) == readbuff::OK )
     {
         line = clean_string(inrec);
@@ -471,19 +519,24 @@ void skip_header()
         if( _strnicmp(line,"COLUMN ",7) == 0 && readcols )
         {
             char *name = strtok(line+7," ");
-            if( ncol < nfields && _stricmp(field[ncol]->name(),name) != 0 )
+            char *type = strtok(NULL," ");
+            if( name && type && nfield < nfields && ! check_field(name,type,nfield) )
             {
-                message(es_fatal,"Inconsistent column names %s and %s in %s\n",
-                    name,field[ncol]->name(),input->name());
-                
+                message(es_fatal,"Inconsistent column names %s and %s or types in %s\n",
+                    name,field[nfield]->name(),input->name());
+
             }
-            ncol++;
+            nfield++;
+        }
+        else if(_strnicmp(line,"SIZE ",5) == 0 )
+        {
+            sscanf(line+5,"%ld",&size);
         }
     }
-    if( readcols && ncol != nfields )
+    if( readcols && nfield != nfields )
     {
         message(es_fatal,"Inconsistent number of columns %d and %d in %s\n",
-            nfields, ncol, input->name());
+            nfields, nfield, input->name());
 
     }
 }
@@ -500,7 +553,7 @@ int read_data()
     {
       bde_field &f = *(field[i]);
       f.reset();
-      if( ! f.load(input)) 
+      if( ! f.load(input))
       {
         n_rec--;
         if( i == 0 && f.len() == 0 )
@@ -532,8 +585,8 @@ int write_column_headers( data_writer *out )
     for( int i = 0; i < noutfields; i++ )
     {
         bde_field &f = (*outfield[i]);
-        if( first ) 
-        { 
+        if( first )
+        {
             first = 0;
         }
         else
@@ -558,8 +611,8 @@ int write_data( data_writer *out )
     for( int i = 0; i < noutfields; i++ )
     {
         bde_field &f = (*outfield[i]);
-        if( first ) 
-        { 
+        if( first )
+        {
             first = 0;
         }
         else
@@ -619,7 +672,7 @@ void close_file()
 
 bool file_is_gzip( char *file )
 {
-    return strlen(file) > (size_t)gzip_ext.len() && 
+    return strlen(file) > (size_t)gzip_ext.len() &&
           _stricmp(file+strlen(file)-gzip_ext.len(),gzip_ext.str()) == 0;
 }
 
@@ -669,6 +722,54 @@ void check_bde_size()
     }
 }
 
+/// Return true if the given directory entry is a directory
+//
+/// Follows symlinks
+///
+/// @param dirpath path of the directory whose entry belongs
+/// @param ent dirent structure pointer (used to speedup lookups,
+///            when stat is known, depending on filesystem type )
+///
+/// @return true if the dir entry is a directory, false otherwise
+///
+static bool is_directory(struct dirent *ent, const char *dirpath)
+{
+  if( ent->d_type == DT_DIR ) return true;
+  if( ent->d_type != DT_UNKNOWN ) return false;
+  char path[PATH_MAX];
+  sprintf(path, "%s/%s", dirpath, ent->d_name);
+  struct stat buf;
+  if ( -1 == lstat(path, &buf) ) {
+    message(es_warning,"Cannot stat file %s\n", path);
+    return false;
+  }
+  return S_ISDIR(buf.st_mode);
+}
+
+/// Return true if the given directory entry is a regular file
+//
+/// Follows symlinks
+///
+/// @param dirpath path of the directory whose entry belongs
+/// @param ent dirent structure pointer (used to speedup lookups,
+///            when stat is known, depending on filesystem type )
+///
+/// @return true if the dir entry is a file, false otherwise
+///
+static bool is_file(struct dirent *ent, const char *dirpath)
+{
+  if( ent->d_type == DT_REG ) return true;
+  if( ent->d_type != DT_UNKNOWN ) return false;
+  struct stat buf;
+  char path[PATH_MAX];
+  sprintf(path, "%s/%s", dirpath, ent->d_name);
+  if ( -1 == lstat(path, &buf) ) {
+    message(es_warning,"Cannot stat file %s\n", path);
+    return false;
+  }
+  return S_ISREG(buf.st_mode);
+}
+
 bool valid_dataset( const char *dirname )
 {
     if( strlen(dirname) != 14 ) return false;
@@ -704,27 +805,45 @@ char *get_input_file( char *name)
     else
     {
         // Find the last dataset
+        char *dirname = strdup(filename);
         DIR *dir = opendir(filename);
-        
-        if( dir == NULL ) 
+
+        if( dir == NULL )
         {
             message(es_fatal,"Invalid bde repository %s\n",filename);
+            free(dirname);
             return 0;
         }
         strcat(filename,"/");
         char *end = filename + strlen(filename);
         struct dirent *ent;
+        message(es_debug,"Reading dir %s", filename);
         while ( ( ent = readdir( dir ) ) != NULL )
         {
-            if( ent->d_type != DT_DIR ) continue;
-            if( strcmp(ent->d_name,".") == 0 || strcmp(ent->d_name,"..") == 0 ) continue;
+            message(es_debug,"Checking entry %s", ent->d_name);
+            if( ! is_directory(ent, dirname) ) {
+              message(es_debug,"Entry %s is not a directory (%d instead of %d)", ent->d_name, ent->d_type, DT_DIR);
+              continue;
+            }
+            if( strcmp(ent->d_name,".") == 0 || strcmp(ent->d_name,"..") == 0 )
+            {
+              message(es_debug,"Entry %s is virtual directory", ent->d_name);
+              continue;
+            }
             char *d = strdup(ent->d_name);
-            if( ! valid_dataset(d) ) continue;
-            if( *end && strcmp(d,end) < 0 ) continue;
+            if( ! valid_dataset(d) ) {
+              message(es_debug,"%s is not a valid dataset", d);
+              continue;
+            }
+            if( *end && strcmp(d,end) < 0 ) {
+              message(es_debug,"Something weird happened");
+              continue;
+            }
             strcpy(end,d);
             fdataset = end;
             free(d);
         }
+        free(dirname);
         closedir(dir);
         if( ! *end )
         {
@@ -749,7 +868,7 @@ char *get_input_file( char *name)
                 struct dirent *ent;
             while ( ( ent = readdir( dir ) ) != NULL )
             {
-                if( ent->d_type != DT_REG ) continue;
+                if( ! is_file(ent, archive) ) continue;
                 // Check that the file name matches the file being copied
                 char *f1 = strdup(ent->d_name);
                 char *fname = strtok(f1,".");
@@ -938,9 +1057,13 @@ bool read_configuration_file( char *configfile, bool isdefault )
 {
 
     FILE *cfg = fopen(configfile,"r");
-    if( ! cfg ) 
+    if( ! cfg )
     {
-        if( ! isdefault ) message(es_fatal,"Cannot open configuration file %s",configfile);
+        if( ! isdefault )
+        {
+            message(es_fatal,"Cannot open configuration file %s: %s",
+                    configfile, strerror(errno));
+        }
         return false;
     }
 
@@ -1119,7 +1242,7 @@ bool read_configuration_file( char *configfile, bool isdefault )
         else if( strcmp(cmd,"file_buffer_size") == 0 && value )
         {
             int bufsize = 0;
-            if( sscanf(value,"%d",&bufsize) == 1 && bufsize >= 4096) 
+            if( sscanf(value,"%d",&bufsize) == 1 && bufsize >= 4096)
             {
                 cmdok = true;
                 readbuff::filebuffsize = bufsize;
@@ -1128,7 +1251,7 @@ bool read_configuration_file( char *configfile, bool isdefault )
         else if( strcmp(cmd,"gzip_buffer_size") == 0 && value )
         {
             int bufsize = 0;
-            if( sscanf(value,"%d",&bufsize) == 1 && bufsize >= 4096) 
+            if( sscanf(value,"%d",&bufsize) == 1 && bufsize >= 4096)
             {
                 cmdok = true;
                 gzipbuffsize = bufsize;
@@ -1136,7 +1259,7 @@ bool read_configuration_file( char *configfile, bool isdefault )
         }
         else if( strcmp(cmd,"max_fields") == 0 && value )
         {
-            if( sscanf(value,"%d",&maxfields) == 1 && maxfields > 0) 
+            if( sscanf(value,"%d",&maxfields) == 1 && maxfields > 0)
             {
                 cmdok = true;
             }
@@ -1271,7 +1394,14 @@ bool read_configuration( char *exefile )
     }
     else
     {
-        ok = false;
+        message(es_warning, "Could not find base configuration, "
+                      "try setting the BDECOPY_DATADIR env variable "
+                      "to a directory containing a file with "
+                      "the same base name as the executable and "
+                      "the %s extension",
+                      default_cfg_ext);
+        // Let's still tolerate this
+        //ok = false;
     }
     return ok;
 }
@@ -1303,7 +1433,7 @@ void print_metadata()
         if( i ) { fprintf(meta,"|"); }
         fprintf(meta,"%s",outfield[i]->name());
     }
-    fprintf(meta,"\n");    
+    fprintf(meta,"\n");
     if( filters )
     {
         fprintf(meta,"Filters:");
@@ -1358,8 +1488,16 @@ bool read_args( char *image, int argc, char *argv[] )
     {
         char *arg = argv[iarg];
         if( nxtarg ){ *nxtarg = arg; nxtarg = 0; continue; }
-        
-        if( arg[0] == '-' )
+
+        // if the argument only has the character '-' and the next
+        // expected input is the outfile, will set output to stdout.
+        if( arg[0] == '-' && ! arg[1] && infiles && ! outfile )
+        {
+            // set output to stdout
+            output_stdout = true;
+            outfile = arg;
+        }
+        else if( arg[0] == '-' )
         {
             switch( arg[1] )
             {
@@ -1371,6 +1509,8 @@ bool read_args( char *image, int argc, char *argv[] )
 
             case 'c':
             case 'C':  nxtarg = &cfgfile; break;
+
+            case 'V':  version(); break;
 
             case 'f':
             case 'F': nxtarg = &specfields; break;
@@ -1406,7 +1546,7 @@ bool read_args( char *image, int argc, char *argv[] )
                       help(image); break;
 
             default:
-                printf("Invalid option %s\n",arg);
+                fprintf(stderr,"Invalid option %s\n",arg);
                 argsok = false;
             }
 
@@ -1414,7 +1554,7 @@ bool read_args( char *image, int argc, char *argv[] )
             {
                 char *value = arg+2;
                 if( *value == ':' ) value++;
-                (*nxtarg) = value; 
+                (*nxtarg) = value;
                 nxtarg = 0;
             }
         }
@@ -1422,37 +1562,37 @@ bool read_args( char *image, int argc, char *argv[] )
         {
             infiles = arg;
         }
-        else if( ! outfile )
+        else if( ! outfile && ! output_stdout)
         {
             outfile = arg;
         }
         else if( ! metafile )
         {
-            metafile = arg; 
+            metafile = arg;
         }
         else
         {
-            printf("Invalid extra argument: %s\n",arg);
+            fprintf(stderr,"Invalid extra argument: %s\n",arg);
             argsok = false;
         }
     }
 
     if( maxerrstr && sscanf(maxerrstr,"%d",&cmd_maxerrors) != 1 )
     {
-        printf("Invalid -e (maximum error count) option %s\n",maxerrstr);
+        fprintf(stderr,"Invalid -e (maximum error count) option %s\n",maxerrstr);
         argsok = false;
     }
 
-    if( nxtarg || ! outfile )
+    if( nxtarg || (! outfile && ! output_stdout))
     {
-        printf("Required arguments not supplied\n");
+        fprintf(stderr,"Required arguments not supplied\n");
         argsok = false;
     }
 
     if( infiles && !split_file_names(infiles,infile,&ninfile)) argsok = 0;
     if( ninfile == 0 )
     {
-        printf("No input files specified\n");
+        fprintf(stderr,"No input files specified\n");
         argsok = false;
     }
 
@@ -1460,35 +1600,54 @@ bool read_args( char *image, int argc, char *argv[] )
 
     if( strcmp(level,"0") != 0 && strcmp(level,"5") != 0 )
     {
-        printf("Invalid level argument \"%s\"- must be 0 or 5\n",level);
+        fprintf(stderr,"Invalid level argument \"%s\"- must be 0 or 5\n",level);
         argsok = false;
     }
 
     if( dataset && ! valid_dataset(dataset) )
     {
-        printf("Invalid dataset argument \"%s\" - must by YYYYMMDDHHMMSS\n",dataset);
+        fprintf(stderr,"Invalid dataset argument \"%s\" - must by YYYYMMDDHHMMSS\n",dataset);
         argsok = false;
     }
 
+    if( use_gzip && output_stdout )
+    {
+        fprintf(stderr,"Cannot use -z option with output to standard output\n");
+        argsok = false;
+    }
+
+    if( output_stdout && ! metafile )
+    {
+        fprintf(stderr,"Must specfiy log_file when output to standard output\n");
+        argsok = false;
+    }
     return argsok;
 }
 
-
 void syntax()
 {
-    printf("bde_copy: Extracts data from BDE files\n");
-    printf("Version: %s (%s)\n\n",VERSION,__DATE__);
-    printf(
-        "Syntax: [options] input_file output_file [log_file]\n\n"
+    fprintf(stderr,"bde_copy: Extracts data from BDE files\n");
+    fprintf(stderr,"Version: %s (%s)\n",VERSION,__DATE__);
+    fprintf(stderr,"Source version: %s\n\n",REVISION);
+    fprintf(stderr,
+        "Syntax: bde_copy [options] input_file output_file [log_file]\n\n"
         "input_file is a BDE crs download file, typically gzip compressed\n"
         "output_file is the generated data file\n"
         "log_file holds information about the conversion - default is standard output\n"
         "\n"
+        "To output the data to standard output use '-' as a substitute for output_file\n"
+        "If output is going to standard output, a log_file must be provided\n"
+        "\n"
         "Options:\n"
-        "  -c xxx   Use xxx as the configuration file - default is the .cfg file\n"
-        "           installed with the bde_copy program\n"
+        "  -V       Print version and exit\n"
+        "  -c xxx   Use xxx as an additional configuration file - this is read\n"
+        "           *in addition* to the bde_copy.cfg file found in the package\n"
+        "           data directory (or BDECOPY_DATADIR env variable if given)\n"
         "  -f xxx   Overrides the field defined in the BDE header.  xxx is formatted\n"
         "           as name1=type1:name2=type2: ... \n"
+        "  -w xxx   Where condition to filter fields. xxx is formatted as\n"
+        "           name1=value1:name2=value2.  The operator can be = or !=.  This is\n"
+        "           interpreted as \"where name1 = value1 and name2 = value2 ....\"\n"
         "  -o xxx   Specifies which field are required in the output file.  Field names\n"
         "           are specified as name1:name2:name3...\n"
         "  -e ##    Specifies the maximum number of errors permitted before the translation\n"
@@ -1499,6 +1658,7 @@ void syntax()
         "  -p ###   Add data (minus header) from files ### ('+' separated) to the\n"
         "           extract\n"
         "  -x       Search for additional data in archive folder\n"
+        "  -z       gzip compress the output file\n"
         "  -n       Don't print metadata in output\n"
         "  -h       Specifies that only the header will be translated.\n"
         "  -?       More detailed help\n"
@@ -1550,12 +1710,15 @@ int main( int argc, char *argv[] )
         }
     }
 
-    meta = stdout;
+    meta = stderr;
     std::set_new_handler(allocation_error);
 
     if( ! read_args(image,argc,argv) ) syntax();
 
-    if( ! read_configuration(image)) return 2;
+    if( ! read_configuration(image)) {
+      message(es_fatal, "Failed reading configuration");
+      return 2;
+    }
 
     if( cmd_maxerrors >= 0 ) max_errors = cmd_maxerrors;
 
@@ -1566,11 +1729,18 @@ int main( int argc, char *argv[] )
         meta = fopen(metafile,"wb");
         if( ! meta )
         {
-            meta = stdout;
+            meta = stderr;
             char *mf = metafile;
             metafile = 0;
-            message(es_fatal,"Cannot open metadata file %s\n",mf);
+            message(es_fatal,"Cannot open metadata file %s: %s\n",
+                    mf, strerror(errno));
+            return 2;
         }
+    }
+    else if( ! output_stdout )
+    {
+        /* for backward compatibility we default to stdout */
+        meta = stdout;
     }
 
     for( int i = 0; i < ninfile; i++ )
@@ -1600,6 +1770,10 @@ int main( int argc, char *argv[] )
     {
         out = gzip_data_writer::open(outfile,append,gzipbuffsize);
     }
+    else if ( output_stdout )
+    {
+        out = file_data_writer::open_stdout();
+    }
     else
     {
         out = file_data_writer::open(outfile,append);
@@ -1616,7 +1790,7 @@ int main( int argc, char *argv[] )
     if( out->isempty() )
     {
         fileheader.write(out);
-        if( col_headers ) 
+        if( col_headers )
         {
             if( write_column_headers(out) != 1 )
             {

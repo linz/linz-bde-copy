@@ -1,5 +1,5 @@
 /***************************************************************************
- $Id$
+
 
  Copyright 2011 Crown copyright (c)
  Land Information New Zealand and the New Zealand Government.

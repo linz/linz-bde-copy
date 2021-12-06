@@ -10,8 +10,6 @@ BdeStartTime: 2010-01-03 02:51:33
 BdeEndTime: 2010-02-07 02:54:33
 BdeSize: 22172
 
-Warning: Size of file ../scg1.crs (1332) doesn't match size in header (22172)
-
 InputCount: 10
 OutputCount: 443
 ErrorCount: 0
