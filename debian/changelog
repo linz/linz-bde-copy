@@ -1,3 +1,15 @@
+linz-bde-copy (1.4.0-linz~bionic) bionic; urgency=medium
+
+  * New version
+
+ -- Victor Engmark <vengmark@linz.govt.nz>  Mon, 06 Dec 2021 22:43:07 +0000
+
+linz-bde-copy (1.4.0-1linz~bionic1) bionic; urgency=low
+
+  * Documentation fixes
+
+ -- Victor Engmark <vengmark@linz.govt.nz>  Tue, 07 Dec 2021 11:10:37 +1300
+
 linz-bde-copy (1.3.0-1linz~bionic1) bionic; urgency=medium
 
   * New distribution
