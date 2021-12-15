@@ -23,6 +23,7 @@ jobs:
             os:
               - ubuntu-18.04
               - ubuntu-20.04
+              - ubuntu-latest
     env:
       APT: "apt-get -o Dpkg::Progress=0 -o Dpkg::Use-Pty=0"
     steps:
