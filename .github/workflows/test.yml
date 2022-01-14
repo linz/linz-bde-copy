@@ -19,6 +19,7 @@ jobs:
     name: Test build
     runs-on: ${{ matrix.os }}
     strategy:
+        fail-fast: false
         matrix:
             os:
               - ubuntu-18.04
@@ -58,6 +59,7 @@ jobs:
     name: Package for Debian
     runs-on: ubuntu-18.04
     strategy:
+        fail-fast: false
         matrix:
             distro: [ 'bionic' ]
     steps:
