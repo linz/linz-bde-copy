@@ -13,78 +13,76 @@ on:
       - '*'
 
 jobs:
-
   test:
-
     name: Test build
     runs-on: ${{ matrix.os }}
     strategy:
-        fail-fast: false
-        matrix:
-            os:
-              - ubuntu-18.04
-              - ubuntu-20.04
-              - ubuntu-latest
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-18.04
+          - ubuntu-20.04
+          - ubuntu-latest
     env:
-      APT: "apt-get -o Dpkg::Progress=0 -o Dpkg::Use-Pty=0"
+      APT: 'apt-get -o Dpkg::Progress=0 -o Dpkg::Use-Pty=0'
     steps:
-    - uses: actions/checkout@v2.4.0
-    - name: Install dependencies
-      run: |
-        sudo ${APT} -qq install \
-            cmake \
-            debhelper \
-            fakeroot
-    - name: Build
-      run: |
-        mkdir build
-        cd build
-        cmake ..
-        make
-    - name: Test build
-      run: |
-        cd build
-        make check
-    - name: Install
-      run: |
-        cd build
-        sudo -E make install
-    - name: Test debian packaging
-      run: |
-        dpkg-buildpackage -b -us -uc
-        sudo dpkg -i ../linz-bde-copy*.deb
+      - uses: actions/checkout@v2.4.0
+      - name: Install dependencies
+        run: |
+          sudo ${APT} -qq install \
+              cmake \
+              debhelper \
+              fakeroot
+      - name: Build
+        run: |
+          mkdir build
+          cd build
+          cmake ..
+          make
+      - name: Test build
+        run: |
+          cd build
+          make check
+      - name: Install
+        run: |
+          cd build
+          sudo -E make install
+      - name: Test debian packaging
+        run: |
+          dpkg-buildpackage -b -us -uc
+          sudo dpkg -i ../linz-bde-copy*.deb
 
   package:
     needs: test
     name: Package for Debian
     runs-on: ubuntu-18.04
     strategy:
-        fail-fast: false
-        matrix:
-            distro: [ 'bionic' ]
+      fail-fast: false
+      matrix:
+        distro: ['bionic']
     steps:
-    - uses: actions/checkout@v2.4.0
-      with:
-        fetch-depth: 0  # Enable the changelog generator to check out previous branch
+      - uses: actions/checkout@v2.4.0
+        with:
+          fetch-depth: 0 # Enable the changelog generator to check out previous branch
 
-    - name: Determine packagecloud publication target
-      run: |
-        # TODO: it would be nice to turn this into a single-liner in
-        #       github-action syntax
-        echo "GitHub ref: ${{ github.ref }}"
-        echo "GitHub event_name: ${{ github.event_name }}"
-        REPO=
-        if test "${{ github.event_name }}" = 'push'; then
-          if expr "${{ github.ref }}" : "refs/tags/" > /dev/null; then
-            REPO=test
-            git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
-          else
-            REPO=dev
+      - name: Determine packagecloud publication target
+        run: |
+          # TODO: it would be nice to turn this into a single-liner in
+          #       github-action syntax
+          echo "GitHub ref: ${{ github.ref }}"
+          echo "GitHub event_name: ${{ github.event_name }}"
+          REPO=
+          if test "${{ github.event_name }}" = 'push'; then
+            if expr "${{ github.ref }}" : "refs/tags/" > /dev/null; then
+              REPO=test
+              git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
+            else
+              REPO=dev
+            fi
           fi
-        fi
-        echo "REPO=$REPO" | tee -a $GITHUB_ENV
+          echo "REPO=$REPO" | tee -a $GITHUB_ENV
 
-    - uses: linz/linz-software-repository@v5
-      with:
-        packagecloud_token: ${{ secrets.LINZCI_PACKAGECLOUD_TOKEN }}
-        packagecloud_repository: ${{ env.REPO }}
+      - uses: linz/linz-software-repository@v5
+        with:
+          packagecloud_token: ${{ secrets.LINZCI_PACKAGECLOUD_TOKEN }}
+          packagecloud_repository: ${{ env.REPO }}
