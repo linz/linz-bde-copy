@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 
 cd `dirname $0` # make sure we're in the directory containing this script
@@ -54,7 +54,7 @@ $EXE -c ../test2.cfg ../par1.crs - par8.log > par8.stdout
 $EXE -c ../test3.cfg ../par1.crs - par9.log > par9.stdout
 $EXE -c ../test1.cfg ../escape.crs - escape2.log > escape2.stdout
 $EXE -c ../test4.cfg ../par1.crs - par10.log > par10.stdout
-$EXE -c ../test5.cfg ../par1.crs - par5a.log 
+$EXE -c ../test5.cfg ../par1.crs - par5a.log
 $EXE -c ../test5.cfg ../parh.crs - par11.log > par11.stdout
 $EXE -c ../test5.cfg ../parhz.crs.gz - par12.log > par12.stdout
 $EXE -c ../test6.cfg ../par1.crs - par13.log > par13.stdout
