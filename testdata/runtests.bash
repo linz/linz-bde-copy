@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+set -o errexit -o noclobber -o nounset -o pipefail
+shopt -s failglob inherit_errexit
+
 
 cd `dirname $0` # make sure we're in the directory containing this script
 rm -rf output
