@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 
 cd `dirname $0` # make sure we're in the directory containing this script
