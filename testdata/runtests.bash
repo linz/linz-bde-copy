@@ -4,7 +4,7 @@ set -o errexit -o noclobber -o nounset -o pipefail
 shopt -s failglob inherit_errexit
 
 
-cd `dirname $0` # make sure we're in the directory containing this script
+cd "$(dirname "$0")" # make sure we're in the directory containing this script
 rm -rf output
 mkdir output
 cd output
@@ -17,8 +17,8 @@ export BDECOPY_DATADIR=$PWD/../../conf
 
 EXE=${EXEDIR}/bde_copy
 
-if [ ! -x $EXE ]; then
-    echo "$EXE not found or not executable, please pass the path containing `bde_copy` as an argument" >&2
+if [ ! -x "$EXE" ]; then
+    echo "$EXE not found or not executable, please pass the path containing $(bde_copy) as an argument" >&2
     exit 1
 fi
 
