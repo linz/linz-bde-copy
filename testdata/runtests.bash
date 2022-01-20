@@ -10,14 +10,16 @@ mkdir output
 cd output
 
 EXEDIR=../../build
-if [ "$1" ]; then
+if [ "$1" ]
+then
     EXEDIR=$1
 fi
 export BDECOPY_DATADIR=$PWD/../../conf
 
 EXE=${EXEDIR}/bde_copy
 
-if [ ! -x "$EXE" ]; then
+if [ ! -x "$EXE" ]
+then
     echo "$EXE not found or not executable, please pass the path containing $(bde_copy) as an argument" >&2
     exit 1
 fi
@@ -80,13 +82,24 @@ $EXE -c ../test1.cfg -h ../par1.crs - par1h.log
 # Redirects stdout to file, and redirects stderr through stdout to pipt the first line of stderr to file.
 # Removes the stdout file if empty.
 $EXE -c ../test1.cfg ../par1.crs -+ par1f1.out 2>&1 >par1f1.stdout | head -n1 > par1f1.stderr
-if [ ! -s par1f1.stdout ]; then rm par1f1.stdout; fi
+if [ ! -s par1f1.stdout ]
+then rm par1f1.stdout
+fi
+
 $EXE -c ../test1.cfg ../par1.crs par1f2.out - 2>&1 >par1f2.stdout | head -n1 > par1f2.stderr
-if [ ! -s par1f2.stdout ]; then rm par1f2.stdout; fi
+if [ ! -s par1f2.stdout ]
+then rm par1f2.stdout
+fi
+
 $EXE -c ../test1.cfg - ../par1.crs par1f3.out 2>&1 >par1f3.stdout | head -n1 > par1f3.stderr
-if [ ! -s par1f3.stdout ]; then rm par1f3.stdout; fi
+if [ ! -s par1f3.stdout ]
+then rm par1f3.stdout
+fi
+
 $EXE -c ../test1.cfg ../par1.crs - 2>&1 > par1f4.stdout | head -n1 > par1f4.stderr
-if [ ! -s par1f4.stdout ]; then rm par1f4.stdout; fi
+if [ ! -s par1f4.stdout ]
+then rm par1f4.stdout
+fi
 
 # Bogus calls
 $EXE -c nonexistent.cfg ../lolutf.crs bogus1.out bogus1.log 2> bogus1.stderr > bogus1.stdout
