@@ -10,7 +10,7 @@ mkdir output
 cd output
 
 exedir=../../build
-if [ "$1" ]
+if [ "${1-}" ]
 then
     exedir=$1
 fi
