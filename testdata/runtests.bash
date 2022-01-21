@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -o nounset -o pipefail
+set -o noclobber -o nounset -o pipefail
 shopt -s failglob inherit_errexit
 
 
