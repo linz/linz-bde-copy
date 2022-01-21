@@ -103,8 +103,8 @@ fi
 
 # Bogus calls
 $exe -c nonexistent.cfg ../lolutf.crs bogus1.out bogus1.log 2> bogus1.stderr > bogus1.stdout
-perl -pi.bak -e 's/^(ConfigFile\:\s)[^\.].*[\\|\/](.+\.cfg)$/$1$2/g' *log
-rm -f *.bak
+perl -pi.bak -e 's/^(ConfigFile\:\s)[^\.].*[\\|\/](.+\.cfg)$/$1$2/g' -- *log
+rm -f -- *.bak
 
-gunzip *.gz
+gunzip -- *.gz
 diff -x .gitattributes . ../validate
