@@ -83,22 +83,26 @@ fi
 # Removes the stdout file if empty.
 "$exe" -c ../test1.cfg ../par1.crs -+ par1f1.out 2>&1 >par1f1.stdout | head -n1 > par1f1.stderr
 if [ ! -s par1f1.stdout ]
-then rm par1f1.stdout
+then
+  rm par1f1.stdout
 fi
 
 "$exe" -c ../test1.cfg ../par1.crs par1f2.out - 2>&1 >par1f2.stdout | head -n1 > par1f2.stderr
 if [ ! -s par1f2.stdout ]
-then rm par1f2.stdout
+then
+  rm par1f2.stdout
 fi
 
 "$exe" -c ../test1.cfg - ../par1.crs par1f3.out 2>&1 >par1f3.stdout | head -n1 > par1f3.stderr
 if [ ! -s par1f3.stdout ]
-then rm par1f3.stdout
+then
+  rm par1f3.stdout
 fi
 
 "$exe" -c ../test1.cfg ../par1.crs - 2>&1 > par1f4.stdout | head -n1 > par1f4.stderr
 if [ ! -s par1f4.stdout ]
-then rm par1f4.stdout
+then
+  rm par1f4.stdout
 fi
 
 # Bogus calls
