@@ -83,7 +83,10 @@ To create a debug build use
 
 ## Testing
 
-Make sure you have Perl installed on your system.
+If you have Nix installed you can simply run
+`nix-shell --pure --run 'mkdir -p build && cd build && cmake -DCMAKE_INSTALL_PREFIX=$(mktemp --directory) .. && make && make check && make install'`
+
+Otherwise, make sure you have Perl installed on your system.
 
 On GNU systems you can run tests using `make check`, or run
 `testdata/runtests.bash <abs_path_to_build_dir>`.
