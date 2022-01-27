@@ -89,7 +89,7 @@ If you have Nix installed you can simply run
 Otherwise, make sure you have Perl installed on your system.
 
 On GNU systems you can run tests using `make check`, or run
-`testdata/runtests.sh <abs_path_to_build_dir>`.
+`testdata/runtests.bash <abs_path_to_build_dir>`.
 
 For windows, change into testdata directory and run `runtests.bat`, then use a programme like kdiff3
 or BeyondCompare and do a directory comparison between the output and validate directories. At a
