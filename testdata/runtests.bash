@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-
 cd `dirname $0` # make sure we're in the directory containing this script
 rm -rf output
 mkdir output || exit 1
@@ -8,15 +7,15 @@ cd output || exit 1
 
 EXEDIR=../../build
 if [ "$1" ]; then
-    EXEDIR=$1
+  EXEDIR=$1
 fi
 export BDECOPY_DATADIR=$PWD/../../conf
 
 EXE=${EXEDIR}/bde_copy
 
 if [ ! -x $EXE ]; then
-    echo "$EXE not found or not executable, please pass the path containing `bde_copy` as an argument" >&2
-    exit 1
+  echo "$EXE not found or not executable, please pass the path containing $(bde_copy) as an argument" >&2
+  exit 1
 fi
 
 $EXE -c ../test1.cfg ../scg.crs scg.out scg.log
