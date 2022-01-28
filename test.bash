@@ -8,7 +8,7 @@ project_root="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 mkdir --parents "${project_root}/build"
 cd build
 
-cmake -DCMAKE_INSTALL_PREFIX=$(mktemp --directory) ..
+cmake -DCMAKE_INSTALL_PREFIX="$(mktemp --directory)" ..
 make
 make check
 make install
