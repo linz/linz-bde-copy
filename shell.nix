@@ -9,11 +9,16 @@
 }:
 pkgs.mkShell {
   packages = [
+    pkgs.cacert
     pkgs.cmake
     pkgs.dpkg
     pkgs.fakeroot
+    pkgs.gitFull
     pkgs.gnumake
+    pkgs.nodejs
     pkgs.perl
+    pkgs.pre-commit
+    pkgs.which
     pkgs.zlib
   ];
 }
