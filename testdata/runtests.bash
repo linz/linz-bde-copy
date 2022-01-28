@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cd `dirname $0` # make sure we're in the directory containing this script
+cd $(dirname $0) # make sure we're in the directory containing this script
 rm -rf output
 mkdir output || exit 1
 cd output || exit 1
