@@ -11,6 +11,7 @@ pkgs.mkShell {
   packages = [
     pkgs.cacert
     pkgs.cmake
+    pkgs.docker
     pkgs.dpkg
     pkgs.fakeroot
     pkgs.gitFull
