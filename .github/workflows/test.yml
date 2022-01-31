@@ -77,11 +77,11 @@ jobs:
   package:
     needs: test
     name: Package for Debian
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     strategy:
       fail-fast: false
       matrix:
-        distro: ['bionic']
+        distro: [bionic, focal]
     steps:
       - uses: actions/checkout@v2.4.0
         with:
