@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-set -o noclobber -o nounset -o pipefail
-shopt -s failglob
+set -o errexit -o noclobber -o nounset -o pipefail
+shopt -s failglob inherit_errexit
 
-cd "$(dirname "$0")" || exit # make sure we're in the directory containing this script
+cd "$(dirname "$0")" # make sure we're in the directory containing this script
 rm -rf output
-mkdir output || exit 1
-cd output || exit 1
+mkdir output
+cd output
 
 exedir=../../build
 if [ "$1" ]
@@ -103,7 +103,7 @@ fi
 
 # Bogus calls
 "$exe" -c nonexistent.cfg ../lolutf.crs bogus1.out bogus1.log 2> bogus1.stderr > bogus1.stdout
-perl -pi.bak -e 's/^(ConfigFile\:\s)[^\.].*[\\|\/](.+\.cfg)$/$1$2/g' ./*log || exit 1
+perl -pi.bak -e 's/^(ConfigFile\:\s)[^\.].*[\\|\/](.+\.cfg)$/$1$2/g' ./*log
 rm -f ./*.bak
 
 gunzip ./*.gz
