@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+set -o noclobber -o nounset -o pipefail
+shopt -s failglob
+
 cd "$(dirname "$0")" || exit # make sure we're in the directory containing this script
 rm -rf output
 mkdir output || exit 1
