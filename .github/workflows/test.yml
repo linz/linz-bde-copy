@@ -81,7 +81,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        distro: ['bionic']
+        distro: [bionic, focal]
     steps:
       - uses: actions/checkout@v2.4.0
         with:
