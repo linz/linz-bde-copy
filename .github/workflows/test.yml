@@ -30,24 +30,28 @@ jobs:
         run: pre-commit run --all-files
 
   test:
-    name: Test build
+    name: Test build on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        os:
-          - ubuntu-18.04
-          - ubuntu-20.04
-          - ubuntu-latest
-    env:
-      APT: 'apt-get -o Dpkg::Progress=0 -o Dpkg::Use-Pty=0'
+        include:
+          - os: ubuntu-18.04
+            release: bionic
+          - os: ubuntu-20.04
+            release: focal
+          - os: ubuntu-latest
+            release: focal
+
     steps:
       - name: Check out repository
         uses: actions/checkout@v2.4.0
+        with:
+          fetch-depth: 0
 
       - name: Install dependencies
         run: |
-          sudo ${APT} -qq install \
+          sudo apt-get --assume-yes -qq install \
               cmake \
               debhelper \
               fakeroot
@@ -69,10 +73,13 @@ jobs:
           cd build
           sudo -E make install
 
+      - name: Build packages
+        uses: linz/linz-software-repository@v8
+        with:
+          release: ${{ matrix.release }}
+
       - name: Test debian packaging
-        run: |
-          dpkg-buildpackage -b -us -uc
-          sudo dpkg -i ../linz-bde-copy*.deb
+        run: sudo dpkg -i build-area/linz-bde-copy*.deb
 
   package:
     needs: test
