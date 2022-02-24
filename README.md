@@ -1,6 +1,5 @@
 # LINZ bde_copy
 
-[![Build Status](https://secure.travis-ci.org/linz/linz-bde-copy.svg)](http://travis-ci.org/linz/linz-bde-copy)
 [![Actions Status](https://github.com/linz/linz-bde-copy/workflows/test/badge.svg?branch=master)](https://github.com/linz/linz-bde-copy/actions)
 
 Programme that extracts LINZ Bulk Data Extracts (BDE) files and optionally creates normalised files
