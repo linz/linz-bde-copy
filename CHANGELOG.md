@@ -2,6 +2,16 @@
 
 All notable changes for the LINZ BDE Copy are documented in this file.
 
+## [1.5.0] - 2022-02-24
+
+### Added
+
+- Support for Ubuntu 20.04/LTS
+
+### Improved
+
+- Quality improvements
+
 ## [1.4.0] - 2021-12-07
 
 ### Added
