@@ -1,8 +1,8 @@
 Source: linz-bde-copy
 Section: misc
 Priority: optional
-Build-Depends: debhelper (>= 7),
-               perl (>= 5.8),
+Build-Depends: debhelper,
+               perl,
                zlib1g-dev,
                cmake
 Standards-Version: 3.9.5
