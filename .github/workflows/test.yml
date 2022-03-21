@@ -74,7 +74,7 @@ jobs:
           sudo -E make install
 
       - name: Build packages
-        uses: linz/linz-software-repository@v10
+        uses: linz/linz-software-repository@v11
         with:
           release: ${{ matrix.release }}
 
@@ -113,7 +113,7 @@ jobs:
           echo "REPO=$REPO" | tee -a $GITHUB_ENV
 
       - name: Upload to Packagecloud
-        uses: linz/linz-software-repository@v10
+        uses: linz/linz-software-repository@v11
         with:
           release: ${{ matrix.distro }}
           packagecloud_token: ${{ secrets.LINZCI_PACKAGECLOUD_TOKEN }}
