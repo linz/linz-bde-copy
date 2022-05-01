@@ -118,3 +118,16 @@ jobs:
           release: ${{ matrix.distro }}
           packagecloud_token: ${{ secrets.LINZCI_PACKAGECLOUD_TOKEN }}
           packagecloud_repository: ${{ env.REPO }}
+
+  finalise:
+    if: always()
+    needs:
+      - lint
+      - test
+      - package
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check whether the needed jobs succeeded or failed
+        uses: re-actors/alls-green@release/v1
+        with:
+          jobs: ${{ toJSON(needs) }}
