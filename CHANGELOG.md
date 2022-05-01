@@ -2,7 +2,19 @@
 
 All notable changes for the LINZ BDE Copy are documented in this file.
 
-## [1.5.1] - 2022-05-02
+## [1.5.3] (broken) - 2022-05-02
+
+### Fixed
+
+- Force pushing changes to origin remote
+
+## [1.5.2] (broken) - 2022-05-02
+
+### Improved
+
+- Simplify verifying all jobs are passing
+
+## [1.5.1] (broken) - 2022-05-02
 
 ### Improved
 
@@ -10,7 +22,7 @@ All notable changes for the LINZ BDE Copy are documented in this file.
 - Use supported Debian compatibility version
 - Untether Debian control versions
 
-## [1.5.0] - 2022-02-24
+## [1.5.0] (broken) - 2022-02-24
 
 ### Added
 
