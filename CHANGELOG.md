@@ -2,6 +2,14 @@
 
 All notable changes for the LINZ BDE Copy are documented in this file.
 
+## [1.5.1] - 2022-05-02
+
+### Improved
+
+- Bump linz/linz-software-repository
+- Use supported Debian compatibility version
+- Untether Debian control versions
+
 ## [1.5.0] - 2022-02-24
 
 ### Added
