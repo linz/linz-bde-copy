@@ -2,7 +2,7 @@
 
 All notable changes for the LINZ BDE Copy are documented in this file.
 
-## [1.5.3] (broken) - 2022-05-02
+## [1.5.3] - 2022-05-02
 
 ### Fixed
 
