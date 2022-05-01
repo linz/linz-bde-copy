@@ -1,3 +1,9 @@
+linz-bde-copy (1.5.3-linz~bionic) bionic; urgency=medium
+
+  * New version
+
+ -- Victor Engmark <vengmark@linz.govt.nz>  Sun, 01 May 2022 23:43:30 +0000
+
 linz-bde-copy (1.5.2-linz~bionic) bionic; urgency=medium
 
   * New version
