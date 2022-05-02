@@ -118,6 +118,7 @@ jobs:
           release: ${{ matrix.distro }}
           packagecloud_token: ${{ secrets.LINZCI_PACKAGECLOUD_TOKEN }}
           packagecloud_repository: ${{ env.REPO }}
+          push_to_git_remote: origin
 
   finalise:
     if: always()
