@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Check out repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.0.2
 
       - name: Install Dependencies
         run: sudo snap install --classic pre-commit
@@ -45,7 +45,7 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.0.2
         with:
           fetch-depth: 0
 
@@ -91,7 +91,7 @@ jobs:
         distro: [bionic, focal]
       max-parallel: 1
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v3.0.2
         with:
           fetch-depth: 0 # Enable the changelog generator to check out previous branch
 
@@ -129,6 +129,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check whether the needed jobs succeeded or failed
-        uses: re-actors/alls-green@release/v1
+        uses: re-actors/alls-green@v1.1.0
         with:
           jobs: ${{ toJSON(needs) }}
