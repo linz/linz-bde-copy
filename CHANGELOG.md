@@ -2,6 +2,12 @@
 
 All notable changes for the LINZ BDE Copy are documented in this file.
 
+## [1.5.4] - 2022-12-21
+
+### Added
+
+- Build on Ubuntu 22.04
+
 ## [1.5.3] - 2022-05-02
 
 ### Fixed
