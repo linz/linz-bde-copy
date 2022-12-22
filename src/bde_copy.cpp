@@ -70,7 +70,7 @@ const char *level="0";
 const char *dataset = 0;
 
 buffer fileheader("");
-buffer fieldseparator("|");
+buffer fieldseparator(",");
 buffer lineterminator("\n");
 
 buffer configuration("");
@@ -912,7 +912,6 @@ readbuff *open_bde_file(char *filename, bool readheader)
     bool external_header = false;
     char *header_file = new char[strlen(filename)+strlen(metadata_ext.str())+1];
     strcpy(header_file,filename);
-
     if( metadata_ext.len() > 0 )
     {
 
@@ -1368,7 +1367,10 @@ bool read_configuration_part( char *exefile, char *cfgext )
 bool read_configuration( char *exefile )
 {
     bool ok = true;
+    printf("%s exefile \n ", exefile);
+
     char *base_config_path = get_data_path(exefile, default_cfg_ext);
+    printf("%s base_config_path \n", base_config_path);
 
     if (base_config_path)
     {
@@ -1455,7 +1457,9 @@ void print_metadata()
 
 void help( char *exefile );
 
-int split_file_names( const char *names, char **list, int *count )
+int main_copy(int i, char *pString[]);
+
+int split_file_names(const char *names, char **list, int *count )
 {
     *count = 0;
     char *nms = copy_string(names);
@@ -1693,7 +1697,8 @@ void help( char *exefile )
 // Main program
 
 
-int main( int argc, char *argv[] )
+
+int main_bde_copy( int argc, char *argv[] )
 {
 #if defined(_WIN32) && defined(_MSC_VER)
     char *image = strdup(_pgmptr);
@@ -1715,10 +1720,10 @@ int main( int argc, char *argv[] )
 
     if( ! read_args(image,argc,argv) ) syntax();
 
-    if( ! read_configuration(image)) {
-      message(es_fatal, "Failed reading configuration");
-      return 2;
-    }
+//    if( ! read_configuration(image)) {
+//      message(es_fatal, "Failed reading configuration");
+//      return 2;
+//    }
 
     if( cmd_maxerrors >= 0 ) max_errors = cmd_maxerrors;
 
@@ -1830,3 +1835,5 @@ int main( int argc, char *argv[] )
 
     return 0;
 }
+
+

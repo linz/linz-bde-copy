@@ -1,4 +1,5 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
+cmake_minimum_required(VERSION 3.3)
+set(CMAKE_CXX_STANDARD 11)
 
 include(CMakeToolsHelpers OPTIONAL)
 
@@ -6,7 +7,7 @@ include(CMakeToolsHelpers OPTIONAL)
 SET(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS TRUE)
 
 SET(APP_NAME "bde_copy")
-PROJECT(${APP_NAME})
+PROJECT(${APP_NAME} LANGUAGES CXX)
 
 SET(CPACK_PACKAGE_VERSION_MAJOR "1")
 SET(CPACK_PACKAGE_VERSION_MINOR "3")
@@ -58,20 +59,20 @@ IF (SVN_MARKER)
   IF(SVNVERSION)
     IF(MSVC)
       ADD_CUSTOM_COMMAND(
-        OUTPUT ${REVISION_HEADER}
-        COMMAND for /f usebackq %%a in "(`\"${SVNVERSION}\"`)" do echo \#define REVISION \"%%a\" >${REVISION_HEADER}
-        MAIN_DEPENDENCY ${SVN_MARKER}
-        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+              OUTPUT ${REVISION_HEADER}
+              COMMAND for /f usebackq %%a in "(`\"${SVNVERSION}\"`)" do echo \#define REVISION \"%%a\" >${REVISION_HEADER}
+              MAIN_DEPENDENCY ${SVN_MARKER}
+              WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
       )
     ELSE(MSVC)
       ADD_CUSTOM_COMMAND(
-        OUTPUT ${REVISION_HEADER}
-        COMMAND echo \\\#define REVISION \\\"`${SVNVERSION}`\\\" >${REVISION_HEADER}
-        MAIN_DEPENDENCY ${SVN_MARKER}
-        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+              OUTPUT ${REVISION_HEADER}
+              COMMAND echo \\\#define REVISION \\\"`${SVNVERSION}`\\\" >${REVISION_HEADER}
+              MAIN_DEPENDENCY ${SVN_MARKER}
+              WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
       )
     ENDIF(MSVC)
-	SET (REVISION_FOUND TRUE)
+    SET (REVISION_FOUND TRUE)
   ENDIF (SVNVERSION)
 ENDIF (SVN_MARKER)
 
@@ -82,20 +83,20 @@ IF (NOT REVISION_FOUND AND GIT_MARKER)
   IF(GIT)
     IF(MSVC)
       ADD_CUSTOM_COMMAND(
-        OUTPUT ${REVISION_HEADER}
-        COMMAND for /f \"usebackq tokens=1\" %%a in "(`\"${GIT}\" log -n1 --oneline`)" do echo \#define REVISION \"%%a\" >${REVISION_HEADER}
-        MAIN_DEPENDENCY ${GIT_MARKER}
-        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+              OUTPUT ${REVISION_HEADER}
+              COMMAND for /f \"usebackq tokens=1\" %%a in "(`\"${GIT}\" log -n1 --oneline`)" do echo \#define REVISION \"%%a\" >${REVISION_HEADER}
+              MAIN_DEPENDENCY ${GIT_MARKER}
+              WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
       )
     ELSE(MSVC)
       ADD_CUSTOM_COMMAND(
-        OUTPUT ${REVISION_HEADER}
-        COMMAND echo \\\#define REVISION \\\"$$\( ${GIT} log -n1 --pretty=%h \)\\\" > ${REVISION_HEADER}
-        MAIN_DEPENDENCY ${GIT_MARKER}
-        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+              OUTPUT ${REVISION_HEADER}
+              COMMAND echo \\\#define REVISION \\\"$$\( ${GIT} log -n1 --pretty=%h \)\\\" > ${REVISION_HEADER}
+              MAIN_DEPENDENCY ${GIT_MARKER}
+              WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
       )
     ENDIF(MSVC)
-	SET (REVISION_FOUND TRUE)
+    SET (REVISION_FOUND TRUE)
   ENDIF(GIT)
 ENDIF ()
 
@@ -112,6 +113,9 @@ INCLUDE_DIRECTORIES(${CMAKE_BINARY_DIR})
 # zlib
 FIND_PACKAGE(ZLIB)
 
+find_package(AWSSDK REQUIRED COMPONENTS s3)
+find_package(aws-lambda-runtime)
+
 IF (NOT ZLIB_FOUND)
   MESSAGE (SEND_ERROR "zlib library could not be found")
 ENDIF ()
@@ -124,33 +128,32 @@ MESSAGE(STATUS BINDIR=               ${CMAKE_INSTALL_PREFIX}/${BINDIR})
 MESSAGE(STATUS DATADIR=              ${CMAKE_INSTALL_PREFIX}/${DATADIR})
 
 SET(BDE_COPY_SRCS
-  src/bde_copy.cpp
-  src/bde_copy_funcs.cpp
-  src/bde_copy_utils.cpp
-  src/bde_copy_gzip.cpp
-)
+        src/bde_copy.cpp
+        src/bde_copy_funcs.cpp
+        src/bde_copy_utils.cpp
+        src/bde_copy_gzip.cpp
+        src/main.cpp
+        )
 
 SET(BDE_COPY_DATA
-  conf/bde_copy.help
-  conf/bde_copy.cfg
-  conf/bde_copy.cfg.clean
-  conf/bde_copy.cfg.mssql
-  conf/bde_copy.cfg.pgis
-  conf/bde_copy.cfg.utf8
-  conf/bde_copy.cfg.detect_utf8
-  conf/bde_copy.cfg.control
-)
+        conf/bde_copy.help
+        conf/bde_copy.cfg
+        conf/bde_copy.cfg.clean
+        conf/bde_copy.cfg.mssql
+        conf/bde_copy.cfg.pgis
+        conf/bde_copy.cfg.utf8
+        conf/bde_copy.cfg.detect_utf8
+        conf/bde_copy.cfg.control
+        )
 
 INCLUDE_DIRECTORIES(
-  src
-  ${ZLIB_INCLUDE_DIRS}
-  )
+        src
+        ${ZLIB_INCLUDE_DIRS}
+)
 
 ADD_EXECUTABLE(${APP_NAME} ${BDE_COPY_SRCS})
 
-TARGET_LINK_LIBRARIES(${APP_NAME}
-  ${ZLIB_LIBRARIES}
-)
+target_link_libraries(${APP_NAME} PRIVATE AWS::aws-lambda-runtime ${AWSSDK_LINK_LIBRARIES} ${ZLIB_LIBRARIES})
 
 ADD_DEPENDENCIES(${APP_NAME} scm_revision)
 
@@ -174,3 +177,5 @@ ADD_TEST(NAME bde_copy
   WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/testdata
   COMMAND ${CMAKE_SOURCE_DIR}/testdata/runtests.bash ${CMAKE_BINARY_DIR})
 ADD_CUSTOM_TARGET(check COMMAND ctest --output-on-failure)
+
+aws_lambda_package_target(${APP_NAME})

@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="bde_copy"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\src\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/aemad/data-infra/linz-bde-copy/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/aemad/data-infra/linz-bde-copy/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/aemad/data-infra/linz-bde-copy/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/aemad/data-infra/linz-bde-copy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/aemad/data-infra/linz-bde-copy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/strip">
+				<Option working_dir="/home/aemad/data-infra/linz-bde-copy/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/aemad/data-infra/linz-bde-copy/cmake-build-debug/Makefile&quot;  VERBOSE=1 install/strip"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/aemad/data-infra/linz-bde-copy/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/aemad/data-infra/linz-bde-copy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/aemad/data-infra/linz-bde-copy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/local">
+				<Option working_dir="/home/aemad/data-infra/linz-bde-copy/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/aemad/data-infra/linz-bde-copy/cmake-build-debug/Makefile&quot;  VERBOSE=1 install/local"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/aemad/data-infra/linz-bde-copy/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/aemad/data-infra/linz-bde-copy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/aemad/data-infra/linz-bde-copy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install">
+				<Option working_dir="/home/aemad/data-infra/linz-bde-copy/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/aemad/data-infra/linz-bde-copy/cmake-build-debug/Makefile&quot;  VERBOSE=1 install"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/aemad/data-infra/linz-bde-copy/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/aemad/data-infra/linz-bde-copy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/aemad/data-infra/linz-bde-copy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="list_install_components">
+				<Option working_dir="/home/aemad/data-infra/linz-bde-copy/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/aemad/data-infra/linz-bde-copy/cmake-build-debug/Makefile&quot;  VERBOSE=1 list_install_components"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/aemad/data-infra/linz-bde-copy/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/aemad/data-infra/linz-bde-copy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/aemad/data-infra/linz-bde-copy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/aemad/data-infra/linz-bde-copy/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/aemad/data-infra/linz-bde-copy/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/aemad/data-infra/linz-bde-copy/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/aemad/data-infra/linz-bde-copy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/aemad/data-infra/linz-bde-copy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/aemad/data-infra/linz-bde-copy/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/aemad/data-infra/linz-bde-copy/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/aemad/data-infra/linz-bde-copy/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/aemad/data-infra/linz-bde-copy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/aemad/data-infra/linz-bde-copy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test">
+				<Option working_dir="/home/aemad/data-infra/linz-bde-copy/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/aemad/data-infra/linz-bde-copy/cmake-build-debug/Makefile&quot;  VERBOSE=1 test"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/aemad/data-infra/linz-bde-copy/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/aemad/data-infra/linz-bde-copy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/aemad/data-infra/linz-bde-copy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="check">
+				<Option working_dir="/home/aemad/data-infra/linz-bde-copy/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/aemad/data-infra/linz-bde-copy/cmake-build-debug/Makefile&quot;  VERBOSE=1 check"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/aemad/data-infra/linz-bde-copy/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/aemad/data-infra/linz-bde-copy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/aemad/data-infra/linz-bde-copy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="bde_copy">
+				<Option output="/home/aemad/data-infra/linz-bde-copy/cmake-build-debug/bde_copy" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/aemad/data-infra/linz-bde-copy/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/aemad/data-infra/linz-bde-copy/cmake-build-debug"/>
+					<Add directory="/home/aemad/data-infra/linz-bde-copy/src"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/aemad/data-infra/linz-bde-copy/cmake-build-debug/Makefile&quot;  VERBOSE=1 bde_copy"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/aemad/data-infra/linz-bde-copy/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/aemad/data-infra/linz-bde-copy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/aemad/data-infra/linz-bde-copy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="bde_copy/fast">
+				<Option output="/home/aemad/data-infra/linz-bde-copy/cmake-build-debug/bde_copy" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/aemad/data-infra/linz-bde-copy/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/aemad/data-infra/linz-bde-copy/cmake-build-debug"/>
+					<Add directory="/home/aemad/data-infra/linz-bde-copy/src"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/aemad/data-infra/linz-bde-copy/cmake-build-debug/Makefile&quot;  VERBOSE=1 bde_copy/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/aemad/data-infra/linz-bde-copy/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/aemad/data-infra/linz-bde-copy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/aemad/data-infra/linz-bde-copy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="scm_revision">
+				<Option working_dir="/home/aemad/data-infra/linz-bde-copy/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/aemad/data-infra/linz-bde-copy/cmake-build-debug/Makefile&quot;  VERBOSE=1 scm_revision"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/aemad/data-infra/linz-bde-copy/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/aemad/data-infra/linz-bde-copy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/aemad/data-infra/linz-bde-copy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/aemad/data-infra/linz-bde-copy/.git/index">
+			<Option target="scm_revision"/>
+		</Unit>
+		<Unit filename="/home/aemad/data-infra/linz-bde-copy/src/bde_copy.cpp">
+			<Option target="bde_copy"/>
+		</Unit>
+		<Unit filename="/home/aemad/data-infra/linz-bde-copy/src/bde_copy.h">
+			<Option target="bde_copy"/>
+		</Unit>
+		<Unit filename="/home/aemad/data-infra/linz-bde-copy/src/bde_copy_funcs.cpp">
+			<Option target="bde_copy"/>
+		</Unit>
+		<Unit filename="/home/aemad/data-infra/linz-bde-copy/src/bde_copy_funcs.h">
+			<Option target="bde_copy"/>
+		</Unit>
+		<Unit filename="/home/aemad/data-infra/linz-bde-copy/src/bde_copy_gzip.cpp">
+			<Option target="bde_copy"/>
+		</Unit>
+		<Unit filename="/home/aemad/data-infra/linz-bde-copy/src/bde_copy_gzip.h">
+			<Option target="bde_copy"/>
+		</Unit>
+		<Unit filename="/home/aemad/data-infra/linz-bde-copy/src/bde_copy_utils.cpp">
+			<Option target="bde_copy"/>
+		</Unit>
+		<Unit filename="/home/aemad/data-infra/linz-bde-copy/src/bde_copy_utils.h">
+			<Option target="bde_copy"/>
+		</Unit>
+		<Unit filename="/home/aemad/data-infra/linz-bde-copy/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/aemad/data-infra/linz-bde-copy/src/bde_copy_config.h.in">
+			<Option virtualFolder="CMake Files\src\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

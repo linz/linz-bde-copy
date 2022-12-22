@@ -1,0 +1,510 @@
+[INFO] 2022-12-21 22:17:37.805 Aws_Init_Cleanup [140130981653056] Initiate AWS SDK for C++ with Version:1.10.32
+[TRACE] 2022-12-21 22:17:37.805 FileSystemUtils [140130981653056] Checking HOME for the home directory.
+[DEBUG] 2022-12-21 22:17:37.805 FileSystemUtils [140130981653056] Environment value for variable HOME is /home/aemad
+[DEBUG] 2022-12-21 22:17:37.805 FileSystemUtils [140130981653056] Home directory is missing the final / appending one to normalize
+[DEBUG] 2022-12-21 22:17:37.805 FileSystemUtils [140130981653056] Final Home Directory is /home/aemad/
+[INFO] 2022-12-21 22:17:37.805 Aws::Config::AWSConfigFileProfileConfigLoader [140130981653056] Initializing config loader against fileName /home/aemad/.aws/credentials and using profilePrefix = 0
+[TRACE] 2022-12-21 22:17:37.805 FileSystemUtils [140130981653056] Checking HOME for the home directory.
+[DEBUG] 2022-12-21 22:17:37.805 FileSystemUtils [140130981653056] Environment value for variable HOME is /home/aemad
+[DEBUG] 2022-12-21 22:17:37.805 FileSystemUtils [140130981653056] Home directory is missing the final / appending one to normalize
+[DEBUG] 2022-12-21 22:17:37.805 FileSystemUtils [140130981653056] Final Home Directory is /home/aemad/
+[INFO] 2022-12-21 22:17:37.805 Aws::Config::AWSConfigFileProfileConfigLoader [140130981653056] Initializing config loader against fileName /home/aemad/.aws/config and using profilePrefix = 1
+[TRACE] 2022-12-21 22:17:37.805 FileSystemUtils [140130981653056] Checking HOME for the home directory.
+[DEBUG] 2022-12-21 22:17:37.805 FileSystemUtils [140130981653056] Environment value for variable HOME is /home/aemad
+[DEBUG] 2022-12-21 22:17:37.805 FileSystemUtils [140130981653056] Home directory is missing the final / appending one to normalize
+[DEBUG] 2022-12-21 22:17:37.805 FileSystemUtils [140130981653056] Final Home Directory is /home/aemad/
+[INFO] 2022-12-21 22:17:37.807 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: aws_expiration in the profile: li-geostore-nonprod-2
+[DEBUG] 2022-12-21 22:17:37.807 Aws::Config::ConfigFileProfileFSM [140130981653056] found access key ASIAYWU6AUFII26C3GJI
+[INFO] 2022-12-21 22:17:37.807 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: aws_expiration in the profile: li-geostore-nonprod
+[DEBUG] 2022-12-21 22:17:37.807 Aws::Config::ConfigFileProfileFSM [140130981653056] found access key ASIAZGM3WG3UDGYPMFJG
+[INFO] 2022-12-21 22:17:37.807 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: aws_expiration in the profile: bill-nelson-sandbox
+[DEBUG] 2022-12-21 22:17:37.807 Aws::Config::ConfigFileProfileFSM [140130981653056] found access key ASIA43IHTCMN7L5JLXDJ
+[INFO] 2022-12-21 22:17:37.807 Aws::Config::AWSProfileConfigLoaderBase [140130981653056] Successfully reloaded configuration.
+[TRACE] 2022-12-21 22:17:37.807 Aws::Config::AWSProfileConfigLoaderBase [140130981653056] reloaded config at 2022-12-21T22:17:37Z
+[TRACE] 2022-12-21 22:17:37.807 FileSystemUtils [140130981653056] Checking HOME for the home directory.
+[DEBUG] 2022-12-21 22:17:37.807 FileSystemUtils [140130981653056] Environment value for variable HOME is /home/aemad
+[DEBUG] 2022-12-21 22:17:37.807 FileSystemUtils [140130981653056] Home directory is missing the final / appending one to normalize
+[DEBUG] 2022-12-21 22:17:37.807 FileSystemUtils [140130981653056] Final Home Directory is /home/aemad/
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_app_id_uri in the profile: li-ds-small-apps-ci
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_duration_hours in the profile: li-ds-small-apps-ci
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_remember_me in the profile: li-ds-small-apps-ci
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_role_arn in the profile: li-ds-small-apps-ci
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_username in the profile: li-ds-small-apps-ci
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_tenant_id in the profile: li-ds-small-apps-ci
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_app_id_uri in the profile: li-ds-small-apps-nonprod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_duration_hours in the profile: li-ds-small-apps-nonprod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_remember_me in the profile: li-ds-small-apps-nonprod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_role_arn in the profile: li-ds-small-apps-nonprod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_username in the profile: li-ds-small-apps-nonprod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_tenant_id in the profile: li-ds-small-apps-nonprod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_app_id_uri in the profile: bde-processor-nonprod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_duration_hours in the profile: bde-processor-nonprod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_remember_me in the profile: bde-processor-nonprod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_role_arn in the profile: bde-processor-nonprod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_username in the profile: bde-processor-nonprod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_tenant_id in the profile: bde-processor-nonprod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_app_id_uri in the profile: li-ds-small-apps-prod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_duration_hours in the profile: li-ds-small-apps-prod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_remember_me in the profile: li-ds-small-apps-prod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_role_arn in the profile: li-ds-small-apps-prod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_username in the profile: li-ds-small-apps-prod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_tenant_id in the profile: li-ds-small-apps-prod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_app_id_uri in the profile: li-geostore-ci
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_duration_hours in the profile: li-geostore-ci
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_remember_me in the profile: li-geostore-ci
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_role_arn in the profile: li-geostore-ci
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_username in the profile: li-geostore-ci
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_tenant_id in the profile: li-geostore-ci
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_app_id_uri in the profile: li-geostore-nonprod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_duration_hours in the profile: li-geostore-nonprod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_remember_me in the profile: li-geostore-nonprod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_role_arn in the profile: li-geostore-nonprod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_username in the profile: li-geostore-nonprod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_tenant_id in the profile: li-geostore-nonprod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_app_id_uri in the profile: li-geostore-nonprod-1
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_duration_hours in the profile: li-geostore-nonprod-1
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_remember_me in the profile: li-geostore-nonprod-1
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_role_arn in the profile: li-geostore-nonprod-1
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_username in the profile: li-geostore-nonprod-1
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_tenant_id in the profile: li-geostore-nonprod-1
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_app_id_uri in the profile: li-geostore-nonprod-2
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_duration_hours in the profile: li-geostore-nonprod-2
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_remember_me in the profile: li-geostore-nonprod-2
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_role_arn in the profile: li-geostore-nonprod-2
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_username in the profile: li-geostore-nonprod-2
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_tenant_id in the profile: li-geostore-nonprod-2
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_app_id_uri in the profile: li-geostore-nonprod-3
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_duration_hours in the profile: li-geostore-nonprod-3
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_remember_me in the profile: li-geostore-nonprod-3
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_role_arn in the profile: li-geostore-nonprod-3
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_username in the profile: li-geostore-nonprod-3
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_tenant_id in the profile: li-geostore-nonprod-3
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_app_id_uri in the profile: li-geostore-prod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_duration_hours in the profile: li-geostore-prod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_remember_me in the profile: li-geostore-prod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_role_arn in the profile: li-geostore-prod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_username in the profile: li-geostore-prod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_tenant_id in the profile: li-geostore-prod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_app_id_uri in the profile: li-small-apps-nonprod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_duration_hours in the profile: li-small-apps-nonprod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_remember_me in the profile: li-small-apps-nonprod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_role_arn in the profile: li-small-apps-nonprod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_username in the profile: li-small-apps-nonprod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_tenant_id in the profile: li-small-apps-nonprod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_app_id_uri in the profile: li-small-apps-prod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_duration_hours in the profile: li-small-apps-prod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_remember_me in the profile: li-small-apps-prod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_role_arn in the profile: li-small-apps-prod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_username in the profile: li-small-apps-prod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_tenant_id in the profile: li-small-apps-prod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_app_id_uri in the profile: shared-network
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_duration_hours in the profile: shared-network
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_remember_me in the profile: shared-network
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_role_arn in the profile: shared-network
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_username in the profile: shared-network
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_tenant_id in the profile: shared-network
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_app_id_uri in the profile: step-notices-nonprod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_duration_hours in the profile: step-notices-nonprod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_remember_me in the profile: step-notices-nonprod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_role_arn in the profile: step-notices-nonprod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_username in the profile: step-notices-nonprod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_tenant_id in the profile: step-notices-nonprod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_app_id_uri in the profile: step-notices-preprod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_duration_hours in the profile: step-notices-preprod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_remember_me in the profile: step-notices-preprod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_role_arn in the profile: step-notices-preprod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_username in the profile: step-notices-preprod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_tenant_id in the profile: step-notices-preprod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_app_id_uri in the profile: step-notices-prod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_duration_hours in the profile: step-notices-prod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_remember_me in the profile: step-notices-prod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_role_arn in the profile: step-notices-prod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_username in the profile: step-notices-prod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_tenant_id in the profile: step-notices-prod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_app_id_uri in the profile: step-titles-nonprod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_duration_hours in the profile: step-titles-nonprod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_remember_me in the profile: step-titles-nonprod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_role_arn in the profile: step-titles-nonprod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_username in the profile: step-titles-nonprod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_tenant_id in the profile: step-titles-nonprod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_app_id_uri in the profile: step-titles-preprod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_duration_hours in the profile: step-titles-preprod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_remember_me in the profile: step-titles-preprod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_role_arn in the profile: step-titles-preprod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_username in the profile: step-titles-preprod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_tenant_id in the profile: step-titles-preprod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_app_id_uri in the profile: step-titles-prod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_duration_hours in the profile: step-titles-prod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_remember_me in the profile: step-titles-prod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_role_arn in the profile: step-titles-prod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_username in the profile: step-titles-prod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_tenant_id in the profile: step-titles-prod
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_app_id_uri in the profile: bill-nelson-sandbox
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_duration_hours in the profile: bill-nelson-sandbox
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_remember_me in the profile: bill-nelson-sandbox
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_role_arn in the profile: bill-nelson-sandbox
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_default_username in the profile: bill-nelson-sandbox
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: azure_tenant_id in the profile: bill-nelson-sandbox
+[INFO] 2022-12-21 22:17:37.809 Aws::Config::AWSProfileConfigLoaderBase [140130981653056] Successfully reloaded configuration.
+[TRACE] 2022-12-21 22:17:37.809 Aws::Config::AWSProfileConfigLoaderBase [140130981653056] reloaded config at 2022-12-21T22:17:37Z
+[INFO] 2022-12-21 22:17:37.809 event-loop [140130981653056] id=0x556425d8c470: Initializing edge-triggered epoll
+[INFO] 2022-12-21 22:17:37.809 event-loop [140130981653056] id=0x556425d8c470: Using eventfd for cross-thread notifications.
+[TRACE] 2022-12-21 22:17:37.809 event-loop [140130981653056] id=0x556425d8c470: eventfd descriptor 6.
+[INFO] 2022-12-21 22:17:37.809 event-loop [140130981653056] id=0x556425d8c470: Starting event-loop thread.
+[INFO] 2022-12-21 22:17:37.810 event-loop [140130981653056] id=0x556425d8c880: Initializing edge-triggered epoll
+[INFO] 2022-12-21 22:17:37.810 event-loop [140130981653056] id=0x556425d8c880: Using eventfd for cross-thread notifications.
+[TRACE] 2022-12-21 22:17:37.810 event-loop [140130981653056] id=0x556425d8c880: eventfd descriptor 8.
+[INFO] 2022-12-21 22:17:37.810 event-loop [140130981653056] id=0x556425d8c880: Starting event-loop thread.
+[INFO] 2022-12-21 22:17:37.810 event-loop [140130981653056] id=0x556425d99540: Initializing edge-triggered epoll
+[INFO] 2022-12-21 22:17:37.810 event-loop [140130981653056] id=0x556425d99540: Using eventfd for cross-thread notifications.
+[TRACE] 2022-12-21 22:17:37.810 event-loop [140130981653056] id=0x556425d99540: eventfd descriptor 10.
+[INFO] 2022-12-21 22:17:37.810 event-loop [140130981653056] id=0x556425d99540: Starting event-loop thread.
+[INFO] 2022-12-21 22:17:37.810 event-loop [140130981653056] id=0x556425d962b0: Initializing edge-triggered epoll
+[INFO] 2022-12-21 22:17:37.810 event-loop [140130981653056] id=0x556425d962b0: Using eventfd for cross-thread notifications.
+[TRACE] 2022-12-21 22:17:37.810 event-loop [140130981653056] id=0x556425d962b0: eventfd descriptor 12.
+[INFO] 2022-12-21 22:17:37.810 event-loop [140130981653056] id=0x556425d962b0: Starting event-loop thread.
+[INFO] 2022-12-21 22:17:37.810 event-loop [140130973247232] id=0x556425d8c470: main loop started
+[TRACE] 2022-12-21 22:17:37.810 event-loop [140130973247232] id=0x556425d8c470: subscribing to events on fd 6
+[INFO] 2022-12-21 22:17:37.810 event-loop [140130973247232] id=0x556425d8c470: default timeout 100000, and max events to process per tick 100
+[TRACE] 2022-12-21 22:17:37.810 event-loop [140130973247232] id=0x556425d8c470: waiting for a maximum of 100000 ms
+[INFO] 2022-12-21 22:17:37.810 dns [140130981653056] id=0x556425d97a40: Initializing default host resolver with 8 max host entries.
+[INFO] 2022-12-21 22:17:37.810 event-loop [140130882938624] id=0x556425d99540: main loop started
+[TRACE] 2022-12-21 22:17:37.810 event-loop [140130882938624] id=0x556425d99540: subscribing to events on fd 10
+[INFO] 2022-12-21 22:17:37.810 channel-bootstrap [140130981653056] id=0x556425da3d40: Initializing client bootstrap with event-loop group 0x556425d92910
+[INFO] 2022-12-21 22:17:37.810 event-loop [140130882938624] id=0x556425d99540: default timeout 100000, and max events to process per tick 100
+[TRACE] 2022-12-21 22:17:37.810 event-loop [140130882938624] id=0x556425d99540: waiting for a maximum of 100000 ms
+[INFO] 2022-12-21 22:17:37.810 event-loop [140130891331328] id=0x556425d8c880: main loop started
+[TRACE] 2022-12-21 22:17:37.810 event-loop [140130891331328] id=0x556425d8c880: subscribing to events on fd 8
+[INFO] 2022-12-21 22:17:37.810 event-loop [140130874545920] id=0x556425d962b0: main loop started
+[TRACE] 2022-12-21 22:17:37.810 event-loop [140130874545920] id=0x556425d962b0: subscribing to events on fd 12
+[INFO] 2022-12-21 22:17:37.810 event-loop [140130891331328] id=0x556425d8c880: default timeout 100000, and max events to process per tick 100
+[TRACE] 2022-12-21 22:17:37.810 event-loop [140130891331328] id=0x556425d8c880: waiting for a maximum of 100000 ms
+[INFO] 2022-12-21 22:17:37.810 event-loop [140130874545920] id=0x556425d962b0: default timeout 100000, and max events to process per tick 100
+[TRACE] 2022-12-21 22:17:37.810 event-loop [140130874545920] id=0x556425d962b0: waiting for a maximum of 100000 ms
+[INFO] 2022-12-21 22:17:37.815 CurlHttpClient [140130981653056] Initializing Curl library with version: 7.68.0, ssl version: OpenSSL/1.1.1f
+[INFO] 2022-12-21 22:17:37.815 EC2MetadataClient [140130981653056] Using IMDS endpoint: http://169.254.169.254
+[DEBUG] 2022-12-21 22:17:37.815 ClientConfiguration [140130981653056] ClientConfiguration will use SDK Auto Resolved profile: [default] if not specified by users.
+[WARN] 2022-12-21 22:17:37.815 ClientConfiguration [140130981653056] Retry Strategy will use the default max attempts.
+[INFO] 2022-12-21 22:17:37.815 EC2MetadataClient [140130981653056] Creating AWSHttpResourceClient with max connections 2 and scheme http
+[INFO] 2022-12-21 22:17:37.815 CurlHandleContainer [140130981653056] Initializing CurlHandleContainer with size 2
+[DEBUG] 2022-12-21 22:17:37.815 ClientConfiguration [140130981653056] ClientConfiguration will use SDK Auto Resolved profile: [default] if not specified by users.
+[WARN] 2022-12-21 22:17:37.815 ClientConfiguration [140130981653056] Retry Strategy will use the default max attempts.
+[TRACE] 2022-12-21 22:17:37.815 EC2MetadataClient [140130981653056] Getting current region for ec2 instance
+[TRACE] 2022-12-21 22:17:37.815 EC2MetadataClient [140130981653056] Retrieving credentials from http://169.254.169.254/latest/meta-data/placement/availability-zone
+[TRACE] 2022-12-21 22:17:37.815 CurlHttpClient [140130981653056] Making request to http://169.254.169.254/latest/meta-data/placement/availability-zone
+[TRACE] 2022-12-21 22:17:37.815 CurlHttpClient [140130981653056] Including headers:
+[TRACE] 2022-12-21 22:17:37.815 CurlHttpClient [140130981653056] host: 169.254.169.254
+[TRACE] 2022-12-21 22:17:37.815 CurlHttpClient [140130981653056] user-agent: aws-sdk-cpp/1.10.32 Linux/5.10.102.1-microsoft-standard-WSL2 x86_64 GCC/9.4.0
+[TRACE] 2022-12-21 22:17:37.815 CurlHttpClient [140130981653056] x-aws-ec2-metadata-token: 
+[DEBUG] 2022-12-21 22:17:37.815 CurlHandleContainer [140130981653056] Attempting to acquire curl connection.
+[DEBUG] 2022-12-21 22:17:37.815 CurlHandleContainer [140130981653056] No current connections available in pool. Attempting to create new connections.
+[DEBUG] 2022-12-21 22:17:37.815 CurlHandleContainer [140130981653056] attempting to grow pool size by 2
+[INFO] 2022-12-21 22:17:37.815 CurlHandleContainer [140130981653056] Pool grown by 2
+[INFO] 2022-12-21 22:17:37.815 CurlHandleContainer [140130981653056] Connection has been released. Continuing.
+[DEBUG] 2022-12-21 22:17:37.815 CurlHandleContainer [140130981653056] Returning connection handle 0x556425e5ef20
+[DEBUG] 2022-12-21 22:17:37.815 CurlHttpClient [140130981653056] Obtained connection handle 0x556425e5ef20
+[DEBUG] 2022-12-21 22:17:37.815 CURL [140130981653056] (Text)   Trying 169.254.169.254:80...
+
+[DEBUG] 2022-12-21 22:17:37.815 CURL [140130981653056] (Text) TCP_NODELAY set
+
+[DEBUG] 2022-12-21 22:17:38.816 CURL [140130981653056] (Text) Connection timed out after 1000 milliseconds
+
+[DEBUG] 2022-12-21 22:17:38.816 CURL [140130981653056] (Text) Closing connection 0
+
+[ERROR] 2022-12-21 22:17:38.816 CurlHttpClient [140130981653056] Curl returned error code 28 - Timeout was reached
+[DEBUG] 2022-12-21 22:17:38.816 CurlHandleContainer [140130981653056] Destroy curl handle: 0x556425e5ef20
+[DEBUG] 2022-12-21 22:17:38.816 CurlHandleContainer [140130981653056] Created replacement handle and released to pool: 0x556425e5ef20
+[ERROR] 2022-12-21 22:17:38.816 EC2MetadataClient [140130981653056] Http request to retrieve credentials failed
+[WARN] 2022-12-21 22:17:38.816 EC2MetadataClient [140130981653056] Request failed, now waiting 0 ms before attempting again.
+[TRACE] 2022-12-21 22:17:38.816 CurlHttpClient [140130981653056] Making request to http://169.254.169.254/latest/meta-data/placement/availability-zone
+[TRACE] 2022-12-21 22:17:38.816 CurlHttpClient [140130981653056] Including headers:
+[TRACE] 2022-12-21 22:17:38.816 CurlHttpClient [140130981653056] host: 169.254.169.254
+[TRACE] 2022-12-21 22:17:38.816 CurlHttpClient [140130981653056] user-agent: aws-sdk-cpp/1.10.32 Linux/5.10.102.1-microsoft-standard-WSL2 x86_64 GCC/9.4.0
+[TRACE] 2022-12-21 22:17:38.816 CurlHttpClient [140130981653056] x-aws-ec2-metadata-token: 
+[DEBUG] 2022-12-21 22:17:38.816 CurlHandleContainer [140130981653056] Attempting to acquire curl connection.
+[INFO] 2022-12-21 22:17:38.816 CurlHandleContainer [140130981653056] Connection has been released. Continuing.
+[DEBUG] 2022-12-21 22:17:38.816 CurlHandleContainer [140130981653056] Returning connection handle 0x556425e5ef20
+[DEBUG] 2022-12-21 22:17:38.816 CurlHttpClient [140130981653056] Obtained connection handle 0x556425e5ef20
+[DEBUG] 2022-12-21 22:17:38.816 CURL [140130981653056] (Text)   Trying 169.254.169.254:80...
+
+[DEBUG] 2022-12-21 22:17:38.816 CURL [140130981653056] (Text) TCP_NODELAY set
+
+[DEBUG] 2022-12-21 22:17:39.820 CURL [140130981653056] (Text) Connection timed out after 1000 milliseconds
+
+[DEBUG] 2022-12-21 22:17:39.820 CURL [140130981653056] (Text) Closing connection 0
+
+[ERROR] 2022-12-21 22:17:39.820 CurlHttpClient [140130981653056] Curl returned error code 28 - Timeout was reached
+[DEBUG] 2022-12-21 22:17:39.820 CurlHandleContainer [140130981653056] Destroy curl handle: 0x556425e5ef20
+[DEBUG] 2022-12-21 22:17:39.820 CurlHandleContainer [140130981653056] Created replacement handle and released to pool: 0x556425e650f0
+[ERROR] 2022-12-21 22:17:39.820 EC2MetadataClient [140130981653056] Http request to retrieve credentials failed
+[ERROR] 2022-12-21 22:17:39.820 EC2MetadataClient [140130981653056] Can not retrieve resource from http://169.254.169.254/latest/meta-data/placement/availability-zone
+[INFO] 2022-12-21 22:17:39.820 EC2MetadataClient [140130981653056] Unable to pull region from instance metadata service 
+[TRACE] 2022-12-21 22:17:39.824 FileSystemUtils [140130981653056] Checking HOME for the home directory.
+[DEBUG] 2022-12-21 22:17:39.824 FileSystemUtils [140130981653056] Environment value for variable HOME is /home/aemad
+[DEBUG] 2022-12-21 22:17:39.824 FileSystemUtils [140130981653056] Home directory is missing the final / appending one to normalize
+[DEBUG] 2022-12-21 22:17:39.824 FileSystemUtils [140130981653056] Final Home Directory is /home/aemad/
+[INFO] 2022-12-21 22:17:39.824 Aws::Config::AWSConfigFileProfileConfigLoader [140130981653056] Initializing config loader against fileName /home/aemad/.aws/credentials and using profilePrefix = 0
+[TRACE] 2022-12-21 22:17:39.824 FileSystemUtils [140130981653056] Checking HOME for the home directory.
+[DEBUG] 2022-12-21 22:17:39.824 FileSystemUtils [140130981653056] Environment value for variable HOME is /home/aemad
+[DEBUG] 2022-12-21 22:17:39.824 FileSystemUtils [140130981653056] Home directory is missing the final / appending one to normalize
+[DEBUG] 2022-12-21 22:17:39.824 FileSystemUtils [140130981653056] Final Home Directory is /home/aemad/
+[TRACE] 2022-12-21 22:17:39.824 FileSystemUtils [140130981653056] Checking HOME for the home directory.
+[DEBUG] 2022-12-21 22:17:39.824 FileSystemUtils [140130981653056] Environment value for variable HOME is /home/aemad
+[DEBUG] 2022-12-21 22:17:39.824 FileSystemUtils [140130981653056] Home directory is missing the final / appending one to normalize
+[DEBUG] 2022-12-21 22:17:39.824 FileSystemUtils [140130981653056] Final Home Directory is /home/aemad/
+[INFO] 2022-12-21 22:17:39.824 ProfileConfigFileAWSCredentialsProvider [140130981653056] Setting provider to read credentials from /home/aemad/.aws/credentials for credentials file and /home/aemad/.aws/config for the config file , for use with profile default
+[INFO] 2022-12-21 22:17:39.824 ProcessCredentialsProvider [140130981653056] Setting process credentials provider to read config from default
+[WARN] 2022-12-21 22:17:39.824 STSAssumeRoleWithWebIdentityCredentialsProvider [140130981653056] Token file must be specified to use STS AssumeRole web identity creds provider.
+[INFO] 2022-12-21 22:17:39.824 SSOBearerTokenProvider [140130981653056] Setting sso bearerToken provider to read config from default
+[INFO] 2022-12-21 22:17:39.824 SSOCredentialsProvider [140130981653056] Setting sso credentials provider to read config from default
+[DEBUG] 2022-12-21 22:17:39.824 DefaultAWSCredentialsProviderChain [140130981653056] The environment variable value AWS_CONTAINER_CREDENTIALS_RELATIVE_URI is 
+[DEBUG] 2022-12-21 22:17:39.824 DefaultAWSCredentialsProviderChain [140130981653056] The environment variable value AWS_CONTAINER_CREDENTIALS_FULL_URI is 
+[DEBUG] 2022-12-21 22:17:39.824 DefaultAWSCredentialsProviderChain [140130981653056] The environment variable value AWS_EC2_METADATA_DISABLED is 
+[INFO] 2022-12-21 22:17:39.824 InstanceProfileCredentialsProvider [140130981653056] Creating Instance with default EC2MetadataClient and refresh rate 300000
+[INFO] 2022-12-21 22:17:39.824 DefaultAWSCredentialsProviderChain [140130981653056] Added EC2 metadata service credentials provider to the provider chain.
+[INFO] 2022-12-21 22:17:39.824 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: aws_expiration in the profile: li-geostore-nonprod-2
+[DEBUG] 2022-12-21 22:17:39.824 Aws::Config::ConfigFileProfileFSM [140130981653056] found access key ASIAYWU6AUFII26C3GJI
+[INFO] 2022-12-21 22:17:39.824 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: aws_expiration in the profile: li-geostore-nonprod
+[DEBUG] 2022-12-21 22:17:39.824 Aws::Config::ConfigFileProfileFSM [140130981653056] found access key ASIAZGM3WG3UDGYPMFJG
+[INFO] 2022-12-21 22:17:39.824 Aws::Config::ConfigFileProfileFSM [140130981653056] Unknown property: aws_expiration in the profile: bill-nelson-sandbox
+[DEBUG] 2022-12-21 22:17:39.824 Aws::Config::ConfigFileProfileFSM [140130981653056] found access key ASIA43IHTCMN7L5JLXDJ
+[INFO] 2022-12-21 22:17:39.824 Aws::Config::AWSProfileConfigLoaderBase [140130981653056] Successfully reloaded configuration.
+[TRACE] 2022-12-21 22:17:39.824 Aws::Config::AWSProfileConfigLoaderBase [140130981653056] reloaded config at 2022-12-21T22:17:39Z
+[INFO] 2022-12-21 22:17:39.824 ProcessCredentialsProvider [140130981653056] Failed to find credential process's profile: default
+[TRACE] 2022-12-21 22:17:39.824 FileSystemUtils [140130981653056] Checking HOME for the home directory.
+[DEBUG] 2022-12-21 22:17:39.824 FileSystemUtils [140130981653056] Environment value for variable HOME is /home/aemad
+[DEBUG] 2022-12-21 22:17:39.824 FileSystemUtils [140130981653056] Home directory is missing the final / appending one to normalize
+[DEBUG] 2022-12-21 22:17:39.824 FileSystemUtils [140130981653056] Final Home Directory is /home/aemad/
+[DEBUG] 2022-12-21 22:17:39.824 SSOCredentialsProvider [140130981653056] Loading token from: /home/aemad/.aws/sso/cache/da39a3ee5e6b4b0d3255bfef95601890afd80709.json
+[DEBUG] 2022-12-21 22:17:39.824 SSOCredentialsProvider [140130981653056] Preparing to load token from: /home/aemad/.aws/sso/cache/da39a3ee5e6b4b0d3255bfef95601890afd80709.json
+[INFO] 2022-12-21 22:17:39.824 SSOCredentialsProvider [140130981653056] Unable to open token file on path: /home/aemad/.aws/sso/cache/da39a3ee5e6b4b0d3255bfef95601890afd80709.json
+[TRACE] 2022-12-21 22:17:39.824 SSOCredentialsProvider [140130981653056] Access token for SSO not available
+[DEBUG] 2022-12-21 22:17:39.824 InstanceProfileCredentialsProvider [140130981653056] Checking if latest credential pull has expired.
+[INFO] 2022-12-21 22:17:39.824 InstanceProfileCredentialsProvider [140130981653056] Credentials have expired attempting to re-pull from EC2 Metadata Service.
+[TRACE] 2022-12-21 22:17:39.824 EC2MetadataClient [140130981653056] Calling EC2MetadataService to get token
+[TRACE] 2022-12-21 22:17:39.824 EC2MetadataClient [140130981653056] Retrieving credentials from http://169.254.169.254/latest/api/token
+[TRACE] 2022-12-21 22:17:39.824 CurlHttpClient [140130981653056] Making request to http://169.254.169.254/latest/api/token
+[TRACE] 2022-12-21 22:17:39.824 CurlHttpClient [140130981653056] Including headers:
+[TRACE] 2022-12-21 22:17:39.824 CurlHttpClient [140130981653056] host: 169.254.169.254
+[TRACE] 2022-12-21 22:17:39.824 CurlHttpClient [140130981653056] user-agent: aws-sdk-cpp/1.10.32 Linux/5.10.102.1-microsoft-standard-WSL2 x86_64 GCC/9.4.0
+[TRACE] 2022-12-21 22:17:39.824 CurlHttpClient [140130981653056] x-aws-ec2-metadata-token-ttl-seconds: 21600
+[DEBUG] 2022-12-21 22:17:39.824 CurlHandleContainer [140130981653056] Attempting to acquire curl connection.
+[INFO] 2022-12-21 22:17:39.824 CurlHandleContainer [140130981653056] Connection has been released. Continuing.
+[DEBUG] 2022-12-21 22:17:39.824 CurlHandleContainer [140130981653056] Returning connection handle 0x556425e650f0
+[DEBUG] 2022-12-21 22:17:39.824 CurlHttpClient [140130981653056] Obtained connection handle 0x556425e650f0
+[DEBUG] 2022-12-21 22:17:39.824 CURL [140130981653056] (Text)   Trying 169.254.169.254:80...
+
+[DEBUG] 2022-12-21 22:17:39.824 CURL [140130981653056] (Text) TCP_NODELAY set
+
+[DEBUG] 2022-12-21 22:17:40.825 CURL [140130981653056] (Text) Connection timed out after 1000 milliseconds
+
+[DEBUG] 2022-12-21 22:17:40.825 CURL [140130981653056] (Text) Closing connection 0
+
+[ERROR] 2022-12-21 22:17:40.825 CurlHttpClient [140130981653056] Curl returned error code 28 - Timeout was reached
+[DEBUG] 2022-12-21 22:17:40.825 CurlHandleContainer [140130981653056] Destroy curl handle: 0x556425e650f0
+[DEBUG] 2022-12-21 22:17:40.825 CurlHandleContainer [140130981653056] Created replacement handle and released to pool: 0x556425e650f0
+[ERROR] 2022-12-21 22:17:40.825 EC2MetadataClient [140130981653056] Http request to retrieve credentials failed
+[WARN] 2022-12-21 22:17:40.825 EC2MetadataClient [140130981653056] Request failed, now waiting 0 ms before attempting again.
+[TRACE] 2022-12-21 22:17:40.825 CurlHttpClient [140130981653056] Making request to http://169.254.169.254/latest/api/token
+[TRACE] 2022-12-21 22:17:40.825 CurlHttpClient [140130981653056] Including headers:
+[TRACE] 2022-12-21 22:17:40.825 CurlHttpClient [140130981653056] host: 169.254.169.254
+[TRACE] 2022-12-21 22:17:40.825 CurlHttpClient [140130981653056] user-agent: aws-sdk-cpp/1.10.32 Linux/5.10.102.1-microsoft-standard-WSL2 x86_64 GCC/9.4.0
+[TRACE] 2022-12-21 22:17:40.826 CurlHttpClient [140130981653056] x-aws-ec2-metadata-token-ttl-seconds: 21600
+[DEBUG] 2022-12-21 22:17:40.826 CurlHandleContainer [140130981653056] Attempting to acquire curl connection.
+[INFO] 2022-12-21 22:17:40.826 CurlHandleContainer [140130981653056] Connection has been released. Continuing.
+[DEBUG] 2022-12-21 22:17:40.826 CurlHandleContainer [140130981653056] Returning connection handle 0x556425e650f0
+[DEBUG] 2022-12-21 22:17:40.826 CurlHttpClient [140130981653056] Obtained connection handle 0x556425e650f0
+[DEBUG] 2022-12-21 22:17:40.826 CURL [140130981653056] (Text)   Trying 169.254.169.254:80...
+
+[DEBUG] 2022-12-21 22:17:40.826 CURL [140130981653056] (Text) TCP_NODELAY set
+
+[DEBUG] 2022-12-21 22:17:41.826 CURL [140130981653056] (Text) Connection timed out after 1000 milliseconds
+
+[DEBUG] 2022-12-21 22:17:41.826 CURL [140130981653056] (Text) Closing connection 0
+
+[ERROR] 2022-12-21 22:17:41.826 CurlHttpClient [140130981653056] Curl returned error code 28 - Timeout was reached
+[DEBUG] 2022-12-21 22:17:41.826 CurlHandleContainer [140130981653056] Destroy curl handle: 0x556425e650f0
+[DEBUG] 2022-12-21 22:17:41.826 CurlHandleContainer [140130981653056] Created replacement handle and released to pool: 0x556425e650f0
+[ERROR] 2022-12-21 22:17:41.826 EC2MetadataClient [140130981653056] Http request to retrieve credentials failed
+[ERROR] 2022-12-21 22:17:41.826 EC2MetadataClient [140130981653056] Can not retrieve resource from http://169.254.169.254/latest/api/token
+[TRACE] 2022-12-21 22:17:41.826 EC2MetadataClient [140130981653056] Calling EC2MetadataService to get token failed, falling back to less secure way.
+[TRACE] 2022-12-21 22:17:41.826 EC2MetadataClient [140130981653056] Getting default credentials for ec2 instance from http://169.254.169.254
+[TRACE] 2022-12-21 22:17:41.826 EC2MetadataClient [140130981653056] Retrieving credentials from http://169.254.169.254/latest/meta-data/iam/security-credentials
+[TRACE] 2022-12-21 22:17:41.826 CurlHttpClient [140130981653056] Making request to http://169.254.169.254/latest/meta-data/iam/security-credentials
+[TRACE] 2022-12-21 22:17:41.826 CurlHttpClient [140130981653056] Including headers:
+[TRACE] 2022-12-21 22:17:41.826 CurlHttpClient [140130981653056] host: 169.254.169.254
+[TRACE] 2022-12-21 22:17:41.826 CurlHttpClient [140130981653056] user-agent: aws-sdk-cpp/1.10.32 Linux/5.10.102.1-microsoft-standard-WSL2 x86_64 GCC/9.4.0
+[DEBUG] 2022-12-21 22:17:41.826 CurlHandleContainer [140130981653056] Attempting to acquire curl connection.
+[INFO] 2022-12-21 22:17:41.826 CurlHandleContainer [140130981653056] Connection has been released. Continuing.
+[DEBUG] 2022-12-21 22:17:41.826 CurlHandleContainer [140130981653056] Returning connection handle 0x556425e650f0
+[DEBUG] 2022-12-21 22:17:41.826 CurlHttpClient [140130981653056] Obtained connection handle 0x556425e650f0
+[DEBUG] 2022-12-21 22:17:41.827 CURL [140130981653056] (Text)   Trying 169.254.169.254:80...
+
+[DEBUG] 2022-12-21 22:17:41.827 CURL [140130981653056] (Text) TCP_NODELAY set
+
+[DEBUG] 2022-12-21 22:17:42.827 CURL [140130981653056] (Text) Connection timed out after 1000 milliseconds
+
+[DEBUG] 2022-12-21 22:17:42.827 CURL [140130981653056] (Text) Closing connection 0
+
+[ERROR] 2022-12-21 22:17:42.827 CurlHttpClient [140130981653056] Curl returned error code 28 - Timeout was reached
+[DEBUG] 2022-12-21 22:17:42.828 CurlHandleContainer [140130981653056] Destroy curl handle: 0x556425e650f0
+[DEBUG] 2022-12-21 22:17:42.828 CurlHandleContainer [140130981653056] Created replacement handle and released to pool: 0x556425e650f0
+[ERROR] 2022-12-21 22:17:42.828 EC2MetadataClient [140130981653056] Http request to retrieve credentials failed
+[WARN] 2022-12-21 22:17:42.828 EC2MetadataClient [140130981653056] Request failed, now waiting 0 ms before attempting again.
+[TRACE] 2022-12-21 22:17:42.828 CurlHttpClient [140130981653056] Making request to http://169.254.169.254/latest/meta-data/iam/security-credentials
+[TRACE] 2022-12-21 22:17:42.828 CurlHttpClient [140130981653056] Including headers:
+[TRACE] 2022-12-21 22:17:42.828 CurlHttpClient [140130981653056] host: 169.254.169.254
+[TRACE] 2022-12-21 22:17:42.828 CurlHttpClient [140130981653056] user-agent: aws-sdk-cpp/1.10.32 Linux/5.10.102.1-microsoft-standard-WSL2 x86_64 GCC/9.4.0
+[DEBUG] 2022-12-21 22:17:42.828 CurlHandleContainer [140130981653056] Attempting to acquire curl connection.
+[INFO] 2022-12-21 22:17:42.828 CurlHandleContainer [140130981653056] Connection has been released. Continuing.
+[DEBUG] 2022-12-21 22:17:42.828 CurlHandleContainer [140130981653056] Returning connection handle 0x556425e650f0
+[DEBUG] 2022-12-21 22:17:42.828 CurlHttpClient [140130981653056] Obtained connection handle 0x556425e650f0
+[DEBUG] 2022-12-21 22:17:42.828 CURL [140130981653056] (Text)   Trying 169.254.169.254:80...
+
+[DEBUG] 2022-12-21 22:17:42.828 CURL [140130981653056] (Text) TCP_NODELAY set
+
+[DEBUG] 2022-12-21 22:17:43.828 CURL [140130981653056] (Text) Connection timed out after 1000 milliseconds
+
+[DEBUG] 2022-12-21 22:17:43.829 CURL [140130981653056] (Text) Closing connection 0
+
+[ERROR] 2022-12-21 22:17:43.829 CurlHttpClient [140130981653056] Curl returned error code 28 - Timeout was reached
+[DEBUG] 2022-12-21 22:17:43.829 CurlHandleContainer [140130981653056] Destroy curl handle: 0x556425e650f0
+[DEBUG] 2022-12-21 22:17:43.829 CurlHandleContainer [140130981653056] Created replacement handle and released to pool: 0x556425e650f0
+[ERROR] 2022-12-21 22:17:43.829 EC2MetadataClient [140130981653056] Http request to retrieve credentials failed
+[ERROR] 2022-12-21 22:17:43.829 EC2MetadataClient [140130981653056] Can not retrieve resource from http://169.254.169.254/latest/meta-data/iam/security-credentials
+[INFO] 2022-12-21 22:17:43.829 Aws::Config::AWSProfileConfigLoaderBase [140130981653056] Failed to reload configuration.
+[INFO] 2022-12-21 22:17:43.829 ProcessCredentialsProvider [140130981653056] Failed to find credential process's profile: default
+[TRACE] 2022-12-21 22:17:43.829 FileSystemUtils [140130981653056] Checking HOME for the home directory.
+[DEBUG] 2022-12-21 22:17:43.829 FileSystemUtils [140130981653056] Environment value for variable HOME is /home/aemad
+[DEBUG] 2022-12-21 22:17:43.829 FileSystemUtils [140130981653056] Home directory is missing the final / appending one to normalize
+[DEBUG] 2022-12-21 22:17:43.829 FileSystemUtils [140130981653056] Final Home Directory is /home/aemad/
+[DEBUG] 2022-12-21 22:17:43.829 SSOCredentialsProvider [140130981653056] Loading token from: /home/aemad/.aws/sso/cache/da39a3ee5e6b4b0d3255bfef95601890afd80709.json
+[DEBUG] 2022-12-21 22:17:43.829 SSOCredentialsProvider [140130981653056] Preparing to load token from: /home/aemad/.aws/sso/cache/da39a3ee5e6b4b0d3255bfef95601890afd80709.json
+[INFO] 2022-12-21 22:17:43.829 SSOCredentialsProvider [140130981653056] Unable to open token file on path: /home/aemad/.aws/sso/cache/da39a3ee5e6b4b0d3255bfef95601890afd80709.json
+[TRACE] 2022-12-21 22:17:43.829 SSOCredentialsProvider [140130981653056] Access token for SSO not available
+[DEBUG] 2022-12-21 22:17:43.829 InstanceProfileCredentialsProvider [140130981653056] Checking if latest credential pull has expired.
+[INFO] 2022-12-21 22:17:43.829 InstanceProfileCredentialsProvider [140130981653056] Credentials have expired attempting to re-pull from EC2 Metadata Service.
+[TRACE] 2022-12-21 22:17:43.829 EC2MetadataClient [140130981653056] Getting default credentials for ec2 instance from http://169.254.169.254
+[TRACE] 2022-12-21 22:17:43.829 EC2MetadataClient [140130981653056] Retrieving credentials from http://169.254.169.254/latest/meta-data/iam/security-credentials
+[TRACE] 2022-12-21 22:17:43.829 CurlHttpClient [140130981653056] Making request to http://169.254.169.254/latest/meta-data/iam/security-credentials
+[TRACE] 2022-12-21 22:17:43.829 CurlHttpClient [140130981653056] Including headers:
+[TRACE] 2022-12-21 22:17:43.829 CurlHttpClient [140130981653056] host: 169.254.169.254
+[TRACE] 2022-12-21 22:17:43.829 CurlHttpClient [140130981653056] user-agent: aws-sdk-cpp/1.10.32 Linux/5.10.102.1-microsoft-standard-WSL2 x86_64 GCC/9.4.0
+[DEBUG] 2022-12-21 22:17:43.829 CurlHandleContainer [140130981653056] Attempting to acquire curl connection.
+[INFO] 2022-12-21 22:17:43.829 CurlHandleContainer [140130981653056] Connection has been released. Continuing.
+[DEBUG] 2022-12-21 22:17:43.829 CurlHandleContainer [140130981653056] Returning connection handle 0x556425e650f0
+[DEBUG] 2022-12-21 22:17:43.829 CurlHttpClient [140130981653056] Obtained connection handle 0x556425e650f0
+[DEBUG] 2022-12-21 22:17:43.829 CURL [140130981653056] (Text)   Trying 169.254.169.254:80...
+
+[DEBUG] 2022-12-21 22:17:43.829 CURL [140130981653056] (Text) TCP_NODELAY set
+
+[DEBUG] 2022-12-21 22:17:44.830 CURL [140130981653056] (Text) Connection timed out after 1000 milliseconds
+
+[DEBUG] 2022-12-21 22:17:44.830 CURL [140130981653056] (Text) Closing connection 0
+
+[ERROR] 2022-12-21 22:17:44.830 CurlHttpClient [140130981653056] Curl returned error code 28 - Timeout was reached
+[DEBUG] 2022-12-21 22:17:44.830 CurlHandleContainer [140130981653056] Destroy curl handle: 0x556425e650f0
+[DEBUG] 2022-12-21 22:17:44.830 CurlHandleContainer [140130981653056] Created replacement handle and released to pool: 0x556425e650f0
+[ERROR] 2022-12-21 22:17:44.830 EC2MetadataClient [140130981653056] Http request to retrieve credentials failed
+[WARN] 2022-12-21 22:17:44.830 EC2MetadataClient [140130981653056] Request failed, now waiting 0 ms before attempting again.
+[TRACE] 2022-12-21 22:17:44.830 CurlHttpClient [140130981653056] Making request to http://169.254.169.254/latest/meta-data/iam/security-credentials
+[TRACE] 2022-12-21 22:17:44.830 CurlHttpClient [140130981653056] Including headers:
+[TRACE] 2022-12-21 22:17:44.830 CurlHttpClient [140130981653056] host: 169.254.169.254
+[TRACE] 2022-12-21 22:17:44.830 CurlHttpClient [140130981653056] user-agent: aws-sdk-cpp/1.10.32 Linux/5.10.102.1-microsoft-standard-WSL2 x86_64 GCC/9.4.0
+[DEBUG] 2022-12-21 22:17:44.830 CurlHandleContainer [140130981653056] Attempting to acquire curl connection.
+[INFO] 2022-12-21 22:17:44.830 CurlHandleContainer [140130981653056] Connection has been released. Continuing.
+[DEBUG] 2022-12-21 22:17:44.830 CurlHandleContainer [140130981653056] Returning connection handle 0x556425e650f0
+[DEBUG] 2022-12-21 22:17:44.830 CurlHttpClient [140130981653056] Obtained connection handle 0x556425e650f0
+[DEBUG] 2022-12-21 22:17:44.831 CURL [140130981653056] (Text)   Trying 169.254.169.254:80...
+
+[DEBUG] 2022-12-21 22:17:44.831 CURL [140130981653056] (Text) TCP_NODELAY set
+
+[DEBUG] 2022-12-21 22:17:45.831 CURL [140130981653056] (Text) Connection timed out after 1000 milliseconds
+
+[DEBUG] 2022-12-21 22:17:45.831 CURL [140130981653056] (Text) Closing connection 0
+
+[ERROR] 2022-12-21 22:17:45.831 CurlHttpClient [140130981653056] Curl returned error code 28 - Timeout was reached
+[DEBUG] 2022-12-21 22:17:45.831 CurlHandleContainer [140130981653056] Destroy curl handle: 0x556425e650f0
+[DEBUG] 2022-12-21 22:17:45.831 CurlHandleContainer [140130981653056] Created replacement handle and released to pool: 0x556425e650f0
+[ERROR] 2022-12-21 22:17:45.831 EC2MetadataClient [140130981653056] Http request to retrieve credentials failed
+[ERROR] 2022-12-21 22:17:45.831 EC2MetadataClient [140130981653056] Can not retrieve resource from http://169.254.169.254/latest/meta-data/iam/security-credentials
+[INFO] 2022-12-21 22:17:45.831 Aws::Config::AWSProfileConfigLoaderBase [140130981653056] Failed to reload configuration.
+[INFO] 2022-12-21 22:17:45.831 CurlHandleContainer [140130981653056] Initializing CurlHandleContainer with size 25
+[INFO] 2022-12-21 22:17:45.957 CurlHandleContainer [140130981653056] Cleaning up CurlHandleContainer.
+[INFO] 2022-12-21 22:17:45.957 CurlHandleContainer [140130981653056] Cleaning up CurlHandleContainer.
+[DEBUG] 2022-12-21 22:17:45.957 CurlHandleContainer [140130981653056] Cleaning up 0x556425e59780
+[DEBUG] 2022-12-21 22:17:45.957 CurlHandleContainer [140130981653056] Cleaning up 0x556425e650f0
+[DEBUG] 2022-12-21 22:17:45.957 channel-bootstrap [140130981653056] id=0x556425da3d40: releasing bootstrap reference
+[DEBUG] 2022-12-21 22:17:45.957 channel-bootstrap [140130981653056] id=0x556425da3d40: destroying
+[INFO] 2022-12-21 22:17:45.957 event-loop [140130866153216] id=0x556425d962b0: Destroying event_loop
+[INFO] 2022-12-21 22:17:45.957 event-loop [140130866153216] id=0x556425d962b0: Stopping event-loop thread.
+[TRACE] 2022-12-21 22:17:45.957 event-loop [140130866153216] id=0x556425d962b0: Scheduling task 0x556425d975e8 cross-thread for timestamp 0
+[TRACE] 2022-12-21 22:17:45.957 event-loop [140130866153216] id=0x556425d962b0: Waking up event-loop thread
+[TRACE] 2022-12-21 22:17:45.957 event-loop [140130874545920] id=0x556425d962b0: wake up with 1 events to process.
+[TRACE] 2022-12-21 22:17:45.957 event-loop [140130874545920] id=0x556425d962b0: activity on fd 12, invoking handler.
+[TRACE] 2022-12-21 22:17:45.957 event-loop [140130874545920] id=0x556425d962b0: notified of cross-thread tasks to schedule
+[TRACE] 2022-12-21 22:17:45.957 event-loop [140130874545920] id=0x556425d962b0: processing cross-thread tasks
+[TRACE] 2022-12-21 22:17:45.957 event-loop [140130874545920] id=0x556425d962b0: task 0x556425d975e8 pulled to event-loop, scheduling now.
+[DEBUG] 2022-12-21 22:17:45.957 task-scheduler [140130874545920] id=0x556425d975e8: Scheduling epoll_event_loop_stop task for immediate execution
+[TRACE] 2022-12-21 22:17:45.957 event-loop [140130874545920] id=0x556425d962b0: running scheduled tasks.
+[DEBUG] 2022-12-21 22:17:45.957 task-scheduler [140130874545920] id=0x556425d975e8: Running epoll_event_loop_stop task with <Running> status
+[TRACE] 2022-12-21 22:17:45.957 event-loop [140130874545920] id=0x556425d962b0: no more scheduled tasks using default timeout.
+[DEBUG] 2022-12-21 22:17:45.957 event-loop [140130874545920] id=0x556425d962b0: exiting main loop
+[TRACE] 2022-12-21 22:17:45.958 event-loop [140130874545920] id=0x556425d962b0: un-subscribing from events on fd 12
+[TRACE] 2022-12-21 22:17:45.958 event-loop [140130874545920] id=0x556425d962b0: scheduling task 0x7f72ac0011e0 in-thread for timestamp 0
+[DEBUG] 2022-12-21 22:17:45.958 task-scheduler [140130874545920] id=0x7f72ac0011e0: Scheduling epoll_event_loop_unsubscribe_cleanup task for immediate execution
+[DEBUG] 2022-12-21 22:17:45.958 task-scheduler [140130866153216] id=0x7f72ac0011e0: Running epoll_event_loop_unsubscribe_cleanup task with <Canceled> status
+[INFO] 2022-12-21 22:17:45.958 event-loop [140130866153216] id=0x556425d99540: Destroying event_loop
+[INFO] 2022-12-21 22:17:45.958 event-loop [140130866153216] id=0x556425d99540: Stopping event-loop thread.
+[TRACE] 2022-12-21 22:17:45.958 event-loop [140130866153216] id=0x556425d99540: Scheduling task 0x556425d96c48 cross-thread for timestamp 0
+[TRACE] 2022-12-21 22:17:45.958 event-loop [140130866153216] id=0x556425d99540: Waking up event-loop thread
+[TRACE] 2022-12-21 22:17:45.958 event-loop [140130882938624] id=0x556425d99540: wake up with 1 events to process.
+[TRACE] 2022-12-21 22:17:45.958 event-loop [140130882938624] id=0x556425d99540: activity on fd 10, invoking handler.
+[TRACE] 2022-12-21 22:17:45.958 event-loop [140130882938624] id=0x556425d99540: notified of cross-thread tasks to schedule
+[TRACE] 2022-12-21 22:17:45.958 event-loop [140130882938624] id=0x556425d99540: processing cross-thread tasks
+[TRACE] 2022-12-21 22:17:45.958 event-loop [140130882938624] id=0x556425d99540: task 0x556425d96c48 pulled to event-loop, scheduling now.
+[DEBUG] 2022-12-21 22:17:45.958 task-scheduler [140130882938624] id=0x556425d96c48: Scheduling epoll_event_loop_stop task for immediate execution
+[TRACE] 2022-12-21 22:17:45.958 event-loop [140130882938624] id=0x556425d99540: running scheduled tasks.
+[DEBUG] 2022-12-21 22:17:45.958 task-scheduler [140130882938624] id=0x556425d96c48: Running epoll_event_loop_stop task with <Running> status
+[TRACE] 2022-12-21 22:17:45.958 event-loop [140130882938624] id=0x556425d99540: no more scheduled tasks using default timeout.
+[DEBUG] 2022-12-21 22:17:45.958 event-loop [140130882938624] id=0x556425d99540: exiting main loop
+[TRACE] 2022-12-21 22:17:45.958 event-loop [140130882938624] id=0x556425d99540: un-subscribing from events on fd 10
+[TRACE] 2022-12-21 22:17:45.958 event-loop [140130882938624] id=0x556425d99540: scheduling task 0x7f72b40011e0 in-thread for timestamp 0
+[DEBUG] 2022-12-21 22:17:45.958 task-scheduler [140130882938624] id=0x7f72b40011e0: Scheduling epoll_event_loop_unsubscribe_cleanup task for immediate execution
+[DEBUG] 2022-12-21 22:17:45.958 task-scheduler [140130866153216] id=0x7f72b40011e0: Running epoll_event_loop_unsubscribe_cleanup task with <Canceled> status
+[INFO] 2022-12-21 22:17:45.958 event-loop [140130866153216] id=0x556425d8c880: Destroying event_loop
+[INFO] 2022-12-21 22:17:45.958 event-loop [140130866153216] id=0x556425d8c880: Stopping event-loop thread.
+[TRACE] 2022-12-21 22:17:45.958 event-loop [140130866153216] id=0x556425d8c880: Scheduling task 0x556425d96258 cross-thread for timestamp 0
+[TRACE] 2022-12-21 22:17:45.958 event-loop [140130866153216] id=0x556425d8c880: Waking up event-loop thread
+[TRACE] 2022-12-21 22:17:45.958 event-loop [140130891331328] id=0x556425d8c880: wake up with 1 events to process.
+[TRACE] 2022-12-21 22:17:45.958 event-loop [140130891331328] id=0x556425d8c880: activity on fd 8, invoking handler.
+[TRACE] 2022-12-21 22:17:45.958 event-loop [140130891331328] id=0x556425d8c880: notified of cross-thread tasks to schedule
+[TRACE] 2022-12-21 22:17:45.958 event-loop [140130891331328] id=0x556425d8c880: processing cross-thread tasks
+[TRACE] 2022-12-21 22:17:45.958 event-loop [140130891331328] id=0x556425d8c880: task 0x556425d96258 pulled to event-loop, scheduling now.
+[DEBUG] 2022-12-21 22:17:45.958 task-scheduler [140130891331328] id=0x556425d96258: Scheduling epoll_event_loop_stop task for immediate execution
+[TRACE] 2022-12-21 22:17:45.958 event-loop [140130891331328] id=0x556425d8c880: running scheduled tasks.
+[DEBUG] 2022-12-21 22:17:45.958 task-scheduler [140130891331328] id=0x556425d96258: Running epoll_event_loop_stop task with <Running> status
+[TRACE] 2022-12-21 22:17:45.958 event-loop [140130891331328] id=0x556425d8c880: no more scheduled tasks using default timeout.
+[DEBUG] 2022-12-21 22:17:45.958 event-loop [140130891331328] id=0x556425d8c880: exiting main loop
+[TRACE] 2022-12-21 22:17:45.958 event-loop [140130891331328] id=0x556425d8c880: un-subscribing from events on fd 8
+[TRACE] 2022-12-21 22:17:45.958 event-loop [140130891331328] id=0x556425d8c880: scheduling task 0x7f72b80011e0 in-thread for timestamp 0
+[DEBUG] 2022-12-21 22:17:45.958 task-scheduler [140130891331328] id=0x7f72b80011e0: Scheduling epoll_event_loop_unsubscribe_cleanup task for immediate execution
+[DEBUG] 2022-12-21 22:17:45.958 task-scheduler [140130866153216] id=0x7f72b80011e0: Running epoll_event_loop_unsubscribe_cleanup task with <Canceled> status
+[INFO] 2022-12-21 22:17:45.958 event-loop [140130866153216] id=0x556425d8c470: Destroying event_loop
+[INFO] 2022-12-21 22:17:45.958 event-loop [140130866153216] id=0x556425d8c470: Stopping event-loop thread.
+[TRACE] 2022-12-21 22:17:45.958 event-loop [140130866153216] id=0x556425d8c470: Scheduling task 0x556425d994e8 cross-thread for timestamp 0
+[TRACE] 2022-12-21 22:17:45.958 event-loop [140130866153216] id=0x556425d8c470: Waking up event-loop thread
+[TRACE] 2022-12-21 22:17:45.958 event-loop [140130973247232] id=0x556425d8c470: wake up with 1 events to process.
+[TRACE] 2022-12-21 22:17:45.958 event-loop [140130973247232] id=0x556425d8c470: activity on fd 6, invoking handler.
+[TRACE] 2022-12-21 22:17:45.958 event-loop [140130973247232] id=0x556425d8c470: notified of cross-thread tasks to schedule
+[TRACE] 2022-12-21 22:17:45.958 event-loop [140130973247232] id=0x556425d8c470: processing cross-thread tasks
+[TRACE] 2022-12-21 22:17:45.958 event-loop [140130973247232] id=0x556425d8c470: task 0x556425d994e8 pulled to event-loop, scheduling now.
+[DEBUG] 2022-12-21 22:17:45.958 task-scheduler [140130973247232] id=0x556425d994e8: Scheduling epoll_event_loop_stop task for immediate execution
+[TRACE] 2022-12-21 22:17:45.958 event-loop [140130973247232] id=0x556425d8c470: running scheduled tasks.
+[DEBUG] 2022-12-21 22:17:45.958 task-scheduler [140130973247232] id=0x556425d994e8: Running epoll_event_loop_stop task with <Running> status
+[TRACE] 2022-12-21 22:17:45.958 event-loop [140130973247232] id=0x556425d8c470: no more scheduled tasks using default timeout.
+[DEBUG] 2022-12-21 22:17:45.958 event-loop [140130973247232] id=0x556425d8c470: exiting main loop
+[TRACE] 2022-12-21 22:17:45.958 event-loop [140130973247232] id=0x556425d8c470: un-subscribing from events on fd 6
+[TRACE] 2022-12-21 22:17:45.958 event-loop [140130973247232] id=0x556425d8c470: scheduling task 0x7f72bc0011e0 in-thread for timestamp 0
+[DEBUG] 2022-12-21 22:17:45.958 task-scheduler [140130973247232] id=0x7f72bc0011e0: Scheduling epoll_event_loop_unsubscribe_cleanup task for immediate execution
+[DEBUG] 2022-12-21 22:17:45.958 task-scheduler [140130866153216] id=0x7f72bc0011e0: Running epoll_event_loop_unsubscribe_cleanup task with <Canceled> status
