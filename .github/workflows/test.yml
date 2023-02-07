@@ -34,8 +34,6 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: ubuntu-18.04
-            release: bionic
           - os: ubuntu-20.04
             release: focal
           - os: ubuntu-22.04
@@ -86,7 +84,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        distro: [bionic, focal, jammy]
+        distro: [focal, jammy]
       max-parallel: 1
     steps:
       - uses: actions/checkout@v3.3.0
