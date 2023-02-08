@@ -2,7 +2,7 @@
 
 All notable changes for the LINZ BDE Copy are documented in this file.
 
-## [X.Y.Z] - YYYY-MM-DD
+## [1.6.0] - 2023-02-09
 
 ### Removed
 
