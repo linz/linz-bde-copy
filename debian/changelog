@@ -1,3 +1,9 @@
+linz-bde-copy (1.6.0-linz~focal) focal; urgency=medium
+
+  * New version
+
+ -- Victor Engmark <vengmark@linz.govt.nz>  Thu, 09 Feb 2023 00:05:38 +0000
+
 linz-bde-copy (1.5.3-linz~bionic) bionic; urgency=medium
 
   * New version
