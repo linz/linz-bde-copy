@@ -70,7 +70,7 @@ const char *level="0";
 const char *dataset = 0;
 
 buffer fileheader("");
-buffer fieldseparator(",");
+buffer fieldseparator("|");
 buffer lineterminator("\n");
 
 buffer configuration("");
