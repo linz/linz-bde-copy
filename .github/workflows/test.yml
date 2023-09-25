@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Check out repository
-        uses: actions/checkout@v3.5.3
+        uses: actions/checkout@v4.1.0
 
       - name: Install Dependencies
         run: sudo snap install --classic pre-commit
@@ -41,7 +41,7 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v3.5.3
+        uses: actions/checkout@v4.1.0
         with:
           fetch-depth: 0
 
@@ -87,7 +87,7 @@ jobs:
         distro: [focal, jammy]
       max-parallel: 1
     steps:
-      - uses: actions/checkout@v3.5.3
+      - uses: actions/checkout@v4.1.0
         with:
           fetch-depth: 0 # Enable the changelog generator to check out previous branch
 
